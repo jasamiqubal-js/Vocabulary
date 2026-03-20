@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jasam's Vocabulary + Past Form</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ── TAB SWITCHER ── */
+:root {
+  --bg:#13131f;--gold:#ffc400;--txt:#dde1f0;--muted:rgba(221,225,240,0.42);
+  --line:rgba(255,255,255,0.07);
+  --c1:#ff5f2e;--c2:#00d4ff;--c3:#00ff88;--c4:#bf7bff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* orbs shared */
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(140px);opacity:0.04;animation:drift 20s ease-in-out infinite alternate}
+.o1{width:500px;height:500px;background:#ff5f2e;top:-15%;left:-10%;animation-delay:0s}
+.o2{width:400px;height:400px;background:#00d4ff;bottom:-10%;right:-5%;animation-delay:-7s}
+.o3{width:300px;height:300px;background:#00ff88;top:45%;left:42%;animation-delay:-14s}
+.o4{width:250px;height:250px;background:#bf7bff;top:15%;right:25%;animation-delay:-3s}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(50px,35px) scale(1.1)}}
+
+/* ── MASTER TAB BAR ── */
+.master-tabs{
+  position:sticky;top:0;z-index:200;
+  background:rgba(6,6,15,0.97);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  padding:14px 20px;
+  display:flex;justify-content:center;align-items:center;gap:12px;
+}
+.master-tabs .brand{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem;letter-spacing:3px;
+  background:linear-gradient(90deg,var(--c1),var(--gold),var(--c2));
+  background-size:200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:hshift 4s linear infinite;
+  margin-right:10px;
+}
+@keyframes hshift{0%{background-position:0%}100%{background-position:200%}}
+
+.mtab{
+  position:relative;
+  font-family:'Outfit',sans-serif;font-size:0.88rem;font-weight:700;
+  padding:11px 30px;border-radius:14px;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);
+  color:var(--muted);
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  letter-spacing:.5px;
+  overflow:hidden;
+}
+.mtab::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,196,0,0.15),transparent);
+  opacity:0;transition:opacity .25s;
+}
+.mtab:hover{color:var(--txt);border-color:rgba(255,196,0,0.3);transform:translateY(-1px)}
+.mtab:hover::before{opacity:1}
+.mtab.active{
+  background:linear-gradient(135deg,rgba(255,196,0,0.18),rgba(255,95,46,0.12));
+  border-color:var(--gold);
+  color:var(--gold);
+  box-shadow:0 0 24px rgba(255,196,0,0.2),0 4px 16px rgba(0,0,0,0.3);
+  transform:translateY(-2px);
+}
+.mtab.active::before{opacity:1}
+.mtab .ticon{margin-right:7px;font-size:1rem}
+.mtab .tbadge{
+  display:inline-block;margin-left:8px;
+  background:rgba(255,196,0,0.15);border:1px solid rgba(255,196,0,0.3);
+  color:var(--gold);font-size:0.62rem;padding:1px 8px;border-radius:20px;font-weight:600;
+}
+.mtab.active .tbadge{background:rgba(255,196,0,0.25)}
+
+/* tab divider */
+.tab-div{width:1px;height:28px;background:rgba(255,255,255,0.1)}
+
+/* ── TAB PANELS ── */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#08081a}
+::-webkit-scrollbar-thumb{background:#1e1e38;border-radius:3px}
+
+/* ======== VOCABULARY STYLES ======== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg:#13131f; --surface:#0d0d1a; --card:rgba(255,255,255,0.06);
+  --gold:#ffc400; --txt:#dde1f0; --muted:rgba(221,225,240,0.42);
+  --line:rgba(255,255,255,0.07);
+  --basic:#4ade80; --basicg:rgba(74,222,128,0.1); --basicb:rgba(74,222,128,0.25);
+  --inter:#60a5fa;  --interg:rgba(96,165,250,0.1);  --interb:rgba(96,165,250,0.25);
+  --adv:#f472b6;   --advg:rgba(244,114,182,0.1);   --advb:rgba(244,114,182,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* orbs */
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(140px);opacity:0.04;animation:drift 20s ease-in-out infinite alternate}
+.o1{width:500px;height:500px;background:#ff5f2e;top:-15%;left:-10%;animation-delay:0s}
+.o2{width:400px;height:400px;background:#00d4ff;bottom:-10%;right:-5%;animation-delay:-7s}
+.o3{width:300px;height:300px;background:#00ff88;top:45%;left:42%;animation-delay:-14s}
+.o4{width:250px;height:250px;background:#bf7bff;top:15%;right:25%;animation-delay:-3s}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(50px,35px) scale(1.1)}}
+
+/* HEADER */
+header{
+  position:relative;z-index:10;padding:44px 24px 28px;
+  text-align:center;border-bottom:1px solid var(--line);
+  background:rgba(6,6,15,0.88);backdrop-filter:blur(18px);
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,196,0,0.1);border:1px solid rgba(255,196,0,0.25);
+  color:var(--gold);font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;
+  padding:5px 20px;border-radius:100px;margin-bottom:16px;
+}
+.eyebrow::before,.eyebrow::after{content:'◆';font-size:0.5rem;opacity:0.6}
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,9vw,6rem);
+  letter-spacing:4px;line-height:1;margin-bottom:8px;
+  background:linear-gradient(90deg,#ff5f2e,#ffc400,#00d4ff,#00ff88,#bf7bff,#ff5f2e);
+  background-size:400%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:hue 8s linear infinite;
+}
+@keyframes hue{0%{background-position:0%}100%{background-position:400%}}
+.sub{color:var(--muted);font-size:0.85rem;margin-bottom:8px}
+.totals{
+  display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;
+}
+.tp{
+  background:rgba(255,255,255,0.05);border:1px solid var(--line);
+  border-radius:30px;padding:4px 14px;font-size:0.72rem;font-weight:600;
+}
+.tp.b{color:var(--basic);border-color:var(--basicb)}
+.tp.i{color:var(--inter);border-color:var(--interb)}
+.tp.a{color:var(--adv);border-color:var(--advb)}
+.tp.t{color:var(--gold);border-color:rgba(255,196,0,0.3)}
+
+/* CONTROLS */
+.controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+#si{
+  background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:10px 20px;color:var(--txt);
+  font-family:'Outfit',sans-serif;font-size:0.9rem;width:260px;outline:none;transition:all .2s;
+}
+#si:focus{border-color:var(--gold);background:rgba(255,196,0,0.05);box-shadow:0 0 22px rgba(255,196,0,0.12)}
+.fb{
+  font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;
+  padding:10px 18px;border-radius:12px;cursor:pointer;border:1.5px solid var(--line);
+  color:var(--muted);background:rgba(255,255,255,0.04);transition:all .18s;
+}
+.fb.on,.fb:hover{color:var(--gold);border-color:rgba(255,196,0,0.4);background:rgba(255,196,0,0.08)}
+.fb.on.basic,.fb.basic:hover{color:var(--basic);border-color:var(--basicb);background:var(--basicg)}
+.fb.on.inter,.fb.inter:hover{color:var(--inter);border-color:var(--interb);background:var(--interg)}
+.fb.on.adv,.fb.adv:hover{color:var(--adv);border-color:var(--advb);background:var(--advg)}
+
+/* STAT BAR */
+.statbar{
+  text-align:center;padding:10px;
+  color:var(--muted);font-size:0.78rem;position:relative;z-index:5;
+}
+.statbar strong{color:var(--gold)}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(175px,1fr));
+  gap:8px;padding:10px 14px 60px;
+  max-width:1440px;margin:0 auto;
+  position:relative;z-index:5;
+}
+.wc{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:13px 15px 11px;
+  transition:transform .15s,box-shadow .15s,border-color .15s,background .15s;
+  position:relative;overflow:hidden;cursor:default;
+}
+.wc::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2.5px;
+  transform:scaleX(0);transform-origin:left;transition:transform .22s;
+}
+.wc.basic::after{background:var(--basic)}
+.wc.inter::after{background:var(--inter)}
+.wc.adv::after{background:var(--adv)}
+
+.wc:hover{transform:translateY(-3px);background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.14)}
+.wc:hover::after{transform:scaleX(1)}
+.wc.basic:hover{box-shadow:0 6px 22px rgba(74,222,128,0.13)}
+.wc.inter:hover{box-shadow:0 6px 22px rgba(96,165,250,0.13)}
+.wc.adv:hover{box-shadow:0 6px 22px rgba(244,114,182,0.13)}
+
+.wn{font-size:0.58rem;color:rgba(255,255,255,0.18);margin-bottom:4px}
+.we{font-weight:700;font-size:1.2rem;margin-bottom:2px;color:var(--txt)}
+.wc.basic .we{color:#4ade80}
+.wc.inter .we{color:#60a5fa}
+.wc.adv .we{color:#f472b6}
+.wp{font-size:0.78rem;color:var(--gold);margin-bottom:2px;opacity:.9}
+.wm{font-size:0.76rem;color:var(--muted)}
+.badge{
+  display:inline-block;font-size:0.58rem;padding:2px 8px;
+  border-radius:20px;margin-top:6px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+}
+.badge.basic{background:rgba(74,222,128,0.1);color:var(--basic);border:1px solid rgba(74,222,128,0.25)}
+.badge.inter{background:rgba(96,165,250,0.1);color:var(--inter);border:1px solid rgba(96,165,250,0.25)}
+.badge.adv{background:rgba(244,114,182,0.1);color:var(--adv);border:1px solid rgba(244,114,182,0.25)}
+
+/* highlight on search */
+.wc.hl{border-color:var(--gold)!important;background:rgba(255,196,0,0.06)!important}
+.wc.dim{opacity:.1;pointer-events:none}
+
+.nores{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px;font-size:.95rem;display:none}
+
+/* scrollbar */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#08081a}
+::-webkit-scrollbar-thumb{background:#1e1e38;border-radius:3px}
+
+@media(max-width:480px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:6px;padding:8px 8px 60px}
+}
+
+
+/* ======== PAST FORM STYLES ======== */
+/* Scoped under #panel-past */
+#panel-past .orbs{display:none}
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #06060f;
+  --surface: #0d0d1a;
+  --c1: #ff5f2e; --c1g: rgba(255,95,46,0.12); --c1b: rgba(255,95,46,0.25);
+  --c2: #00d4ff; --c2g: rgba(0,212,255,0.12); --c2b: rgba(0,212,255,0.25);
+  --c3: #00ff88; --c3g: rgba(0,255,136,0.12); --c3b: rgba(0,255,136,0.25);
+  --c4: #bf7bff; --c4g: rgba(191,123,255,0.12); --c4b: rgba(191,123,255,0.25);
+  --gold: #ffc400;
+  --txt: #dde1f0;
+  --muted: rgba(221,225,240,0.4);
+  --card: rgba(255,255,255,0.04);
+  --line: rgba(255,255,255,0.07);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── ANIMATED BG ORBS ── */
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(140px);opacity:0.04;animation:drift 20s ease-in-out infinite alternate}
+.orb1{width:500px;height:500px;background:var(--c1);top:-10%;left:-10%;animation-delay:0s}
+.orb2{width:400px;height:400px;background:var(--c2);bottom:-10%;right:-5%;animation-delay:-6s}
+.orb3{width:350px;height:350px;background:var(--c3);top:40%;left:40%;animation-delay:-12s;opacity:0.18}
+.orb4{width:300px;height:300px;background:var(--c4);top:20%;right:20%;animation-delay:-4s;opacity:0.2}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,30px) scale(1.08)}}
+
+/* ── HEADER ── */
+header{
+  position:relative;z-index:10;
+  padding:48px 24px 32px;
+  text-align:center;
+  border-bottom:1px solid var(--line);
+  background:rgba(6,6,15,0.85);
+  backdrop-filter:blur(16px);
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,196,0,0.1);border:1px solid rgba(255,196,0,0.25);
+  color:var(--gold);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;
+  padding:5px 18px;border-radius:100px;margin-bottom:16px;
+}
+.eyebrow::before,.eyebrow::after{content:'◆';font-size:0.5rem;opacity:0.6}
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.6rem,8vw,5.5rem);
+  letter-spacing:3px;
+  background:linear-gradient(90deg,var(--c1),var(--gold),var(--c2),var(--c3));
+  background-size:300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shift 6s linear infinite;
+  line-height:1;margin-bottom:10px;
+}
+@keyframes shift{0%{background-position:0%}100%{background-position:300%}}
+.sub{color:var(--muted);font-size:0.875rem;margin-bottom:24px}
+
+/* ── SEARCH ── */
+.search-row{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+#searchInput{
+  background:rgba(255,255,255,0.05);
+  border:1.5px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:10px 20px;
+  color:var(--txt);font-family:'Outfit',sans-serif;font-size:0.9rem;
+  width:280px;outline:none;transition:all .2s;
+}
+#searchInput:focus{border-color:var(--gold);background:rgba(255,196,0,0.05);box-shadow:0 0 20px rgba(255,196,0,0.1)}
+.stat-pill{
+  background:rgba(255,196,0,0.08);border:1px solid rgba(255,196,0,0.2);
+  color:var(--gold);padding:10px 18px;border-radius:12px;font-size:0.82rem;font-weight:500;
+}
+
+/* ── STICKY NAV ── */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(6,6,15,0.94);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding:10px 16px;
+  display:flex;gap:7px;justify-content:center;flex-wrap:wrap;
+}
+.ntab{
+  font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;
+  padding:7px 15px;border-radius:10px;cursor:pointer;border:1px solid transparent;
+  transition:all .2s;color:var(--muted);background:rgba(255,255,255,0.04);
+  display:flex;align-items:center;gap:5px;
+}
+.ntab .cnt{background:rgba(255,255,255,0.1);border-radius:6px;padding:1px 6px;font-size:0.68rem}
+.ntab[data-r="0"]:hover,.ntab[data-r="0"].on{background:rgba(255,196,0,0.1);color:var(--gold);border-color:rgba(255,196,0,0.3)}
+.ntab[data-r="1"]:hover,.ntab[data-r="1"].on{background:var(--c1g);color:var(--c1);border-color:var(--c1b)}
+.ntab[data-r="2"]:hover,.ntab[data-r="2"].on{background:var(--c2g);color:var(--c2);border-color:var(--c2b)}
+.ntab[data-r="3"]:hover,.ntab[data-r="3"].on{background:var(--c3g);color:var(--c3);border-color:var(--c3b)}
+.ntab[data-r="4"]:hover,.ntab[data-r="4"].on{background:var(--c4g);color:var(--c4);border-color:var(--c4b)}
+
+/* ── MAIN ── */
+main{position:relative;z-index:5;max-width:1440px;margin:0 auto;padding:28px 16px 80px}
+
+/* ── RULE SECTION ── */
+.rsec{margin-bottom:56px}
+.rsec.hidden{display:none}
+
+.rhead{
+  border-radius:18px;padding:22px 26px;margin-bottom:18px;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;
+  border:1px solid;position:relative;overflow:hidden;
+}
+.rhead::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg, currentColor 0%, transparent 60%);
+  opacity:0.04;pointer-events:none;
+}
+.rsec[data-r="1"] .rhead{background:var(--c1g);border-color:var(--c1b);color:var(--c1)}
+.rsec[data-r="2"] .rhead{background:var(--c2g);border-color:var(--c2b);color:var(--c2)}
+.rsec[data-r="3"] .rhead{background:var(--c3g);border-color:var(--c3b);color:var(--c3)}
+.rsec[data-r="4"] .rhead{background:var(--c4g);border-color:var(--c4b);color:var(--c4)}
+
+.rnum{
+  font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;
+  opacity:0.9;width:60px;text-align:center;
+}
+.rinfo .rtitle{font-size:1rem;font-weight:700;margin-bottom:4px}
+.rinfo .rdesc{font-size:0.8rem;color:var(--muted);line-height:1.5}
+.rex{
+  background:rgba(0,0,0,0.35);border-radius:12px;
+  padding:12px 18px;text-align:center;min-width:170px;
+}
+.rex .exlbl{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.rex .exw{font-weight:700;font-size:0.9rem;line-height:1.6}
+
+/* ── WORD GRID ── */
+.wgrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(168px,1fr));
+  gap:7px;
+}
+.wcard{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:12px 14px 10px;
+  cursor:default;
+  transition:transform .15s,box-shadow .15s,border-color .15s,background .15s;
+  position:relative;overflow:hidden;
+}
+.wcard::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2.5px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .2s;
+}
+.rsec[data-r="1"] .wcard::after{background:var(--c1)}
+.rsec[data-r="2"] .wcard::after{background:var(--c2)}
+.rsec[data-r="3"] .wcard::after{background:var(--c3)}
+.rsec[data-r="4"] .wcard::after{background:var(--c4)}
+
+.wcard:hover{
+  transform:translateY(-3px);
+  border-color:rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.07);
+}
+.rsec[data-r="1"] .wcard:hover{box-shadow:0 6px 20px rgba(255,95,46,0.15)}
+.rsec[data-r="2"] .wcard:hover{box-shadow:0 6px 20px rgba(0,212,255,0.15)}
+.rsec[data-r="3"] .wcard:hover{box-shadow:0 6px 20px rgba(0,255,136,0.15)}
+.rsec[data-r="4"] .wcard:hover{box-shadow:0 6px 20px rgba(191,123,255,0.15)}
+.wcard:hover::after{transform:scaleX(1)}
+
+.wn{font-size:0.58rem;color:rgba(255,255,255,0.2);margin-bottom:5px}
+.wbase{font-size:0.95rem;color:rgba(221,225,240,0.55);margin-bottom:1px}
+.rsec[data-r="1"] .wbase{color:rgba(255,95,46,0.75)}
+.rsec[data-r="2"] .wbase{color:rgba(0,212,255,0.75)}
+.rsec[data-r="3"] .wbase{color:rgba(0,255,136,0.75)}
+.rsec[data-r="4"] .wbase{color:rgba(191,123,255,0.75)}
+.wpast{font-size:1.2rem;font-weight:700;margin-bottom:3px}
+.rsec[data-r="1"] .wpast{color:var(--c1)}
+.rsec[data-r="2"] .wpast{color:var(--c2)}
+.rsec[data-r="3"] .wpast{color:var(--c3)}
+.rsec[data-r="4"] .wpast{color:var(--c4)}
+.wpron{font-size:0.74rem;color:var(--gold);opacity:0.9}
+
+.wcard.dim{opacity:0.12;pointer-events:none}
+.wcard.glow{border-color:var(--gold);background:rgba(255,196,0,0.06)}
+
+.noresult{
+  grid-column:1/-1;text-align:center;
+  color:var(--muted);padding:40px;font-size:0.9rem;display:none;
+}
+
+@media(max-width:480px){
+  .rhead{grid-template-columns:auto 1fr;gap:12px}
+  .rex{display:none}
+  .rnum{font-size:2.5rem;width:45px}
+  .wgrid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#08081a}
+::-webkit-scrollbar-thumb{background:#222238;border-radius:3px}
+
+
+</style>
+</head>
+<body>
+
+<div class="orbs">
+  <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="orb o3"></div><div class="orb o4"></div>
+</div>
+
+<!-- MASTER TAB BAR -->
+<div class="master-tabs">
+  <div class="brand">JASAM'S ENGLISH</div>
+  <div class="tab-div"></div>
+  <button class="mtab active" onclick="switchTab('voc',this)">
+    <span class="ticon">📖</span>Vocabulary<span class="tbadge">1000</span>
+  </button>
+  <button class="mtab" onclick="switchTab('past',this)">
+    <span class="ticon">✍️</span>Past Form<span class="tbadge">500+</span>
+  </button>
+</div>
+
+<!-- VOCABULARY PANEL -->
+<div class="tab-panel active" id="panel-voc">
+
+
+<div class="orbs">
+  <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="orb o3"></div><div class="orb o4"></div>
+</div>
+
+<header>
+  <div class="eyebrow">Jasam's English Master Guide</div>
+  <h1>1000 VOCABULARY</h1>
+  <p class="sub">Basic → Intermediate → Advanced • Daily Life + Education • Bangla উচ্চারণ সহ</p>
+  <div class="totals">
+    <span class="tp t">📚 Total: <strong id="totalAll">0</strong></span>
+    <span class="tp b">🟢 Basic: <strong id="totalB">0</strong></span>
+    <span class="tp i">🔵 Inter: <strong id="totalI">0</strong></span>
+    <span class="tp a">🔴 Adv: <strong id="totalA">0</strong></span>
+  </div>
+  <div class="controls">
+    <input type="text" id="si" placeholder="🔍 Search করো..." oninput="doFilter()">
+    <button class="fb on" onclick="setL('all',this)">⚡ All</button>
+    <button class="fb basic" onclick="setL('basic',this)">🟢 Basic</button>
+    <button class="fb inter" onclick="setL('inter',this)">🔵 Intermediate</button>
+    <button class="fb adv" onclick="setL('adv',this)">🔴 Advanced</button>
+  </div>
+</header>
+
+<div class="statbar">দেখাচ্ছে <strong id="cnt">0</strong> words</div>
+<div class="grid" id="grid">
+  <div class="nores" id="nores">কোনো word পাওয়া যায়নি 🙁</div>
+</div>
+
+
+
+</div>
+
+<!-- PAST FORM PANEL -->
+<div class="tab-panel" id="panel-past">
+
+
+<div class="orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+</div>
+
+<header>
+  <div class="eyebrow">Jasam's English Master Guide</div>
+  <h1>500 PAST FORM WORDS</h1>
+  <p class="sub">৩টি Pronunciation Rule + Irregular • Education & Daily Life • Bangla উচ্চারণ সহ</p>
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="🔍 যেকোনো word খোঁজো..." oninput="doSearch()">
+    <div class="stat-pill">দেখাচ্ছে: <strong id="cnt">510</strong> words</div>
+  </div>
+</header>
+
+<nav id="nav">
+  <button class="ntab on" data-r="0" onclick="setR(0,this)">⚡ All Rules</button>
+  <button class="ntab" data-r="1" onclick="setR(1,this)">🔴 Rule 1 — ইড <span class="cnt">130</span></button>
+  <button class="ntab" data-r="2" onclick="setR(2,this)">🔵 Rule 2 — ড <span class="cnt">130</span></button>
+  <button class="ntab" data-r="3" onclick="setR(3,this)">🟢 Rule 3 — ট <span class="cnt">130</span></button>
+  <button class="ntab" data-r="4" onclick="setR(4,this)">🟣 Irregular <span class="cnt">120</span></button>
+</nav>
+
+<main id="main"></main>
+
+
+
+</div>
+
+<!-- VOCABULARY JS -->
+<script>
+
+// [english, bangla-pronunciation, bangla-meaning, level]
+const W = [
+  // ===== BASIC =====
+  ["Water","ওয়াটার","পানি","basic"],
+  ["Food","ফুড","খাবার","basic"],
+  ["Home","হোম","বাড়ি","basic"],
+  ["House","হাউস","ঘর","basic"],
+  ["Family","ফ্যামিলি","পরিবার","basic"],
+  ["Friend","ফ্রেন্ড","বন্ধু","basic"],
+  ["School","স্কুল","বিদ্যালয়","basic"],
+  ["Teacher","টিচার","শিক্ষক","basic"],
+  ["Student","স্টুডেন্ট","ছাত্র/ছাত্রী","basic"],
+  ["Book","বুক","বই","basic"],
+  ["Pen","পেন","কলম","basic"],
+  ["Class","ক্লাস","শ্রেণী","basic"],
+  ["Schoolbag","স্কুলব্যাগ","স্কুল ব্যাগ","basic"],
+  ["Time","টাইম","সময়","basic"],
+  ["Day","ডে","দিন","basic"],
+  ["Night","নাইট","রাত","basic"],
+  ["Morning","মর্নিং","সকাল","basic"],
+  ["Evening","ইভনিং","সন্ধ্যা","basic"],
+  ["Sun","সান","সূর্য","basic"],
+  ["Moon","মুন","চাঁদ","basic"],
+  ["Star","স্টার","তারা","basic"],
+  ["Sky","স্কাই","আকাশ","basic"],
+  ["Rain","রেইন","বৃষ্টি","basic"],
+  ["Wind","উইন্ড","বাতাস","basic"],
+  ["Weather","ওয়েদার","আবহাওয়া","basic"],
+  ["Road","রোড","রাস্তা","basic"],
+  ["Street","স্ট্রিট","রাস্তা","basic"],
+  ["Car","কার","গাড়ি","basic"],
+  ["Bus","বাস","বাস","basic"],
+  ["Train","ট্রেন","ট্রেন","basic"],
+  ["Airplane","এয়ারপ্লেন","বিমান","basic"],
+  ["Market","মার্কেট","বাজার","basic"],
+  ["Shop","শপ","দোকান","basic"],
+  ["Money","মানি","টাকা","basic"],
+  ["Work","ওয়ার্ক","কাজ","basic"],
+  ["Job","জব","চাকরি","basic"],
+  ["Name","নেম","নাম","basic"],
+  ["Age","এইজ","বয়স","basic"],
+  ["Face","ফেস","মুখ","basic"],
+  ["Eye","আই","চোখ","basic"],
+  ["Hand","হ্যান্ড","হাত","basic"],
+  ["Leg","লেগ","পা","basic"],
+  ["Head","হেড","মাথা","basic"],
+  ["Heart","হার্ট","হৃদয়","basic"],
+  ["Rice","রাইস","ভাত","basic"],
+  ["Fruit","ফ্রুট","ফল","basic"],
+  ["Milk","মিল্ক","দুধ","basic"],
+  ["Bread","ব্রেড","রুটি","basic"],
+  ["Tea","টি","চা","basic"],
+  ["Happy","হ্যাপি","খুশি","basic"],
+  ["Sad","স্যাড","দুঃখিত","basic"],
+  ["Happiness","হ্যাপিনেস","সুখ","basic"],
+  ["Sadness","স্যাডনেস","দুঃখ","basic"],
+  ["Good","গুড","ভালো","basic"],
+  ["Bad","ব্যাড","খারাপ","basic"],
+  ["Big","বিগ","বড়","basic"],
+  ["Small","স্মল","ছোট","basic"],
+  ["Hot","হট","গরম","basic"],
+  ["Cold","কোল্ড","ঠান্ডা","basic"],
+  ["Fast","ফাস্ট","দ্রুত","basic"],
+  ["Slow","স্লো","ধীরে","basic"],
+  ["Clean","ক্লিন","পরিষ্কার","basic"],
+  ["Dirty","ডার্টি","নোংরা","basic"],
+  ["Open","ওপেন","খোলা","basic"],
+  ["Close","ক্লোজ","বন্ধ","basic"],
+  ["Give","গিভ","দেওয়া","basic"],
+  ["Take","টেক","নেওয়া","basic"],
+  ["Come","কাম","আসা","basic"],
+  ["Go","গো","যাওয়া","basic"],
+  ["See","সি","দেখা","basic"],
+  ["Hear","হিয়ার","শোনা","basic"],
+  ["Eat","ইট","খাওয়া","basic"],
+  ["Drink","ড্রিংক","পান করা","basic"],
+  ["Sleep","স্লিপ","ঘুমানো","basic"],
+  ["Walk","ওয়াক","হাঁটা","basic"],
+  ["Run","রান","দৌড়ানো","basic"],
+  ["Sit","সিট","বসা","basic"],
+  ["Stand","স্ট্যান্ড","দাঁড়ানো","basic"],
+  ["Speak","স্পিক","বলা","basic"],
+  ["Listen","লিসেন","শোনা","basic"],
+  ["Read","রিড","পড়া","basic"],
+  ["Write","রাইট","লেখা","basic"],
+  ["Play","প্লে","খেলা","basic"],
+  ["Buy","বাই","কেনা","basic"],
+  ["Sell","সেল","বিক্রি","basic"],
+  ["Help","হেল্প","সাহায্য","basic"],
+  ["Ask","আস্ক","জিজ্ঞেস করা","basic"],
+  ["Answer","আনসার","উত্তর","basic"],
+  ["Know","নো","জানা","basic"],
+  ["Think","থিংক","ভাবা","basic"],
+  ["Want","ওয়ান্ট","চাওয়া","basic"],
+  ["Need","নিড","দরকার","basic"],
+  ["Love","লাভ","ভালোবাসা","basic"],
+  ["Hate","হেট","ঘৃণা","basic"],
+  ["Try","ট্রাই","চেষ্টা করা","basic"],
+  ["Keep","কিপ","রাখা","basic"],
+  ["Look","লুক","দেখা","basic"],
+  ["Find","ফাইন্ড","খোঁজা","basic"],
+  ["Say","স্যে","বলা","basic"],
+  ["Tell","টেল","বলা","basic"],
+  ["Hold","হোল্ড","ধরে রাখা","basic"],
+  ["Call","কল","ডাক দেওয়া","basic"],
+  ["Talk","টক","কথা বলা","basic"],
+  ["Move","মুভ","চলা","basic"],
+  ["Show","শো","দেখানো","basic"],
+  ["Follow","ফলো","অনুসরণ করা","basic"],
+  ["Send","সেন্ড","পাঠানো","basic"],
+  ["Child","চাইল্ড","শিশু","basic"],
+  ["Mother","মাদার","মা","basic"],
+  ["Father","ফাদার","বাবা","basic"],
+  ["Brother","ব্রাদার","ভাই","basic"],
+  ["Sister","সিস্টার","বোন","basic"],
+  ["Room","রুম","কক্ষ","basic"],
+  ["Door","ডোর","দরজা","basic"],
+  ["Window","উইন্ডো","জানালা","basic"],
+  ["Table","টেবিল","টেবিল","basic"],
+  ["Chair","চেয়ার","চেয়ার","basic"],
+  ["Bed","বেড","বিছানা","basic"],
+  ["Bag","ব্যাগ","ব্যাগ","basic"],
+  ["Clothes","ক্লোদজ","কাপড়","basic"],
+  ["Shoe","শু","জুতো","basic"],
+  ["Phone","ফোন","ফোন","basic"],
+  ["Number","নাম্বার","সংখ্যা","basic"],
+  ["Color","কালার","রঙ","basic"],
+  ["Light","লাইট","আলো","basic"],
+  ["Dark","ডার্ক","অন্ধকার","basic"],
+  ["Fire","ফায়ার","আগুন","basic"],
+  ["Tree","ট্রি","গাছ","basic"],
+  ["Flower","ফ্লাওয়ার","ফুল","basic"],
+  ["River","রিভার","নদী","basic"],
+  ["Sea","সি","সমুদ্র","basic"],
+  ["Mountain","মাউন্টেন","পাহাড়","basic"],
+  ["Land","ল্যান্ড","জমি/ভূমি","basic"],
+  ["Animal","অ্যানিমেল","প্রাণী","basic"],
+  ["Bird","বার্ড","পাখি","basic"],
+  ["Fish","ফিশ","মাছ","basic"],
+  ["Dog","ডগ","কুকুর","basic"],
+  ["Cat","ক্যাট","বিড়াল","basic"],
+  ["Village","ভিলেজ","গ্রাম","basic"],
+  ["City","সিটি","শহর","basic"],
+  ["Country","কান্ট্রি","দেশ","basic"],
+  ["Hospital","হসপিটাল","হাসপাতাল","basic"],
+  ["Doctor","ডাক্তার","ডাক্তার","basic"],
+  ["Medicine","মেডিসিন","ওষুধ","basic"],
+  ["Holiday","হলিডে","ছুটি","basic"],
+  ["Test","টেস্ট","পরীক্ষা","basic"],
+  ["Exam","এক্সাম","পরীক্ষা","basic"],
+  ["Mark","মার্ক","নম্বর","basic"],
+  ["Pass","পাস","পাস করা","basic"],
+  ["Fail","ফেইল","ফেল করা","basic"],
+  ["Life","লাইফ","জীবন","basic"],
+  ["Truth","ট্রুথ","সত্য","basic"],
+  ["Lie","লাই","মিথ্যা","basic"],
+  ["Right","রাইট","সঠিক","basic"],
+  ["Wrong","রং","ভুল","basic"],
+  ["Easy","ইজি","সহজ","basic"],
+  ["Hard","হার্ড","কঠিন","basic"],
+  ["New","নিউ","নতুন","basic"],
+  ["Old","ওল্ড","পুরানো","basic"],
+  ["Free","ফ্রি","মুক্ত","basic"],
+  ["Busy","বিজি","ব্যস্ত","basic"],
+  ["Tired","টায়ার্ড","ক্লান্ত","basic"],
+  ["Hungry","হাংগ্রি","ক্ষুধার্ত","basic"],
+  ["Sick","সিক","অসুস্থ","basic"],
+  ["Healthy","হেলদি","সুস্থ","basic"],
+  ["Strong","স্ট্রং","শক্তিশালী","basic"],
+  ["Weak","উইক","দুর্বল","basic"],
+  ["Young","ইয়াং","তরুণ","basic"],
+  ["Tall","টল","লম্বা","basic"],
+  ["Short","শর্ট","খাটো","basic"],
+  ["Smile","স্মাইল","হাসি","basic"],
+  ["Cry","ক্রাই","কাঁদা","basic"],
+  ["Dream","ড্রিম","স্বপ্ন","basic"],
+  ["Hope","হোপ","আশা","basic"],
+  ["Fear","ফিয়ার","ভয়","basic"],
+  ["Anger","অ্যাঙ্গার","রাগ","basic"],
+  ["Screen","স্ক্রিন","পর্দা","basic"],
+  ["Computer","কম্পিউটার","কম্পিউটার","basic"],
+  ["Wait","ওয়েট","অপেক্ষা করা","basic"],
+  ["Watch","ওয়াচ","দেখা/পর্যবেক্ষণ","basic"],
+  ["Touch","টাচ","স্পর্শ করা","basic"],
+  ["Fill","ফিল","ভর্তি করা","basic"],
+  ["Push","পুশ","ঠেলা","basic"],
+  ["Save","সেভ","বাঁচানো","basic"],
+  ["Win","উইন","জেতা","basic"],
+  ["Wish","উইশ","কামনা করা","basic"],
+  ["Aim","এইম","লক্ষ্য করা","basic"],
+  ["Pay","পে","প্রদান করা","basic"],
+  ["Start","স্টার্ট","শুরু করা","basic"],
+  ["Stay","স্টে","থাকা","basic"],
+  ["Study","স্টাডি","অধ্যয়ন করা","basic"],
+  ["Turn","টার্ন","ঘুরানো","basic"],
+  ["Use","ইউস","ব্যবহার করা","basic"],
+  ["Live","লিভ","বাস করা","basic"],
+  ["Miss","মিস","মিস করা","basic"],
+  ["Leave","লিভ","ছেড়ে যাওয়া","basic"],
+  ["Break","ব্রেক","ভাঙা","basic"],
+  ["Bring","ব্রিং","আনা","basic"],
+  ["Build","বিল্ড","নির্মাণ করা","basic"],
+  ["Care","কেয়ার","যত্ন নেওয়া","basic"],
+  ["Carry","ক্যারি","বহন করা","basic"],
+  ["Catch","ক্যাচ","ধরা","basic"],
+  ["Choose","চুজ","নির্বাচন করা","basic"],
+  ["Clean","ক্লিন","পরিষ্কার করা","basic"],
+  ["Draw","ড্র","অঙ্কন করা","basic"],
+  ["Drive","ড্রাইভ","গাড়ি চালানো","basic"],
+  ["Feed","ফিড","খাওয়ানো","basic"],
+  ["Feel","ফিল","অনুভব করা","basic"],
+  ["Fight","ফাইট","লড়াই করা","basic"],
+  ["Form","ফর্ম","গঠন করা","basic"],
+  ["Gain","গেইন","অর্জন করা","basic"],
+  ["Grow","গ্রো","বৃদ্ধি পাওয়া","basic"],
+  ["Happen","হ্যাপেন","ঘটা","basic"],
+  ["Harm","হার্ম","ক্ষতি করা","basic"],
+  ["Hurt","হার্ট","ব্যথা দেওয়া","basic"],
+  ["Join","জয়েন","যুক্ত হওয়া","basic"],
+  ["Jump","জাম্প","লাফানো","basic"],
+  ["Lead","লিড","নেতৃত্ব দেওয়া","basic"],
+  ["Learn","লার্ন","শেখা","basic"],
+  ["Lose","লুজ","হারানো","basic"],
+  ["Make","মেক","তৈরি করা","basic"],
+  ["Rise","রাইজ","উঠা","basic"],
+  ["Search","সার্চ","খোঁজা","basic"],
+  ["Sign","সাইন","সই করা","basic"],
+  ["Sing","সিং","গান করা","basic"],
+  ["Teach","টিচ","শেখানো","basic"],
+  ["Throw","থ্রো","ছোঁড়া","basic"],
+
+  // ===== INTERMEDIATE =====
+  ["Journey","জার্নি","ভ্রমণ","inter"],
+  ["Adventure","অ্যাডভেঞ্চার","অভিযান","inter"],
+  ["Experience","এক্সপেরিয়েন্স","অভিজ্ঞতা","inter"],
+  ["Opportunity","অপরচুনিটি","সুযোগ","inter"],
+  ["Challenge","চ্যালেঞ্জ","চ্যালেঞ্জ","inter"],
+  ["Success","সাকসেস","সাফল্য","inter"],
+  ["Failure","ফেইলিউর","ব্যর্থতা","inter"],
+  ["Effort","এফোর্ট","প্রচেষ্টা","inter"],
+  ["Purpose","পার্পাস","উদ্দেশ্য","inter"],
+  ["Decision","ডিসিশন","সিদ্ধান্ত","inter"],
+  ["Solution","সলিউশন","সমাধান","inter"],
+  ["Problem","প্রব্লেম","সমস্যা","inter"],
+  ["Situation","সিচুয়েশন","পরিস্থিতি","inter"],
+  ["Result","রেজাল্ট","ফলাফল","inter"],
+  ["Progress","প্রোগ্রেস","অগ্রগতি","inter"],
+  ["Growth","গ্রোথ","বৃদ্ধি","inter"],
+  ["Change","চেঞ্জ","পরিবর্তন","inter"],
+  ["Advice","অ্যাডভাইস","পরামর্শ","inter"],
+  ["Trust","ট্রাস্ট","বিশ্বাস","inter"],
+  ["Respect","রেসপেক্ট","সম্মান","inter"],
+  ["Honest","অনেস্ট","সৎ","inter"],
+  ["Patient","পেশেন্ট","ধৈর্যশীল","inter"],
+  ["Confident","কনফিডেন্ট","আত্মবিশ্বাসী","inter"],
+  ["Serious","সিরিয়াস","গুরুত্বপূর্ণ","inter"],
+  ["Curious","কিউরিয়াস","কৌতূহলী","inter"],
+  ["Creative","ক্রিয়েটিভ","সৃজনশীল","inter"],
+  ["Responsible","রেসপন্সিবল","দায়িত্বশীল","inter"],
+  ["Independent","ইন্ডিপেন্ডেন্ট","স্বাধীন","inter"],
+  ["Intelligent","ইন্টেলিজেন্ট","বুদ্ধিমান","inter"],
+  ["Talented","ট্যালেন্টেড","প্রতিভাবান","inter"],
+  ["Skilled","স্কিলড","দক্ষ","inter"],
+  ["Qualified","কোয়ালিফাইড","যোগ্য","inter"],
+  ["Organized","অর্গানাইজড","সংগঠিত","inter"],
+  ["Focused","ফোকাসড","মনোযোগী","inter"],
+  ["Motivated","মোটিভেটেড","অনুপ্রাণিত","inter"],
+  ["Dedicated","ডেডিকেটেড","নিবেদিত","inter"],
+  ["Ambitious","অ্যাম্বিশাস","উচ্চাভিলাষী","inter"],
+  ["Productive","প্রোডাক্টিভ","উৎপাদনশীল","inter"],
+  ["Effective","ইফেক্টিভ","কার্যকর","inter"],
+  ["Efficient","ইফিশেন্ট","দক্ষ","inter"],
+  ["Flexible","ফ্লেক্সিবল","নমনীয়","inter"],
+  ["Available","অ্যাভেইলেবল","উপলব্ধ","inter"],
+  ["Important","ইম্পর্ট্যান্ট","গুরুত্বপূর্ণ","inter"],
+  ["Necessary","নেসেসারি","প্রয়োজনীয়","inter"],
+  ["Possible","পসিবল","সম্ভব","inter"],
+  ["Impossible","ইম্পসিবল","অসম্ভব","inter"],
+  ["Difficult","ডিফিকাল্ট","কঠিন","inter"],
+  ["Simple","সিম্পল","সহজ","inter"],
+  ["Common","কমন","সাধারণ","inter"],
+  ["Popular","পপুলার","জনপ্রিয়","inter"],
+  ["Famous","ফেমাস","বিখ্যাত","inter"],
+  ["Modern","মডার্ন","আধুনিক","inter"],
+  ["Traditional","ট্র্যাডিশনাল","ঐতিহ্যবাহী","inter"],
+  ["Natural","ন্যাচারাল","প্রাকৃতিক","inter"],
+  ["Digital","ডিজিটাল","ডিজিটাল","inter"],
+  ["Online","অনলাইন","অনলাইন","inter"],
+  ["Internet","ইন্টারনেট","ইন্টারনেট","inter"],
+  ["Website","ওয়েবসাইট","ওয়েবসাইট","inter"],
+  ["Software","সফটওয়্যার","সফটওয়্যার","inter"],
+  ["System","সিস্টেম","সিস্টেম","inter"],
+  ["Network","নেটওয়ার্ক","নেটওয়ার্ক","inter"],
+  ["Device","ডিভাইস","যন্ত্র","inter"],
+  ["Battery","ব্যাটারি","ব্যাটারি","inter"],
+  ["Password","পাসওয়ার্ড","পাসওয়ার্ড","inter"],
+  ["Message","মেসেজ","বার্তা","inter"],
+  ["Contact","কনট্যাক্ট","যোগাযোগ","inter"],
+  ["Meeting","মিটিং","সভা","inter"],
+  ["Schedule","স্কেডিউল","সময়সূচি","inter"],
+  ["Plan","প্ল্যান","পরিকল্পনা","inter"],
+  ["Goal","গোল","লক্ষ্য","inter"],
+  ["Target","টার্গেট","লক্ষ্যমাত্রা","inter"],
+  ["Project","প্রজেক্ট","প্রকল্প","inter"],
+  ["Task","টাস্ক","দায়িত্ব","inter"],
+  ["Report","রিপোর্ট","প্রতিবেদন","inter"],
+  ["Research","রিসার্চ","গবেষণা","inter"],
+  ["Information","ইনফরমেশন","তথ্য","inter"],
+  ["Knowledge","নলেজ","জ্ঞান","inter"],
+  ["Education","এডুকেশন","শিক্ষা","inter"],
+  ["Training","ট্রেনিং","প্রশিক্ষণ","inter"],
+  ["Certificate","সার্টিফিকেট","সনদ","inter"],
+  ["Degree","ডিগ্রি","ডিগ্রি","inter"],
+  ["Career","ক্যারিয়ার","ক্যারিয়ার","inter"],
+  ["Salary","স্যালারি","বেতন","inter"],
+  ["Income","ইনকাম","আয়","inter"],
+  ["Expense","এক্সপেন্স","খরচ","inter"],
+  ["Budget","বাজেট","বাজেট","inter"],
+  ["Investment","ইনভেস্টমেন্ট","বিনিয়োগ","inter"],
+  ["Business","বিজনেস","ব্যবসা","inter"],
+  ["Service","সার্ভিস","সেবা","inter"],
+  ["Customer","কাস্টমার","গ্রাহক","inter"],
+  ["Product","প্রোডাক্ট","পণ্য","inter"],
+  ["Quality","কোয়ালিটি","মান","inter"],
+  ["Review","রিভিউ","পর্যালোচনা","inter"],
+  ["Feedback","ফিডব্যাক","মতামত","inter"],
+  ["Update","আপডেট","হালনাগাদ","inter"],
+  ["Version","ভার্সন","সংস্করণ","inter"],
+  ["Feature","ফিচার","বৈশিষ্ট্য","inter"],
+  ["Design","ডিজাইন","নকশা","inter"],
+  ["Style","স্টাইল","ধরন","inter"],
+  ["Culture","কালচার","সংস্কৃতি","inter"],
+  ["Society","সোসাইটি","সমাজ","inter"],
+  ["Government","গভর্নমেন্ট","সরকার","inter"],
+  ["Environment","এনভায়রনমেন্ট","পরিবেশ","inter"],
+  ["Climate","ক্লাইমেট","জলবায়ু","inter"],
+  ["Pollution","পলিউশন","দূষণ","inter"],
+  ["Energy","এনার্জি","শক্তি","inter"],
+  ["Resource","রিসোর্স","সম্পদ","inter"],
+  ["Treatment","ট্রিটমেন্ট","চিকিৎসা","inter"],
+  ["Prevention","প্রিভেনশন","প্রতিরোধ","inter"],
+  ["Awareness","অ্যাওয়ারনেস","সচেতনতা","inter"],
+  ["Community","কমিউনিটি","সম্প্রদায়","inter"],
+  ["Volunteer","ভলান্টিয়ার","স্বেচ্ছাসেবক","inter"],
+  ["Cooperation","কোঅপারেশন","সহযোগিতা","inter"],
+  ["Relationship","রিলেশনশিপ","সম্পর্ক","inter"],
+  ["Communication","কমিউনিকেশন","যোগাযোগ","inter"],
+  ["Conversation","কনভার্সেশন","কথোপকথন","inter"],
+  ["Presentation","প্রেজেন্টেশন","উপস্থাপনা","inter"],
+  ["Discussion","ডিসকাশন","আলোচনা","inter"],
+  ["Agreement","অ্যাগ্রিমেন্ট","চুক্তি","inter"],
+  ["Permission","পারমিশন","অনুমতি","inter"],
+  ["Competition","কম্পিটিশন","প্রতিযোগিতা","inter"],
+  ["Improvement","ইমপ্রুভমেন্ট","উন্নতি","inter"],
+  ["Development","ডেভেলপমেন্ট","উন্নয়ন","inter"],
+  ["Technology","টেকনোলজি","প্রযুক্তি","inter"],
+  ["Innovation","ইনোভেশন","উদ্ভাবন","inter"],
+  ["Creativity","ক্রিয়েটিভিটি","সৃজনশীলতা","inter"],
+  ["Inspiration","ইন্সপিরেশন","অনুপ্রেরণা","inter"],
+  ["Motivation","মোটিভেশন","অনুপ্রেরণা","inter"],
+  ["Discipline","ডিসিপ্লিন","শৃঙ্খলা","inter"],
+  ["Habit","হ্যাবিট","অভ্যাস","inter"],
+  ["Attitude","অ্যাটিটিউড","মনোভাব","inter"],
+  ["Behavior","বিহেভিয়ার","আচরণ","inter"],
+  ["Character","ক্যারেক্টার","চরিত্র","inter"],
+  ["Personality","পার্সোনালিটি","ব্যক্তিত্ব","inter"],
+  ["Emotion","ইমোশন","আবেগ","inter"],
+  ["Benefit","বেনিফিট","সুবিধা","inter"],
+  ["Condition","কন্ডিশন","অবস্থা","inter"],
+  ["Imagination","ইমেজিনেশন","কল্পনা","inter"],
+  // Verbs - intermediate
+  ["Achieve","অ্যাচিভ","অর্জন করা","inter"],
+  ["Adapt","অ্যাডাপ্ট","মানিয়ে নেওয়া","inter"],
+  ["Admire","অ্যাডমায়ার","প্রশংসা করা","inter"],
+  ["Adopt","অ্যাডপ্ট","মানা/গ্রহণ করা","inter"],
+  ["Advance","অ্যাডভান্স","অগ্রসর হওয়া","inter"],
+  ["Affect","অ্যাফেক্ট","প্রভাবিত করা","inter"],
+  ["Agree","অ্যাগ্রি","একমত হওয়া","inter"],
+  ["Allow","অ্যালাউ","অনুমোদন করা","inter"],
+  ["Analyze","অ্যানালাইজ","বিশ্লেষণ করা","inter"],
+  ["Announce","অ্যানাউন্স","ঘোষণা করা","inter"],
+  ["Anticipate","অ্যান্টিসিপেট","প্রত্যাশা করা","inter"],
+  ["Apply","অ্যাপ্লাই","আবেদন/প্রয়োগ করা","inter"],
+  ["Appreciate","অ্যাপ্রিসিয়েট","কৃতজ্ঞতা প্রকাশ করা","inter"],
+  ["Approach","অ্যাপ্রোচ","কাছে যাওয়া","inter"],
+  ["Argue","আর্গু","বিতর্ক করা","inter"],
+  ["Arrange","অ্যারেঞ্জ","ব্যবস্থা করা","inter"],
+  ["Assess","অ্যাসেস","মূল্যায়ন করা","inter"],
+  ["Assist","অ্যাসিস্ট","সাহায্য করা","inter"],
+  ["Assume","অ্যাসিউম","অনুমান করা","inter"],
+  ["Attack","অ্যাটাক","আক্রমণ করা","inter"],
+  ["Attend","অ্যাটেন্ড","উপস্থিত থাকা","inter"],
+  ["Attract","অ্যাট্র্যাক্ট","আকর্ষণ করা","inter"],
+  ["Avoid","অ্যাভয়েড","এড়ানো","inter"],
+  ["Balance","ব্যালান্স","ভারসাম্য রাখা","inter"],
+  ["Behave","বিহেভ","আচরণ করা","inter"],
+  ["Blame","ব্লেম","দোষারোপ করা","inter"],
+  ["Borrow","বোরো","ধার নেওয়া","inter"],
+  ["Calculate","ক্যালকুলেট","হিসাব করা","inter"],
+  ["Clarify","ক্ল্যারিফাই","পরিষ্কার করা","inter"],
+  ["Collaborate","কোলাবোরেট","সহযোগিতা করা","inter"],
+  ["Compare","কম্পেয়ার","তুলনা করা","inter"],
+  ["Comprehend","কমপ্রিহেন্ড","বোঝা","inter"],
+  ["Conclude","কনক্লুড","উপসংহার টানা","inter"],
+  ["Confirm","কনফার্ম","নিশ্চিত করা","inter"],
+  ["Connect","কানেক্ট","সংযুক্ত করা","inter"],
+  ["Consider","কনসিডার","বিবেচনা করা","inter"],
+  ["Construct","কনস্ট্রাক্ট","নির্মাণ করা","inter"],
+  ["Consult","কনসাল্ট","পরামর্শ করা","inter"],
+  ["Consume","কনজিউম","ব্যবহার/খাওয়া","inter"],
+  ["Continue","কন্টিনিউ","চালিয়ে যাওয়া","inter"],
+  ["Contribute","কন্ট্রিবিউট","অবদান রাখা","inter"],
+  ["Control","কন্ট্রোল","নিয়ন্ত্রণ করা","inter"],
+  ["Convert","কনভার্ট","রূপান্তর করা","inter"],
+  ["Convince","কনভিন্স","মানানো","inter"],
+  ["Create","ক্রিয়েট","সৃষ্টি করা","inter"],
+  ["Criticize","ক্রিটিসাইজ","সমালোচনা করা","inter"],
+  ["Decide","ডিসাইড","সিদ্ধান্ত নেওয়া","inter"],
+  ["Decrease","ডিক্রিজ","হ্রাস করা","inter"],
+  ["Define","ডিফাইন","সংজ্ঞায়িত করা","inter"],
+  ["Deliver","ডিলিভার","পৌঁছে দেওয়া","inter"],
+  ["Demand","ডিমান্ড","দাবি করা","inter"],
+  ["Demonstrate","ডেমোনস্ট্রেট","প্রদর্শন করা","inter"],
+  ["Depend","ডিপেন্ড","নির্ভর করা","inter"],
+  ["Describe","ডিসক্রাইব","বর্ণনা করা","inter"],
+  ["Destroy","ডিস্ট্রয়","ধ্বংস করা","inter"],
+  ["Determine","ডিটারমাইন","নির্ধারণ করা","inter"],
+  ["Develop","ডেভেলপ","উন্নয়ন করা","inter"],
+  ["Devote","ডিভোট","উৎসর্গ করা","inter"],
+  ["Discuss","ডিসকাস","আলোচনা করা","inter"],
+  ["Dislike","ডিসলাইক","অপছন্দ করা","inter"],
+  ["Display","ডিসপ্লে","প্রদর্শন করা","inter"],
+  ["Distribute","ডিস্ট্রিবিউট","বিতরণ করা","inter"],
+  ["Divide","ডিভাইড","ভাগ করা","inter"],
+  ["Educate","এডুকেট","শিক্ষিত করা","inter"],
+  ["Eliminate","এলিমিনেট","নির্মূল করা","inter"],
+  ["Emphasize","এমফাসাইজ","গুরুত্ব দেওয়া","inter"],
+  ["Encourage","এনকারেজ","উৎসাহিত করা","inter"],
+  ["Engage","এনগেজ","নিযুক্ত করা","inter"],
+  ["Enhance","এনহান্স","উন্নত করা","inter"],
+  ["Enjoy","এনজয়","উপভোগ করা","inter"],
+  ["Ensure","এনশিওর","নিশ্চিত করা","inter"],
+  ["Enter","এন্টার","প্রবেশ করা","inter"],
+  ["Establish","এস্ট্যাবলিশ","প্রতিষ্ঠা করা","inter"],
+  ["Examine","এক্সামিন","পরীক্ষা করা","inter"],
+  ["Excite","এক্সাইট","উত্তেজিত করা","inter"],
+  ["Expand","এক্সপ্যান্ড","প্রসারিত করা","inter"],
+  ["Expect","এক্সপেক্ট","প্রত্যাশা করা","inter"],
+  ["Explain","এক্সপ্লেইন","ব্যাখ্যা করা","inter"],
+  ["Explore","এক্সপ্লোর","অনুসন্ধান করা","inter"],
+  ["Express","এক্সপ্রেস","প্রকাশ করা","inter"],
+  ["Extend","এক্সটেন্ড","সম্প্রসারণ করা","inter"],
+  ["Facilitate","ফ্যাসিলিটেট","সহজ করা","inter"],
+  ["Familiarize","ফ্যামিলিয়ারাইজ","পরিচিত হওয়া","inter"],
+  ["Focus","ফোকাস","মনোযোগ দেওয়া","inter"],
+  ["Force","ফোর্স","জোর করা","inter"],
+  ["Found","ফাউন্ড","প্রতিষ্ঠা করা","inter"],
+  ["Gather","গ্যাদার","একত্রিত করা","inter"],
+  ["Handle","হ্যান্ডেল","সামলানো","inter"],
+  ["Identify","আইডেন্টিফাই","সনাক্ত করা","inter"],
+  ["Illustrate","ইলাস্ট্রেট","উদাহরণ দেওয়া","inter"],
+  ["Imagine","ইমাজিন","কল্পনা করা","inter"],
+  ["Improve","ইমপ্রুভ","উন্নতি করা","inter"],
+  ["Include","ইনক্লুড","অন্তর্ভুক্ত করা","inter"],
+  ["Increase","ইনক্রিজ","বৃদ্ধি করা","inter"],
+  ["Influence","ইনফ্লুয়েন্স","প্রভাবিত করা","inter"],
+  ["Inform","ইনফর্ম","জানানো","inter"],
+  ["Initiate","ইনিশিয়েট","শুরু করা","inter"],
+  ["Inspire","ইনস্পায়ার","অনুপ্রাণিত করা","inter"],
+  ["Integrate","ইন্টিগ্রেট","একত্রিত করা","inter"],
+  ["Interact","ইন্টারঅ্যাক্ট","আন্তঃক্রিয়া করা","inter"],
+  ["Interpret","ইন্টারপ্রেট","ব্যাখ্যা করা","inter"],
+  ["Introduce","ইন্ট্রোডিউস","পরিচয় করানো","inter"],
+  ["Invent","ইনভেন্ট","উদ্ভাবন করা","inter"],
+  ["Invite","ইনভাইট","আমন্ত্রণ করা","inter"],
+  ["Judge","জাজ","বিচার করা","inter"],
+  ["Label","লেবেল","লেবেল করা","inter"],
+  ["Maintain","মেনটেইন","বজায় রাখা","inter"],
+  ["Manage","ম্যানেজ","পরিচালনা করা","inter"],
+  ["Measure","মেজার","পরিমাপ করা","inter"],
+  ["Mention","মেনশন","উল্লেখ করা","inter"],
+  ["Mind","মাইন্ড","খেয়াল রাখা","inter"],
+  ["Modify","মডিফাই","সংশোধন করা","inter"],
+  ["Motivate","মোটিভেট","প্রেরণা দেওয়া","inter"],
+  ["Negotiate","নেগোশিয়েট","আলোচনার মাধ্যমে সমাধান","inter"],
+  ["Notice","নোটিস","লক্ষ্য করা","inter"],
+  ["Observe","অবজার্ভ","পর্যবেক্ষণ করা","inter"],
+  ["Obtain","অবটেইন","প্রাপ্ত করা","inter"],
+  ["Offer","অফার","প্রদান করা","inter"],
+  ["Operate","অপারেট","পরিচালনা করা","inter"],
+  ["Organize","অর্গানাইজ","সংগঠিত করা","inter"],
+  ["Participate","পার্টিসিপেট","অংশগ্রহণ করা","inter"],
+  ["Perform","পারফর্ম","সম্পাদন করা","inter"],
+  ["Practice","প্র্যাকটিস","অনুশীলন করা","inter"],
+  ["Predict","প্রেডিক্ট","পূর্বাভাস দেওয়া","inter"],
+  ["Prepare","প্রিপেয়ার","প্রস্তুত করা","inter"],
+  ["Present","প্রেজেন্ট","উপস্থাপন করা","inter"],
+  ["Prevent","প্রিভেন্ট","প্রতিরোধ করা","inter"],
+  ["Produce","প্রোডিউস","উৎপাদন করা","inter"],
+  ["Promote","প্রোমোট","প্রচার করা","inter"],
+  ["Protect","প্রোটেক্ট","রক্ষা করা","inter"],
+  ["Provide","প্রোভাইড","প্রদান করা","inter"],
+  ["Publicize","পাবলিসাইজ","প্রকাশ করা","inter"],
+  ["Question","কোয়েশ্চন","প্রশ্ন করা","inter"],
+  ["Raise","রেইজ","উত্থাপন করা","inter"],
+  ["Reach","রিচ","পৌঁছানো","inter"],
+  ["React","রিয়্যাক্ট","প্রতিক্রিয়া দেখানো","inter"],
+  ["Realize","রিয়েলাইজ","উপলব্ধি করা","inter"],
+  ["Receive","রিসিভ","গ্রহণ করা","inter"],
+  ["Recognize","রেকগনাইজ","চেনা/স্বীকৃতি দেওয়া","inter"],
+  ["Recommend","রেকমেন্ড","সুপারিশ করা","inter"],
+  ["Record","রেকর্ড","রেকর্ড করা","inter"],
+  ["Recover","রিকভার","পুনরুদ্ধার করা","inter"],
+  ["Reduce","রিডিউস","হ্রাস করা","inter"],
+  ["Refer","রেফার","উল্লেখ করা","inter"],
+  ["Reflect","রিফ্লেক্ট","প্রতিফলিত করা","inter"],
+  ["Refuse","রিফিউজ","অস্বীকার করা","inter"],
+  ["Register","রেজিস্টার","নিবন্ধন করা","inter"],
+  ["Relax","রিল্যাক্স","বিশ্রাম নেওয়া","inter"],
+  ["Replace","রিপ্লেস","প্রতিস্থাপন করা","inter"],
+  ["Require","রিকোয়ার","প্রয়োজন হওয়া","inter"],
+  ["Respond","রেসপন্ড","উত্তর দেওয়া","inter"],
+  ["Reveal","রিভিল","প্রকাশ করা","inter"],
+  ["Select","সিলেক্ট","নির্বাচন করা","inter"],
+  ["Separate","সেপারেট","আলাদা করা","inter"],
+  ["Serve","সার্ভ","সেবা করা","inter"],
+  ["Share","শেয়ার","ভাগ করা","inter"],
+  ["Solve","সলভ","সমাধান করা","inter"],
+  ["Sort","সর্ট","শ্রেণিবদ্ধ করা","inter"],
+  ["Specify","স্পেসিফাই","স্পষ্ট করা","inter"],
+  ["Suggest","সাজেস্ট","পরামর্শ দেওয়া","inter"],
+  ["Support","সাপোর্ট","সহায়তা করা","inter"],
+  ["Surprise","সারপ্রাইজ","আশ্চর্য করা","inter"],
+  ["Transfer","ট্র্যান্সফার","স্থানান্তর করা","inter"],
+  ["Translate","ট্র্যান্সলেট","অনুবাদ করা","inter"],
+  ["Travel","ট্র্যাভেল","ভ্রমণ করা","inter"],
+  ["Treat","ট্রিট","আচরণ/চিকিৎসা করা","inter"],
+  ["Understand","আন্ডারস্ট্যান্ড","বোঝা","inter"],
+  ["Utilize","ইউটিলাইজ","কাজে লাগানো","inter"],
+  ["Verify","ভেরিফাই","যাচাই করা","inter"],
+  ["Visit","ভিজিট","দেখা করা","inter"],
+  ["Warn","ওয়ার্ন","সতর্ক করা","inter"],
+  ["Acquire","অ্যাকোয়ার","অর্জন করা","inter"],
+  ["Adjust","অ্যাডজাস্ট","সামঞ্জস্য করা","inter"],
+  ["Accept","অ্যাকসেপ্ট","গ্রহণ করা","inter"],
+  ["Accomplish","অ্যাকমপ্লিশ","সম্পন্ন করা","inter"],
+  ["Formulate","ফর্মুলেট","তৈরি করা","inter"],
+  ["Donation","ডোনেশন","দান","inter"],
+  ["Comparison","কম্পেরিজন","তুলনা","inter"],
+
+  // ===== ADVANCED =====
+  ["Consciousness","কনশাসনেস","চেতনা","adv"],
+  ["Perception","পার্সেপশন","উপলব্ধি","adv"],
+  ["Perspective","পার্সপেক্টিভ","দৃষ্টিভঙ্গি","adv"],
+  ["Philosophy","ফিলোসফি","দর্শন","adv"],
+  ["Psychology","সাইকোলজি","মনোবিজ্ঞান","adv"],
+  ["Phenomenon","ফিনোমেনন","প্রপঞ্চ","adv"],
+  ["Hypothesis","হাইপোথেসিস","অনুমান/প্রকল্প","adv"],
+  ["Analysis","অ্যানালিসিস","বিশ্লেষণ","adv"],
+  ["Synthesis","সিনথেসিস","সংশ্লেষণ","adv"],
+  ["Evaluation","ইভালুয়েশন","মূল্যায়ন","adv"],
+  ["Implementation","ইমপ্লিমেন্টেশন","বাস্তবায়ন","adv"],
+  ["Infrastructure","ইনফ্রাস্ট্রাকচার","অবকাঠামো","adv"],
+  ["Sustainability","সাসটেইনেবিলিটি","টেকসইতা","adv"],
+  ["Transparency","ট্র্যান্সপারেন্সি","স্বচ্ছতা","adv"],
+  ["Accountability","অ্যাকাউন্টেবিলিটি","জবাবদিহিতা","adv"],
+  ["Authenticity","অথেনটিসিটি","খাঁটিত্ব","adv"],
+  ["Credibility","ক্রেডিবিলিটি","বিশ্বাসযোগ্যতা","adv"],
+  ["Integrity","ইন্টেগ্রিটি","সততা","adv"],
+  ["Consistency","কনসিস্টেন্সি","সামঞ্জস্য","adv"],
+  ["Contradiction","কন্ট্রাডিকশন","বৈপরীত্য","adv"],
+  ["Paradox","প্যারাডক্স","বিরোধাভাস","adv"],
+  ["Ambiguity","অ্যামবিগুইটি","দ্বিচারিতা","adv"],
+  ["Interpretation","ইন্টারপ্রিটেশন","ব্যাখ্যা","adv"],
+  ["Implication","ইমপ্লিকেশন","তাৎপর্য","adv"],
+  ["Consequence","কনসিকোয়েন্স","পরিণতি","adv"],
+  ["Circumstance","সার্কামস্ট্যান্স","পরিস্থিতি","adv"],
+  ["Fundamental","ফান্ডামেন্টাল","মৌলিক","adv"],
+  ["Substantial","সাবস্ট্যান্শিয়াল","উল্লেখযোগ্য","adv"],
+  ["Comprehensive","কম্প্রিহেন্সিভ","ব্যাপক","adv"],
+  ["Sophisticated","সফিস্টিকেটেড","পরিশীলিত","adv"],
+  ["Significant","সিগনিফিক্যান্ট","তাৎপর্যপূর্ণ","adv"],
+  ["Influential","ইনফ্লুয়েনশিয়াল","প্রভাবশালী","adv"],
+  ["Controversial","কনট্রোভার্শিয়াল","বিতর্কিত","adv"],
+  ["Contemporary","কনটেম্পোরারি","সমসাময়িক","adv"],
+  ["Conventional","কনভেনশনাল","প্রচলিত","adv"],
+  ["Revolutionary","রেভলিউশনারি","বৈপ্লবিক","adv"],
+  ["Unprecedented","আনপ্রেসিডেন্টেড","নজিরবিহীন","adv"],
+  ["Inevitable","ইনেভিটেবল","অনিবার্য","adv"],
+  ["Vulnerable","ভালনারেবল","ঝুঁকিপূর্ণ","adv"],
+  ["Resilient","রেজিলিয়েন্ট","প্রতিরোধী","adv"],
+  ["Persistent","পার্সিস্টেন্ট","অধ্যবসায়ী","adv"],
+  ["Determined","ডিটার্মিনড","দৃঢ়প্রতিজ্ঞ","adv"],
+  ["Eloquent","এলোকোয়েন্ট","বাগ্মী","adv"],
+  ["Articulate","আর্টিকুলেট","স্পষ্টভাষী","adv"],
+  ["Empathy","এমপ্যাথি","সহানুভূতি","adv"],
+  ["Compassion","কম্পাশন","করুণা","adv"],
+  ["Generosity","জেনেরোসিটি","উদারতা","adv"],
+  ["Humility","হিউমিলিটি","নম্রতা","adv"],
+  ["Adversity","অ্যাডভার্সিটি","প্রতিকূলতা","adv"],
+  ["Perseverance","পার্সিভিয়ারেন্স","অধ্যবসায়","adv"],
+  ["Achievement","অ্যাচিভমেন্ট","অর্জন","adv"],
+  ["Breakthrough","ব্রেকথ্রু","যুগান্তকারী সাফল্য","adv"],
+  ["Momentum","মোমেন্টাম","গতিশক্তি","adv"],
+  ["Transformation","ট্র্যান্সফর্মেশন","রূপান্তর","adv"],
+  ["Revolution","রেভলিউশন","বিপ্লব","adv"],
+  ["Evolution","ইভলিউশন","বিবর্তন","adv"],
+  ["Civilization","সিভিলাইজেশন","সভ্যতা","adv"],
+  ["Globalization","গ্লোবালাইজেশন","বৈশ্বিকীকরণ","adv"],
+  ["Urbanization","আরবানাইজেশন","নগরায়ন","adv"],
+  ["Modernization","মডার্নাইজেশন","আধুনিকায়ন","adv"],
+  ["Entrepreneurship","এন্ট্রিপ্রেনারশিপ","উদ্যোক্তাবৃত্তি","adv"],
+  ["Leadership","লিডারশিপ","নেতৃত্ব","adv"],
+  ["Mentorship","মেন্টরশিপ","পরামর্শদাতৃত্ব","adv"],
+  ["Scholarship","স্কলারশিপ","বৃত্তি","adv"],
+  ["Internship","ইন্টার্নশিপ","ইন্টার্নশিপ","adv"],
+  ["Collaboration","কোলাবোরেশন","সহযোগিতা","adv"],
+  ["Coordination","কোঅর্ডিনেশন","সমন্বয়","adv"],
+  ["Administration","অ্যাডমিনিস্ট্রেশন","প্রশাসন","adv"],
+  ["Legislation","লেজিসলেশন","আইন প্রণয়ন","adv"],
+  ["Regulation","রেগুলেশন","নিয়ন্ত্রণ","adv"],
+  ["Authorization","অথরাইজেশন","অনুমোদন","adv"],
+  ["Verification","ভেরিফিকেশন","যাচাইকরণ","adv"],
+  ["Documentation","ডকুমেন্টেশন","নথিভুক্তি","adv"],
+  ["Configuration","কনফিগারেশন","কনফিগারেশন","adv"],
+  ["Optimization","অপটিমাইজেশন","সর্বোচ্চকরণ","adv"],
+  ["Customization","কাস্টমাইজেশন","ব্যক্তিগতকরণ","adv"],
+  ["Automation","অটোমেশন","স্বয়ংক্রিয়করণ","adv"],
+  ["Authentication","অথেনটিকেশন","প্রমাণীকরণ","adv"],
+  ["Encryption","এনক্রিপশন","এনক্রিপশন","adv"],
+  ["Algorithm","অ্যালগরিদম","অ্যালগরিদম","adv"],
+  ["Architecture","আর্কিটেকচার","স্থাপত্য","adv"],
+  ["Framework","ফ্রেমওয়ার্ক","কাঠামো","adv"],
+  ["Scalability","স্কেলেবিলিটি","পরিমাপযোগ্যতা","adv"],
+  ["Accessibility","অ্যাক্সেসিবিলিটি","প্রাপ্যতা","adv"],
+  ["Compatibility","কম্প্যাটিবিলিটি","সামঞ্জস্যতা","adv"],
+  ["Cybersecurity","সাইবারসিকিউরিটি","সাইবার নিরাপত্তা","adv"],
+  ["Artificial Intelligence","আর্টিফিশিয়াল ইন্টেলিজেন্স","কৃত্রিম বুদ্ধিমত্তা","adv"],
+  ["Machine Learning","মেশিন লার্নিং","যন্ত্র শিক্ষণ","adv"],
+  ["Blockchain","ব্লকচেইন","ব্লকচেইন","adv"],
+  ["Biodiversity","বায়োডাইভার্সিটি","জীববৈচিত্র্য","adv"],
+  ["Deforestation","ডিফোরেস্টেশন","বন উজাড়","adv"],
+  ["Humanitarian","হিউম্যানিটেরিয়ান","মানবিক","adv"],
+  ["Philosophical","ফিলোসফিক্যাল","দার্শনিক","adv"],
+  ["Psychological","সাইকোলজিক্যাল","মনস্তাত্ত্বিক","adv"],
+  ["Socioeconomic","সোশিওইকোনমিক","আর্থসামাজিক","adv"],
+  ["Interdisciplinary","ইন্টারডিসিপ্লিনারি","আন্তঃবিষয়ক","adv"],
+  ["Transformative","ট্র্যান্সফর্মেটিভ","রূপান্তরকারী","adv"],
+  ["Extraordinary","এক্সট্রাঅর্ডিনারি","অসাধারণ","adv"],
+  ["Manifestation","ম্যানিফেস্টেশন","বহিঃপ্রকাশ","adv"],
+  ["Visualization","ভিজুয়ালাইজেশন","দৃশ্যায়ন","adv"],
+  ["Professionalism","প্রফেশনালিজম","পেশাদারিত্ব","adv"],
+  ["Determination","ডিটার্মিনেশন","দৃঢ়তা","adv"],
+  ["Procrastination","প্রোক্র্যাস্টিনেশন","কালক্ষেপণ","adv"],
+  ["Overwhelmed","ওভারহেলমড","অভিভূত","adv"],
+  ["Acknowledgment","অ্যাকনলেজমেন্ট","স্বীকৃতি","adv"],
+  ["Recommendation","রেকমেন্ডেশন","সুপারিশ","adv"],
+  ["Representation","রিপ্রেজেন্টেশন","প্রতিনিধিত্ব","adv"],
+  ["Appreciation","অ্যাপ্রিসিয়েশন","কৃতজ্ঞতা","adv"],
+  ["Discrimination","ডিসক্রিমিনেশন","বৈষম্য","adv"],
+  ["Enlightenment","এনলাইটেনমেন্ট","জ্ঞানোদয়","adv"],
+  ["Distinguish","ডিসটিংগুইশ","পার্থক্য করা","adv"],
+  ["Sociology","সোশিওলজি","সমাজবিজ্ঞান","adv"],
+  ["Linguistics","লিঙ্গুইস্টিক্স","ভাষাবিজ্ঞান","adv"],
+];
+
+// deduplicate by lowercase english
+const seen = new Set();
+const DATA = W.filter(w => {
+  const k = w[0].toLowerCase();
+  if(seen.has(k)) return false;
+  seen.add(k); return true;
+});
+
+// count levels
+const bC = DATA.filter(w=>w[3]==='basic').length;
+const iC = DATA.filter(w=>w[3]==='inter').length;
+const aC = DATA.filter(w=>w[3]==='adv').length;
+document.getElementById('totalAll').textContent = DATA.length;
+document.getElementById('totalB').textContent = bC;
+document.getElementById('totalI').textContent = iC;
+document.getElementById('totalA').textContent = aC;
+document.getElementById('cnt').textContent = DATA.length;
+
+let activeL = 'all';
+
+function render(list){
+  const g = document.getElementById('grid');
+  const nr = document.getElementById('nores');
+  // remove old cards
+  g.querySelectorAll('.wc').forEach(c=>c.remove());
+  nr.style.display = list.length===0 ? 'block' : 'none';
+  document.getElementById('cnt').textContent = list.length;
+  list.forEach((w,i)=>{
+    const c = document.createElement('div');
+    c.className = `wc ${w[3]}`;
+    c.innerHTML = `
+      <div class="wn">#${String(i+1).padStart(4,'0')}</div>
+      <div class="we">${w[0]}</div>
+      <div class="wp">${w[1]}</div>
+      <div class="wm">${w[2]}</div>
+      <span class="badge ${w[3]}">${w[3]==='basic'?'🟢 Basic':w[3]==='inter'?'🔵 Inter':'🔴 Adv'}</span>
+    `;
+    g.appendChild(c);
+  });
+}
+
+function doFilter(){
+  const q = document.getElementById('si').value.toLowerCase().trim();
+  let list = activeL==='all' ? DATA : DATA.filter(w=>w[3]===activeL);
+  if(q) list = list.filter(w=>w[0].toLowerCase().includes(q)||w[1].includes(q)||w[2].includes(q));
+  render(list);
+}
+
+function setL(l, btn){
+  activeL = l;
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  doFilter();
+}
+
+render(DATA);
+
+</script>
+
+<!-- PAST FORM JS -->
+<script>
+// Wrap past form init so it runs when tab is opened
+// Past Form JS — global scope
+let pastBuilt = false;
+function initPast() {
+  if(pastBuilt) return;
+  pastBuilt = true;
+  build();
+}
+
+  
+const RULES = [
+  {
+    r:1, icon:'🔴', sound:'"ইড"',
+    title:'Rule 1 — উচ্চারণ হবে "ইড"',
+    desc:'যখন base verb এর শেষে T বা D sound থাকে, তখন "-ed" যোগ করলে উচ্চারণ হয় "ইড"। মনে রাখো: T/D → ইড',
+    ex:'Start → Started → স্টার্টেড',
+    words:[
+      ['Start','Started','স্টার্টেড'],
+      ['Want','Wanted','ওয়ান্টেড'],
+      ['Need','Needed','নিডেড'],
+      ['End','Ended','এনডেড'],
+      ['Add','Added','অ্যাডেড'],
+      ['Wait','Waited','ওয়েটেড'],
+      ['Treat','Treated','ট্রিটেড'],
+      ['Heat','Heated','হিটেড'],
+      ['Print','Printed','প্রিন্টেড'],
+      ['Point','Pointed','পয়েন্টেড'],
+      ['Paint','Painted','পেইন্টেড'],
+      ['Count','Counted','কাউন্টেড'],
+      ['Visit','Visited','ভিজিটেড'],
+      ['List','Listed','লিস্টেড'],
+      ['Test','Tested','টেস্টেড'],
+      ['Trust','Trusted','ট্রাস্টেড'],
+      ['Rest','Rested','রেস্টেড'],
+      ['Last','Lasted','লাস্টেড'],
+      ['Taste','Tasted','টেস্টেড'],
+      ['Waste','Wasted','ওয়েস্টেড'],
+      ['Post','Posted','পোস্টেড'],
+      ['Vote','Voted','ভোটেড'],
+      ['Note','Noted','নোটেড'],
+      ['Quote','Quoted','কোটেড'],
+      ['Create','Created','ক্রিয়েটেড'],
+      ['Decorate','Decorated','ডেকোরেটেড'],
+      ['Graduate','Graduated','গ্র্যাজুয়েটেড'],
+      ['Educate','Educated','এডুকেটেড'],
+      ['Nominate','Nominated','নমিনেটেড'],
+      ['Dedicate','Dedicated','ডেডিকেটেড'],
+      ['Operate','Operated','অপারেটেড'],
+      ['Separate','Separated','সেপারেটেড'],
+      ['Celebrate','Celebrated','সেলিব্রেটেড'],
+      ['Investigate','Investigated','ইনভেস্টিগেটেড'],
+      ['Evaluate','Evaluated','ইভালুয়েটেড'],
+      ['Generate','Generated','জেনারেটেড'],
+      ['Demonstrate','Demonstrated','ডেমোনস্ট্রেটেড'],
+      ['Motivate','Motivated','মোটিভেটেড'],
+      ['Participate','Participated','পার্টিসিপেটেড'],
+      ['Implement','Implemented','ইমপ্লিমেন্টেড'],
+      ['Document','Documented','ডকুমেন্টেড'],
+      ['Present','Presented','প্রেজেন্টেড'],
+      ['Represent','Represented','রিপ্রেজেন্টেড'],
+      ['Invent','Invented','ইনভেন্টেড'],
+      ['Prevent','Prevented','প্রিভেন্টেড'],
+      ['Contact','Contacted','কনট্যাক্টেড'],
+      ['Protect','Protected','প্রোটেক্টেড'],
+      ['Collect','Collected','কোলেক্টেড'],
+      ['Connect','Connected','কানেক্টেড'],
+      ['Select','Selected','সিলেক্টেড'],
+      ['Direct','Directed','ডিরেক্টেড'],
+      ['Correct','Corrected','করেক্টেড'],
+      ['Expect','Expected','এক্সপেক্টেড'],
+      ['Accept','Accepted','অ্যাকসেপ্টেড'],
+      ['Respect','Respected','রেসপেক্টেড'],
+      ['Reject','Rejected','রিজেক্টেড'],
+      ['Detect','Detected','ডিটেক্টেড'],
+      ['Neglect','Neglected','নিগ্লেক্টেড'],
+      ['Attract','Attracted','অ্যাট্রাক্টেড'],
+      ['Instruct','Instructed','ইনস্ট্রাক্টেড'],
+      ['Construct','Constructed','কনস্ট্রাক্টেড'],
+      ['Conduct','Conducted','কনডাক্টেড'],
+      ['Suggest','Suggested','সাজেস্টেড'],
+      ['Request','Requested','রিকোয়েস্টেড'],
+      ['Interest','Interested','ইন্টারেস্টেড'],
+      ['Complete','Completed','কমপ্লিটেড'],
+      ['Repeat','Repeated','রিপিটেড'],
+      ['Greet','Greeted','গ্রিটেড'],
+      ['Defeat','Defeated','ডিফিটেড'],
+      ['Locate','Located','লোকেটেড'],
+      ['Calculate','Calculated','ক্যালকুলেটেড'],
+      ['Translate','Translated','ট্র্যান্সলেটেড'],
+      ['Estimate','Estimated','এস্টিমেটেড'],
+      ['Navigate','Navigated','নেভিগেটেড'],
+      ['Update','Updated','আপডেটেড'],
+      ['Debate','Debated','ডিবেটেড'],
+      ['Relate','Related','রিলেটেড'],
+      ['State','Stated','স্টেটেড'],
+      ['Format','Formatted','ফরম্যাটেড'],
+      ['Target','Targeted','টার্গেটেড'],
+      ['Report','Reported','রিপোর্টেড'],
+      ['Support','Supported','সাপোর্টেড'],
+      ['Sort','Sorted','সর্টেড'],
+      ['Import','Imported','ইম্পোর্টেড'],
+      ['Export','Exported','এক্সপোর্টেড'],
+      ['Transport','Transported','ট্র্যান্সপোর্টেড'],
+      ['Convert','Converted','কনভার্টেড'],
+      ['Invest','Invested','ইনভেস্টেড'],
+      ['Upload','Uploaded','আপলোডেড'],
+      ['Download','Downloaded','ডাউনলোডেড'],
+      ['Donate','Donated','ডোনেটেড'],
+      ['Rate','Rated','রেটেড'],
+      ['Integrate','Integrated','ইন্টিগ্রেটেড'],
+      ['Automate','Automated','অটোমেটেড'],
+      ['Validate','Validated','ভ্যালিডেটেড'],
+      ['Dominate','Dominated','ডমিনেটেড'],
+      ['Allocate','Allocated','অ্যালোকেটেড'],
+      ['Coordinate','Coordinated','কোঅর্ডিনেটেড'],
+      ['Communicate','Communicated','কমিউনিকেটেড'],
+      ['Appreciate','Appreciated','অ্যাপ্রিসিয়েটেড'],
+      ['Concentrate','Concentrated','কনসেনট্রেটেড'],
+      ['Anticipate','Anticipated','অ্যান্টিসিপেটেড'],
+      ['Activate','Activated','অ্যাক্টিভেটেড'],
+      ['Delete','Deleted','ডিলেটেড'],
+      ['Edit','Edited','এডিটেড'],
+      ['Excite','Excited','এক্সাইটেড'],
+      ['Unite','United','ইউনাইটেড'],
+      ['Divide','Divided','ডিভাইডেড'],
+      ['Decide','Decided','ডিসাইডেড'],
+      ['Include','Included','ইনক্লুডেড'],
+      ['Exclude','Excluded','এক্সক্লুডেড'],
+      ['Provide','Provided','প্রোভাইডেড'],
+      ['Succeed','Succeeded','সাক্সিডেড'],
+      ['Exceed','Exceeded','এক্সিডেড'],
+      ['Grade','Graded','গ্রেডেড'],
+      ['Land','Landed','ল্যান্ডেড'],
+      ['Hand','Handed','হ্যান্ডেড'],
+      ['Fund','Funded','ফান্ডেড'],
+      ['Guard','Guarded','গার্ডেড'],
+      ['Head','Headed','হেডেড'],
+      ['Load','Loaded','লোডেড'],
+      ['Code','Coded','কোডেড'],
+      ['Host','Hosted','হোস্টেড'],
+      ['Affect','Affected','অ্যাফেক্টেড'],
+      ['Reflect','Reflected','রিফ্লেক্টেড'],
+      ['Protest','Protested','প্রোটেস্টেড'],
+      ['Adopt','Adopted','অ্যাডপ্টেড'],
+      ['Adapt','Adapted','অ্যাডাপ্টেড'],
+    ]
+  },
+  {
+    r:2, icon:'🔵', sound:'"ড"',
+    title:'Rule 2 — উচ্চারণ হবে "ড"',
+    desc:'যখন base verb এর শেষে voiced sound থাকে (B, G, L, M, N, R, V, W, Z বা vowel), তখন "-ed" এর উচ্চারণ হয় "ড"',
+    ex:'Play → Played → প্লেড',
+    words:[
+      ['Play','Played','প্লেড'],
+      ['Call','Called','কলড'],
+      ['Move','Moved','মুভড'],
+      ['Follow','Followed','ফলোড'],
+      ['Learn','Learned','লার্নড'],
+      ['Answer','Answered','আনসারড'],
+      ['Remember','Remembered','রিমেমবারড'],
+      ['Happen','Happened','হ্যাপেনড'],
+      ['Open','Opened','ওপেনড'],
+      ['Listen','Listened','লিসেনড'],
+      ['Turn','Turned','টার্নড'],
+      ['Earn','Earned','আর্নড'],
+      ['Return','Returned','রিটার্নড'],
+      ['Travel','Traveled','ট্র্যাভেলড'],
+      ['Achieve','Achieved','অ্যাচিভড'],
+      ['Believe','Believed','বিলিভড'],
+      ['Receive','Received','রিসিভড'],
+      ['Perceive','Perceived','পার্সিভড'],
+      ['Relieve','Relieved','রিলিভড'],
+      ['Solve','Solved','সলভড'],
+      ['Involve','Involved','ইনভলভড'],
+      ['Resolve','Resolved','রিজলভড'],
+      ['Evolve','Evolved','ইভলভড'],
+      ['Improve','Improved','ইমপ্রুভড'],
+      ['Approve','Approved','অ্যাপ্রুভড'],
+      ['Love','Loved','লাভড'],
+      ['Live','Lived','লিভড'],
+      ['Arrive','Arrived','অ্যারাইভড'],
+      ['Survive','Survived','সার্ভাইভড'],
+      ['Describe','Described','ডিসক্রাইবড'],
+      ['Subscribe','Subscribed','সাবস্ক্রাইবড'],
+      ['Observe','Observed','অবজার্ভড'],
+      ['Prefer','Preferred','প্রিফার্ড'],
+      ['Refer','Referred','রিফার্ড'],
+      ['Transfer','Transferred','ট্র্যান্সফার্ড'],
+      ['Cover','Covered','কাভার্ড'],
+      ['Discover','Discovered','ডিসকাভার্ড'],
+      ['Recover','Recovered','রিকাভার্ড'],
+      ['Deliver','Delivered','ডিলিভার্ড'],
+      ['Consider','Considered','কনসিডার্ড'],
+      ['Wonder','Wondered','ওয়ান্ডার্ড'],
+      ['Suffer','Suffered','সাফার্ড'],
+      ['Offer','Offered','অফার্ড'],
+      ['Share','Shared','শেয়ার্ড'],
+      ['Prepare','Prepared','প্রিপেয়ার্ড'],
+      ['Compare','Compared','কম্পেয়ার্ড'],
+      ['Declare','Declared','ডিক্লেয়ার্ড'],
+      ['Repair','Repaired','রিপেয়ার্ড'],
+      ['Clear','Cleared','ক্লিয়ার্ড'],
+      ['Appear','Appeared','অ্যাপিয়ার্ড'],
+      ['Fear','Feared','ফিয়ার্ড'],
+      ['Cheer','Cheered','চিয়ার্ড'],
+      ['Encourage','Encouraged','এনকারেজড'],
+      ['Engage','Engaged','এনগেজড'],
+      ['Arrange','Arranged','অ্যারেঞ্জড'],
+      ['Change','Changed','চেঞ্জড'],
+      ['Challenge','Challenged','চ্যালেঞ্জড'],
+      ['Manage','Managed','ম্যানেজড'],
+      ['Organize','Organized','অর্গানাইজড'],
+      ['Recognize','Recognized','রেকগনাইজড'],
+      ['Realize','Realized','রিয়েলাইজড'],
+      ['Analyze','Analyzed','অ্যানালাইজড'],
+      ['Summarize','Summarized','সামারাইজড'],
+      ['Memorize','Memorized','মেমোরাইজড'],
+      ['Prioritize','Prioritized','প্রাইওরিটাইজড'],
+      ['Minimize','Minimized','মিনিমাইজড'],
+      ['Maximize','Maximized','ম্যাক্সিমাইজড'],
+      ['Utilize','Utilized','ইউটিলাইজড'],
+      ['Emphasize','Emphasized','এম্ফাসাইজড'],
+      ['Criticize','Criticized','ক্রিটিসাইজড'],
+      ['Stabilize','Stabilized','স্ট্যাবিলাইজড'],
+      ['Specialize','Specialized','স্পেশালাইজড'],
+      ['Optimize','Optimized','অপটিমাইজড'],
+      ['Customize','Customized','কাস্টমাইজড'],
+      ['Revise','Revised','রিভাইজড'],
+      ['Advise','Advised','অ্যাডভাইজড'],
+      ['Surprise','Surprised','সারপ্রাইজড'],
+      ['Browse','Browsed','ব্রাউজড'],
+      ['Raise','Raised','রেইজড'],
+      ['Praise','Praised','প্রেইজড'],
+      ['Use','Used','ইউজড'],
+      ['Cause','Caused','কজড'],
+      ['Close','Closed','ক্লোজড'],
+      ['Expose','Exposed','এক্সপোজড'],
+      ['Propose','Proposed','প্রোপোজড'],
+      ['Oppose','Opposed','অপোজড'],
+      ['Compose','Composed','কম্পোজড'],
+      ['Allow','Allowed','অ্যালাউড'],
+      ['Show','Showed','শোড'],
+      ['Borrow','Borrowed','বোরোড'],
+      ['Review','Reviewed','রিভিউড'],
+      ['Interview','Interviewed','ইন্টারভিউড'],
+      ['Continue','Continued','কন্টিনিউড'],
+      ['Value','Valued','ভ্যালিউড'],
+      ['Schedule','Scheduled','স্কেডিউলড'],
+      ['Enable','Enabled','এনেবলড'],
+      ['Cancel','Cancelled','ক্যান্সেলড'],
+      ['Control','Controlled','কন্ট্রোলড'],
+      ['Enroll','Enrolled','এনরোলড'],
+      ['Scroll','Scrolled','স্ক্রলড'],
+      ['Pull','Pulled','পুলড'],
+      ['Fill','Filled','ফিলড'],
+      ['Plan','Planned','প্ল্যানড'],
+      ['Gain','Gained','গেইনড'],
+      ['Join','Joined','জয়েনড'],
+      ['Train','Trained','ট্রেইনড'],
+      ['Maintain','Maintained','মেনটেইনড'],
+      ['Explain','Explained','এক্সপ্লেইনড'],
+      ['Obtain','Obtained','অবটেইনড'],
+      ['Remain','Remained','রিমেইনড'],
+      ['Complain','Complained','কম্প্লেইনড'],
+      ['Hire','Hired','হায়ার্ড'],
+      ['Inspire','Inspired','ইন্সপায়ার্ড'],
+      ['Admire','Admired','অ্যাডমায়ার্ড'],
+      ['Require','Required','রিকোয়ার্ড'],
+      ['Desire','Desired','ডিজায়ার্ড'],
+      ['Retire','Retired','রিটায়ার্ড'],
+      ['Score','Scored','স্কোর্ড'],
+      ['Store','Stored','স্টোর্ড'],
+      ['Explore','Explored','এক্সপ্লোর্ড'],
+      ['Ignore','Ignored','ইগনোর্ড'],
+      ['Restore','Restored','রিস্টোর্ড'],
+      ['Smile','Smiled','স্মাইলড'],
+      ['Compile','Compiled','কম্পাইলড'],
+      ['File','Filed','ফাইলড'],
+      ['Save','Saved','সেভড'],
+      ['Serve','Served','সার্ভড'],
+      ['Agree','Agreed','অ্যাগ্রিড'],
+      ['Carry','Carried','ক্যারিড'],
+      ['Enjoy','Enjoyed','এনজয়ড'],
+      ['Employ','Employed','এমপ্লয়ড'],
+      ['Deploy','Deployed','ডিপ্লয়ড'],
+      ['Annoy','Annoyed','অ্যানয়ড'],
+    ]
+  },
+  {
+    r:3, icon:'🟢', sound:'"ট"',
+    title:'Rule 3 — উচ্চারণ হবে "ট"',
+    desc:'যখন base verb এর শেষে voiceless sound থাকে (P, K, S, F, SH, CH, X), তখন "-ed" এর উচ্চারণ হয় "ট"',
+    ex:'Walk → Walked → ওয়াকট',
+    words:[
+      ['Walk','Walked','ওয়াকট'],
+      ['Talk','Talked','টকট'],
+      ['Jump','Jumped','জাম্পট'],
+      ['Help','Helped','হেল্পট'],
+      ['Stop','Stopped','স্টপট'],
+      ['Drop','Dropped','ড্রপট'],
+      ['Clap','Clapped','ক্ল্যাপট'],
+      ['Snap','Snapped','স্ন্যাপট'],
+      ['Watch','Watched','ওয়াচট'],
+      ['Search','Searched','সার্চট'],
+      ['Reach','Reached','রিচট'],
+      ['Touch','Touched','টাচট'],
+      ['Match','Matched','ম্যাচট'],
+      ['Sketch','Sketched','স্কেচট'],
+      ['Switch','Switched','সুইচট'],
+      ['Launch','Launched','লঞ্চট'],
+      ['Crash','Crashed','ক্র্যাশট'],
+      ['Push','Pushed','পুশট'],
+      ['Rush','Rushed','রাশট'],
+      ['Finish','Finished','ফিনিশট'],
+      ['Publish','Published','পাবলিশট'],
+      ['Establish','Established','এস্ট্যাবলিশট'],
+      ['Accomplish','Accomplished','অ্যাকমপ্লিশট'],
+      ['Polish','Polished','পলিশট'],
+      ['Wish','Wished','উইশট'],
+      ['Wash','Washed','ওয়াশট'],
+      ['Refresh','Refreshed','রিফ্রেশট'],
+      ['Laugh','Laughed','লাফট'],
+      ['Look','Looked','লুকট'],
+      ['Cook','Cooked','কুকট'],
+      ['Book','Booked','বুকট'],
+      ['Check','Checked','চেকট'],
+      ['Block','Blocked','ব্লকট'],
+      ['Click','Clicked','ক্লিকট'],
+      ['Track','Tracked','ট্র্যাকট'],
+      ['Attack','Attacked','অ্যাটাকট'],
+      ['Pack','Packed','প্যাকট'],
+      ['Kick','Kicked','কিকট'],
+      ['Pick','Picked','পিকট'],
+      ['Lock','Locked','লকট'],
+      ['Knock','Knocked','নকট'],
+      ['Shock','Shocked','শকট'],
+      ['Work','Worked','ওয়ার্কট'],
+      ['Ask','Asked','আসকট'],
+      ['Like','Liked','লাইকট'],
+      ['Mark','Marked','মার্কট'],
+      ['Park','Parked','পার্কট'],
+      ['Thank','Thanked','থ্যাংকট'],
+      ['Rank','Ranked','র‍্যাংকট'],
+      ['Link','Linked','লিংকট'],
+      ['Skip','Skipped','স্কিপট'],
+      ['Ship','Shipped','শিপট'],
+      ['Dip','Dipped','ডিপট'],
+      ['Grip','Gripped','গ্রিপট'],
+      ['Rip','Ripped','রিপট'],
+      ['Tip','Tipped','টিপট'],
+      ['Clip','Clipped','ক্লিপট'],
+      ['Miss','Missed','মিসট'],
+      ['Pass','Passed','পাসট'],
+      ['Press','Pressed','প্রেসট'],
+      ['Stress','Stressed','স্ট্রেসট'],
+      ['Bless','Blessed','ব্লেসট'],
+      ['Guess','Guessed','গেসট'],
+      ['Address','Addressed','অ্যাড্রেসট'],
+      ['Express','Expressed','এক্সপ্রেসট'],
+      ['Impress','Impressed','ইমপ্রেসট'],
+      ['Discuss','Discussed','ডিসকাসট'],
+      ['Focus','Focused','ফোকাসট'],
+      ['Process','Processed','প্রসেসট'],
+      ['Access','Accessed','অ্যাকসেসট'],
+      ['Practice','Practiced','প্র্যাকটিসট'],
+      ['Notice','Noticed','নোটিসট'],
+      ['Face','Faced','ফেসট'],
+      ['Place','Placed','প্লেসট'],
+      ['Trace','Traced','ট্রেসট'],
+      ['Race','Raced','রেসট'],
+      ['Fix','Fixed','ফিক্সট'],
+      ['Mix','Mixed','মিক্সট'],
+      ['Relax','Relaxed','রিল্যাক্সট'],
+      ['Box','Boxed','বক্সট'],
+      ['Stuff','Stuffed','স্টাফট'],
+      ['Approach','Approached','অ্যাপ্রোচট'],
+      ['Coach','Coached','কোচট'],
+      ['Preach','Preached','প্রিচট'],
+      ['Wrap','Wrapped','র‍্যাপট'],
+      ['Develop','Developed','ডেভেলপট'],
+      ['Attach','Attached','অ্যাটাচট'],
+      ['Detach','Detached','ডিট্যাচট'],
+      ['Dispatch','Dispatched','ডিসপ্যাচট'],
+      ['Scratch','Scratched','স্ক্র্যাচট'],
+      ['Fetch','Fetched','ফেচট'],
+      ['Snatch','Snatched','স্ন্যাচট'],
+      ['Patch','Patched','প্যাচট'],
+      ['Stamp','Stamped','স্ট্যাম্পট'],
+      ['Camp','Camped','ক্যাম্পট'],
+      ['Collapse','Collapsed','কোল্যাপসট'],
+      ['Release','Released','রিলিসট'],
+      ['Increase','Increased','ইনক্রিসট'],
+      ['Decrease','Decreased','ডিক্রিসট'],
+      ['Purchase','Purchased','পার্চেসট'],
+      ['Dance','Danced','ড্যান্সট'],
+      ['Advance','Advanced','অ্যাডভান্সট'],
+      ['Enhance','Enhanced','এনহান্সট'],
+      ['Finance','Financed','ফাইন্যান্সট'],
+      ['Balance','Balanced','ব্যালান্সট'],
+      ['Hope','Hoped','হোপট'],
+      ['Type','Typed','টাইপট'],
+      ['Wipe','Wiped','ওয়াইপট'],
+      ['Escape','Escaped','এস্কেপট'],
+      ['Shape','Shaped','শেইপট'],
+      ['Research','Researched','রিসার্চট'],
+      ['Bleach','Bleached','ব্লিচট'],
+      ['Cope','Coped','কোপট'],
+      ['Smoke','Smoked','স্মোকট'],
+      ['Choke','Choked','চোকট'],
+      ['Poke','Poked','পোকট'],
+      ['Soak','Soaked','সোকট'],
+      ['Pluck','Plucked','প্লাকট'],
+      ['Wreck','Wrecked','রেকট'],
+      ['Mock','Mocked','মকট'],
+      ['Trick','Tricked','ট্রিকট'],
+      ['Flick','Flicked','ফ্লিকট'],
+      ['Hike','Hiked','হাইকট'],
+      ['Bake','Baked','বেকট'],
+      ['Brake','Braked','ব্রেকট'],
+      ['Shake (R3)','Shaked*','শেকট'],
+      ['Stroke','Stroked','স্ট্রোকট'],
+    ]
+  },
+  {
+    r:4, icon:'🟣', sound:'Irregular',
+    title:'Rule 4 — Irregular (কোনো Rule নেই!)',
+    desc:'এই words গুলোতে কোনো নির্দিষ্ট নিয়ম নেই। আলাদাভাবে মুখস্থ করতে হবে। Daily life এ সবচেয়ে বেশি ব্যবহৃত হয়!',
+    ex:'Go → Went → ওয়েন্ট',
+    words:[
+      ['Go','Went','ওয়েন্ট'],
+      ['Come','Came','কেম'],
+      ['Run','Ran','র‍্যান'],
+      ['Write','Wrote','রোট'],
+      ['Read','Read','রেড'],
+      ['See','Saw','স'],
+      ['Know','Knew','নিউ'],
+      ['Think','Thought','থট'],
+      ['Buy','Bought','বট'],
+      ['Bring','Brought','ব্রট'],
+      ['Teach','Taught','টট'],
+      ['Catch','Caught','কট'],
+      ['Eat','Ate','এট'],
+      ['Drink','Drank','ড্র্যাংক'],
+      ['Sleep','Slept','স্লেপ্ট'],
+      ['Wake','Woke','ওক'],
+      ['Speak','Spoke','স্পোক'],
+      ['Break','Broke','ব্রোক'],
+      ['Take','Took','টুক'],
+      ['Make','Made','মেড'],
+      ['Give','Gave','গেভ'],
+      ['Get','Got','গট'],
+      ['Find','Found','ফাউন্ড'],
+      ['Leave','Left','লেফট'],
+      ['Tell','Told','টোল্ড'],
+      ['Say','Said','সেড'],
+      ['Feel','Felt','ফেল্ট'],
+      ['Meet','Met','মেট'],
+      ['Keep','Kept','কেপ্ট'],
+      ['Stand','Stood','স্টুড'],
+      ['Understand','Understood','আন্ডারস্টুড'],
+      ['Begin','Began','বিগ্যান'],
+      ['Grow','Grew','গ্রিউ'],
+      ['Draw','Drew','ড্রিউ'],
+      ['Fly','Flew','ফ্লিউ'],
+      ['Drive','Drove','ড্রোভ'],
+      ['Rise','Rose','রোজ'],
+      ['Fall','Fell','ফেল'],
+      ['Sit','Sat','স্যাট'],
+      ['Cut','Cut','কাট'],
+      ['Put','Put','পুট'],
+      ['Hit','Hit','হিট'],
+      ['Set','Set','সেট'],
+      ['Let','Let','লেট'],
+      ['Send','Sent','সেন্ট'],
+      ['Build','Built','বিল্ট'],
+      ['Hold','Held','হেল্ড'],
+      ['Hear','Heard','হার্ড'],
+      ['Lose','Lost','লস্ট'],
+      ['Pay','Paid','পেড'],
+      ['Win','Won','ওয়ান'],
+      ['Wear','Wore','ওর'],
+      ['Forget','Forgot','ফরগট'],
+      ['Choose','Chose','চোজ'],
+      ['Spend','Spent','স্পেন্ট'],
+      ['Lend','Lent','লেন্ট'],
+      ['Bend','Bent','বেন্ট'],
+      ['Sell','Sold','সোল্ড'],
+      ['Bite','Bit','বিট'],
+      ['Hide','Hid','হিড'],
+      ['Ride','Rode','রোড'],
+      ['Strike','Struck','স্ট্রাক'],
+      ['Dig','Dug','ডাগ'],
+      ['Swim','Swam','সোয়াম'],
+      ['Sing','Sang','স্যাং'],
+      ['Ring','Rang','র‍্যাং'],
+      ['Fight','Fought','ফট'],
+      ['Shoot','Shot','শট'],
+      ['Feed','Fed','ফেড'],
+      ['Lead','Led','লেড'],
+      ['Bleed','Bled','ব্লেড'],
+      ['Mean','Meant','মেন্ট'],
+      ['Dream','Dreamt','ড্রেমট'],
+      ['Deal','Dealt','ডেলট'],
+      ['Steal','Stole','স্টোল'],
+      ['Freeze','Froze','ফ্রোজ'],
+      ['Shake','Shook','শুক'],
+      ['Mistake','Mistook','মিসটুক'],
+      ['Forgive','Forgave','ফরগেভ'],
+      ['Overcome','Overcame','ওভারকেম'],
+      ['Undergo','Underwent','আন্ডারওয়েন্ট'],
+      ['Withdraw','Withdrew','উইদড্রিউ'],
+      ['Arise','Arose','অ্যারোজ'],
+      ['Spread','Spread','স্প্রেড'],
+      ['Shed','Shed','শেড'],
+      ['Shut','Shut','শাট'],
+      ['Split','Split','স্প্লিট'],
+      ['Quit','Quit','কুইট'],
+      ['Cast','Cast','কাস্ট'],
+      ['Cost','Cost','কস্ট'],
+      ['Hurt','Hurt','হার্ট'],
+      ['Burst','Burst','বার্স্ট'],
+      ['Kneel','Knelt','নেলট'],
+      ['Swear','Swore','সোর'],
+      ['Tear','Tore','টোর'],
+      ['Bear','Bore','বোর'],
+      ['Forbid','Forbade','ফরবেড'],
+      ['Light','Lit','লিট'],
+      ['Spit','Spat','স্প্যাট'],
+      ['Weave','Wove','ওভ'],
+      ['Grind','Ground','গ্রাউন্ড'],
+      ['Wind','Wound','ওউন্ড'],
+      ['Bind','Bound','বাউন্ড'],
+      ['Shrink','Shrank','শ্র্যাংক'],
+      ['Sink','Sank','স্যাংক'],
+      ['Spring','Sprang','স্প্র্যাং'],
+      ['Throw','Threw','থ্রিউ'],
+      ['Blow','Blew','ব্লিউ'],
+      ['Flee','Fled','ফ্লেড'],
+      ['Slide','Slid','স্লিড'],
+      ['Creep','Crept','ক্রেপ্ট'],
+      ['Sweep','Swept','সোয়েপ্ট'],
+      ['Weep','Wept','ওয়েপ্ট'],
+      ['Lay','Laid','লেড'],
+      ['Pay','Paid','পেড'],
+      ['Forgave','Forgiven*','(ফরগিভন)'],
+    ]
+  }
+];
+
+let activeR = 0, q = '';
+
+function build(){
+  const m = document.getElementById('main');
+  m.innerHTML = '';
+  RULES.forEach(rule => {
+    const sec = document.createElement('section');
+    sec.className = 'rsec';
+    sec.id = `s${rule.r}`;
+    sec.setAttribute('data-r', rule.r);
+
+    const colors = ['','var(--c1)','var(--c2)','var(--c3)','var(--c4)'];
+    const col = colors[rule.r];
+
+    sec.innerHTML = `
+      <div class="rhead">
+        <div class="rnum" style="color:${col}">R${rule.r}</div>
+        <div class="rinfo">
+          <div class="rtitle" style="color:${col}">${rule.icon} ${rule.title}</div>
+          <div class="rdesc">${rule.desc}</div>
+        </div>
+        <div class="rex">
+          <div class="exlbl">📌 Example</div>
+          <div class="exw" style="color:${col}">${rule.ex}</div>
+        </div>
+      </div>
+      <div class="wgrid" id="g${rule.r}">
+        <div class="noresult" id="nr${rule.r}">কোনো word পাওয়া যায়নি 🙁</div>
+      </div>
+    `;
+    m.appendChild(sec);
+
+    const grid = document.getElementById(`g${rule.r}`);
+    rule.words.forEach((w,i) => {
+      const c = document.createElement('div');
+      c.className = 'wcard';
+      c.dataset.b = w[0].toLowerCase();
+      c.dataset.p = w[1].toLowerCase();
+      c.dataset.pr = w[2];
+      c.innerHTML = `
+        <div class="wn">#${String(i+1).padStart(3,'0')}</div>
+        <div class="wbase">${w[0]}</div>
+        <div class="wpast">${w[1]}</div>
+        <div class="wpron">${w[2]}</div>
+      `;
+      grid.appendChild(c);
+    });
+  });
+  refresh();
+}
+
+function setR(r, btn){
+  activeR = r;
+  document.querySelectorAll('.ntab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  RULES.forEach(rule => {
+    const s = document.getElementById(`s${rule.r}`);
+    s.classList.toggle('hidden', r !== 0 && r !== rule.r);
+  });
+  refresh();
+}
+
+function doSearch(){
+  q = document.getElementById('searchInput').value.toLowerCase().trim();
+  refresh();
+}
+
+function refresh(){
+  let total = 0;
+  RULES.forEach(rule => {
+    const sec = document.getElementById(`s${rule.r}`);
+    if(sec.classList.contains('hidden')){ return; }
+    const cards = document.querySelectorAll(`#g${rule.r} .wcard`);
+    let vis = 0;
+    cards.forEach(c => {
+      const ok = !q || c.dataset.b.includes(q) || c.dataset.p.includes(q) || c.dataset.pr.includes(q);
+      c.classList.toggle('dim', !ok);
+      c.classList.toggle('glow', ok && q.length > 0);
+      if(ok){ vis++; total++; }
+    });
+    const nr = document.getElementById(`nr${rule.r}`);
+    nr.style.display = vis === 0 ? 'block' : 'none';
+  });
+  // if all rules visible count total
+  if(activeR === 0 && !q){
+    total = RULES.reduce((s,r)=>s+r.words.length,0);
+  }
+  document.getElementById('cnt').textContent = total;
+}
+
+// build called on tab switch
+
+
+</script>
+
+<!-- TAB SWITCHER -->
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.mtab').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(tab === 'past') initPast();
+}
+</script>
+
+</body>
+</html>

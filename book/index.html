@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jasam's English Master Book</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600&display=swap');
+
+:root {
+  --bg:#0f1117; --surface:#161b27; --card:#1e2535; --border:rgba(255,255,255,0.07);
+  --gold:#ffc400; --goldd:rgba(255,196,0,0.12); --goldb:rgba(255,196,0,0.3);
+  --blue:#60a5fa; --blued:rgba(96,165,250,0.12); --blueb:rgba(96,165,250,0.3);
+  --green:#4ade80; --greend:rgba(74,222,128,0.12); --greenb:rgba(74,222,128,0.3);
+  --pink:#f472b6; --pinkd:rgba(244,114,182,0.12); --pinkb:rgba(244,114,182,0.3);
+  --orange:#fb923c; --oranged:rgba(251,146,60,0.12); --orangeb:rgba(251,146,60,0.3);
+  --purple:#a78bfa; --purpled:rgba(167,139,250,0.12); --purpleb:rgba(167,139,250,0.3);
+  --txt:#e2e8f0; --muted:rgba(226,232,240,0.45); --sidebar:240px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:var(--sidebar);min-width:var(--sidebar);
+  background:var(--surface);border-right:1px solid var(--border);
+  height:100vh;position:sticky;top:0;overflow-y:auto;
+  display:flex;flex-direction:column;z-index:100;
+  transition:transform .3s;
+}
+.sb-brand{
+  padding:20px 16px 14px;border-bottom:1px solid var(--border);
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;
+  background:linear-gradient(90deg,var(--gold),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sb-brand span{display:block;font-family:'Outfit',sans-serif;font-size:0.62rem;
+  font-weight:400;letter-spacing:1px;color:var(--muted);-webkit-text-fill-color:var(--muted);margin-top:2px}
+
+/* search in sidebar */
+.sb-search{padding:10px 12px;border-bottom:1px solid var(--border)}
+#sbSearch{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:8px;padding:7px 12px;color:var(--txt);font-family:'Outfit',sans-serif;
+  font-size:0.78rem;outline:none}
+#sbSearch:focus{border-color:var(--gold)}
+
+.sb-progress{padding:10px 14px 6px;border-bottom:1px solid var(--border)}
+.sb-progress-label{font-size:0.62rem;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
+.prog-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px}
+.prog-fill{height:4px;background:linear-gradient(90deg,var(--gold),var(--blue));border-radius:2px;transition:width .4s;width:0%}
+.prog-text{font-size:0.6rem;color:var(--gold);text-align:right;margin-top:3px}
+
+.sb-nav{flex:1;padding:8px 0 20px}
+.sb-section{margin-bottom:2px}
+.sb-step{
+  padding:7px 14px 5px;font-size:0.62rem;text-transform:uppercase;
+  letter-spacing:2px;color:var(--muted);font-weight:600;margin-top:10px;
+}
+.sb-link{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;font-size:0.8rem;color:var(--muted);
+  text-decoration:none;cursor:pointer;border-radius:0;
+  transition:all .18s;border-left:2px solid transparent;
+  background:none;width:100%;text-align:left;border:none;
+}
+.sb-link:hover{color:var(--txt);background:rgba(255,255,255,0.04)}
+.sb-link.active{color:var(--gold);background:rgba(255,196,0,0.06);border-left:2px solid var(--gold)}
+.sb-link .sbi{font-size:0.85rem;width:18px;text-align:center}
+.sb-link .sbn{flex:1}
+.sb-link .sbdone{font-size:0.6rem;color:var(--green);display:none}
+.sb-link.done .sbdone{display:block}
+
+/* ── MAIN ── */
+#main{width:100%;padding:0;position:relative;z-index:5}
+
+/* TOP BAR */
+.topbar{
+  position:sticky;top:0;z-index:90;
+  background:rgba(15,17,23,0.95);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:12px 24px;display:flex;align-items:center;gap:16px;
+}
+.menu-btn{background:none;border:1px solid var(--border);color:var(--muted);
+  border-radius:8px;padding:6px 10px;cursor:pointer;font-size:1rem;display:none}
+.topbar-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;
+  background:linear-gradient(90deg,var(--gold),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.topbar-search{margin-left:auto}
+#mainSearch{background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:10px;padding:8px 16px;color:var(--txt);font-family:'Outfit',sans-serif;
+  font-size:0.82rem;width:220px;outline:none}
+#mainSearch:focus{border-color:var(--gold)}
+
+/* CONTENT */
+.content{max-width:900px;margin:0 auto;padding:24px 24px 80px;position:relative;z-index:10}
+
+/* CHAPTER HEADER */
+.ch-header{
+  border-radius:16px;padding:28px 28px 22px;margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.ch-header::before{content:'';position:absolute;inset:0;opacity:0.06;
+  background:radial-gradient(circle at 80% 50%, currentColor, transparent 70%)}
+.ch-step{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin-bottom:8px}
+.ch-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,3rem);letter-spacing:2px;line-height:1;margin-bottom:10px}
+.ch-desc{font-size:0.88rem;line-height:1.7;opacity:0.8;max-width:600px}
+.ch-done-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:16px;padding:8px 20px;border-radius:30px;
+  border:1.5px solid currentColor;background:transparent;
+  font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;
+  cursor:pointer;opacity:0.7;transition:all .2s;
+}
+.ch-done-btn:hover{opacity:1}
+.ch-done-btn.done{opacity:1}
+
+/* COLOR VARIANTS */
+.gold-theme{background:var(--goldd);border:1px solid var(--goldb);color:var(--gold)}
+.blue-theme{background:var(--blued);border:1px solid var(--blueb);color:var(--blue)}
+.green-theme{background:var(--greend);border:1px solid var(--greenb);color:var(--green)}
+.pink-theme{background:var(--pinkd);border:1px solid var(--pinkb);color:var(--pink)}
+.orange-theme{background:var(--oranged);border:1px solid var(--orangeb);color:var(--orange)}
+.purple-theme{background:var(--purpled);border:1px solid var(--purpleb);color:var(--purple)}
+
+/* SECTION TITLE */
+.sec-title{
+  display:flex;align-items:center;gap:10px;
+  font-size:1.05rem;font-weight:700;margin:28px 0 14px;
+  padding-bottom:8px;border-bottom:1px solid var(--border);
+}
+.sec-title .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* INFO BOX */
+.info-box{
+  border-radius:12px;padding:16px 18px;margin-bottom:16px;
+  border-left:3px solid;font-size:0.86rem;line-height:1.7;
+}
+.info-box.tip{background:rgba(255,196,0,0.07);border-color:var(--gold)}
+.info-box.note{background:rgba(96,165,250,0.07);border-color:var(--blue)}
+.info-box.warn{background:rgba(251,146,60,0.07);border-color:var(--orange)}
+.info-box.trick{background:rgba(74,222,128,0.07);border-color:var(--green)}
+.info-box strong{display:block;margin-bottom:4px;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;opacity:0.7}
+
+/* STRUCTURE BOX */
+.struct-box{
+  background:rgba(0,0,0,0.3);border:1px solid var(--border);
+  border-radius:12px;padding:16px 20px;margin:12px 0;
+  font-family:'Courier New',monospace;font-size:0.84rem;line-height:1.8;
+}
+.struct-box .label{font-family:'Outfit',sans-serif;font-size:0.65rem;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.struct-item{margin-bottom:4px}
+.struct-item .tag{color:var(--gold)}
+.struct-item .arrow{color:var(--blue);margin:0 6px}
+
+/* FORMULA BOX */
+.formula{
+  background:linear-gradient(135deg,rgba(255,196,0,0.1),rgba(96,165,250,0.1));
+  border:1px solid rgba(255,196,0,0.2);
+  border-radius:12px;padding:14px 20px;margin:12px 0;
+  font-size:1rem;font-weight:700;letter-spacing:1px;text-align:center;
+}
+
+/* EXAMPLE TABLE */
+.ex-table{width:100%;border-collapse:collapse;margin:10px 0}
+.ex-table th{background:rgba(255,255,255,0.05);padding:8px 12px;
+  font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);text-align:left;border-bottom:1px solid var(--border)}
+.ex-table td{padding:9px 12px;font-size:0.84rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.ex-table tr:hover td{background:rgba(255,255,255,0.03)}
+.ex-table td:first-child{color:var(--txt);font-weight:500}
+.ex-table td:nth-child(2){color:var(--gold)}
+.ex-table td:nth-child(3){color:var(--muted);font-size:0.78rem}
+.ex-table td:nth-child(4){color:var(--blue);font-size:0.76rem}
+
+/* EXAMPLE CARDS GRID */
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin:10px 0}
+.ex-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.ex-card .eng{font-weight:600;font-size:0.9rem;margin-bottom:3px}
+.ex-card .bn{font-size:0.78rem;color:var(--muted)}
+
+/* DIALOGUE BOX */
+.dialogue{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:20px;margin:14px 0;
+}
+.dialogue-header{
+  font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+.dialogue-header::after{content:'';flex:1;height:1px;background:var(--border)}
+.dlg-line{margin-bottom:12px}
+.dlg-speaker{font-weight:700;font-size:0.8rem;margin-bottom:2px}
+.dlg-eng{font-size:0.88rem;margin-bottom:2px}
+.dlg-bn{font-size:0.78rem;color:var(--muted);font-style:italic}
+
+/* CHART BOX */
+.chart-box{
+  background:rgba(0,0,0,0.35);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;margin:12px 0;
+}
+.chart-box table{width:100%;border-collapse:collapse}
+.chart-box th{background:rgba(255,255,255,0.06);padding:10px 14px;
+  font-size:0.72rem;letter-spacing:1px;color:var(--muted);text-align:center}
+.chart-box td{padding:10px 14px;font-size:0.82rem;border-top:1px solid rgba(255,255,255,0.04);text-align:center}
+.chart-box td:first-child{text-align:left;color:var(--muted);font-size:0.75rem;font-weight:600}
+.chart-box .c-pres{color:var(--green)}
+.chart-box .c-past{color:var(--blue)}
+.chart-box .c-fut{color:var(--pink)}
+
+/* TRICK BOX */
+.trick-box{
+  background:linear-gradient(135deg,rgba(74,222,128,0.08),rgba(96,165,250,0.08));
+  border:1px solid rgba(74,222,128,0.2);border-radius:12px;
+  padding:16px 18px;margin:12px 0;
+}
+.trick-box .trick-title{color:var(--green);font-weight:700;font-size:0.82rem;
+  margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.trick-item{font-size:0.84rem;padding:4px 0;display:flex;gap:8px;align-items:baseline}
+.trick-item::before{content:'→';color:var(--gold);flex-shrink:0}
+
+/* MODAL VERB CARD */
+.modal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:10px 0}
+.modal-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.modal-card .mv{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;margin-bottom:4px}
+.modal-card .mv-meaning{font-size:0.75rem;color:var(--muted);margin-bottom:8px}
+.modal-card .mv-ex{font-size:0.8rem;padding:6px 8px;background:rgba(255,255,255,0.04);border-radius:6px;margin-bottom:4px}
+
+/* CONDITIONAL TABLE */
+.cond-grid{display:grid;gap:10px;margin:10px 0}
+.cond-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.cond-card .c-type{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.cond-card .c-rule{font-family:'Courier New',monospace;font-size:0.82rem;
+  background:rgba(0,0,0,0.3);border-radius:6px;padding:8px 12px;margin:6px 0}
+.cond-card .c-ex{font-size:0.85rem;margin-top:6px}
+.cond-card .c-bn{font-size:0.78rem;color:var(--muted);margin-top:3px}
+
+/* PASSIVE TABLE */
+.passive-row{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:12px 16px;margin-bottom:8px;font-size:0.85rem;
+}
+.passive-row .arrow-mid{color:var(--gold);font-size:1.2rem}
+.passive-row .active-side{color:var(--blue)}
+.passive-row .passive-side{color:var(--green)}
+
+/* HIGHLIGHT TEXT */
+.hl-gold{color:var(--gold);font-weight:600}
+.hl-blue{color:var(--blue);font-weight:600}
+.hl-green{color:var(--green);font-weight:600}
+.hl-pink{color:var(--pink);font-weight:600}
+.hl-orange{color:var(--orange);font-weight:600}
+
+/* PAGE NAV */
+.page-nav{display:flex;gap:10px;margin-top:32px;padding-top:20px;border-top:1px solid var(--border)}
+.pnav-btn{flex:1;background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:12px 16px;cursor:pointer;font-family:'Outfit',sans-serif;
+  font-size:0.82rem;color:var(--muted);transition:all .2s;text-align:center}
+.pnav-btn:hover{color:var(--gold);border-color:var(--goldb)}
+.pnav-btn .pdir{font-size:0.62rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+
+/* CHAPTER SECTIONS */
+.chapter{display:none;position:relative;z-index:10}
+.chapter.active{display:block;min-height:calc(100vh - 50px)}
+
+/* SIGNAL WORDS */
+.signal-grid{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.signal-tag{background:rgba(255,196,0,0.1);border:1px solid rgba(255,196,0,0.2);
+  color:var(--gold);border-radius:20px;padding:4px 12px;font-size:0.78rem}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#2a3044;border-radius:2px}
+
+/* MOBILE */
+@media(max-width:768px){
+  #sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-100%);z-index:200}
+  #sidebar.open{transform:translateX(0)}
+  .menu-btn{display:block}
+  .content{padding:16px 14px 60px}
+  .passive-row{grid-template-columns:1fr;gap:4px}
+  .passive-row .arrow-mid{display:none}
+}
+
+/* highlight search */
+.highlight{background:rgba(255,196,0,0.25);border-radius:2px;padding:0 2px}
+
+/* ── TOP NAV CSS ── */
+#topnav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(10,12,20,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding:0;
+}
+.tn-inner{
+  display:flex;align-items:stretch;
+  overflow-x:auto;gap:0;
+  scrollbar-width:none;
+}
+.tn-inner::-webkit-scrollbar{display:none}
+.tn-home{
+  flex-shrink:0;
+  background:linear-gradient(135deg,rgba(255,196,0,0.15),rgba(255,95,46,0.15));
+  border:none;border-right:1px solid rgba(255,255,255,0.07);
+  color:var(--gold);font-family:'Outfit',sans-serif;
+  font-size:0.8rem;font-weight:700;
+  padding:0 18px;cursor:pointer;
+  transition:all .2s;letter-spacing:.5px;
+  display:flex;align-items:center;gap:6px;
+}
+.tn-home:hover{background:rgba(255,196,0,0.25)}
+.tn-home.active{background:rgba(255,196,0,0.25);color:var(--gold)}
+.tn-divider{width:1px;background:rgba(255,255,255,0.07);flex-shrink:0}
+.tn-scroll{
+  display:flex;align-items:stretch;
+  overflow-x:auto;flex:1;
+  scrollbar-width:none;
+}
+.tn-scroll::-webkit-scrollbar{display:none}
+.tn-group{
+  display:flex;align-items:center;gap:2px;
+  padding:6px 10px;
+  border-right:1px solid rgba(255,255,255,0.05);
+  flex-shrink:0;
+}
+.tn-label{
+  font-size:0.55rem;text-transform:uppercase;letter-spacing:1.5px;
+  color:rgba(255,255,255,0.25);margin-right:4px;white-space:nowrap;
+  writing-mode:horizontal-tb;
+}
+.tnb{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:6px;color:var(--muted);
+  font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:500;
+  padding:5px 10px;cursor:pointer;white-space:nowrap;
+  transition:all .18s;
+}
+.tnb:hover{background:rgba(255,196,0,0.1);color:var(--gold);border-color:rgba(255,196,0,0.3)}
+.tnb.active{
+  background:rgba(255,196,0,0.15);
+  color:var(--gold);
+  border-color:rgba(255,196,0,0.4);
+  font-weight:700;
+}
+/* hide old topbar */
+.topbar{display:none!important}
+/* hide sidebar */
+#sidebar{display:none!important}
+/* main takes full width */
+#main{width:100%!important}
+
+#home{position:relative;z-index:10}
+/* HOME CARDS */
+.home-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:18px 18px 14px;
+  cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+}
+.home-card::before{content:'';position:absolute;inset:0;opacity:0;
+  background:linear-gradient(135deg,currentColor,transparent 70%);transition:opacity .2s}
+.home-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.15)}
+.home-card:hover::before{opacity:0.06}
+.home-card.gold-theme:hover{box-shadow:0 8px 24px rgba(255,196,0,0.15)}
+.home-card.blue-theme:hover{box-shadow:0 8px 24px rgba(96,165,250,0.15)}
+.home-card.green-theme:hover{box-shadow:0 8px 24px rgba(74,222,128,0.15)}
+.home-card.pink-theme:hover{box-shadow:0 8px 24px rgba(244,114,182,0.15)}
+.home-card.orange-theme:hover{box-shadow:0 8px 24px rgba(251,146,60,0.15)}
+.home-card.purple-theme:hover{box-shadow:0 8px 24px rgba(167,139,250,0.15)}
+.hc-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;opacity:0.2;line-height:1;margin-bottom:4px}
+.gold-theme .hc-num{color:var(--gold)}
+.blue-theme .hc-num{color:var(--blue)}
+.green-theme .hc-num{color:var(--green)}
+.pink-theme .hc-num{color:var(--pink)}
+.orange-theme .hc-num{color:var(--orange)}
+.purple-theme .hc-num{color:var(--purple)}
+.hc-title{font-weight:700;font-size:0.92rem;margin-bottom:4px}
+.hc-desc{font-size:0.76rem;color:var(--muted)}
+.hc-done{font-size:0.7rem;color:var(--green);margin-top:8px;min-height:14px}
+
+</style>
+</head>
+<body>
+
+<!-- ── TOP NAV ── -->
+<div id="topnav">
+  <div class="tn-inner">
+    <button class="tn-home" onclick="goTo('home')">🏠 Home</button>
+    <div class="tn-divider"></div>
+    <div class="tn-scroll">
+      <div class="tn-group">
+        <span class="tn-label">Foundation</span>
+        <button class="tnb" onclick="goTo('ch1')">Sentence Structure</button>
+        <button class="tnb" onclick="goTo('ch2')">Articles</button>
+      </div>
+      <div class="tn-group">
+        <span class="tn-label">Present</span>
+        <button class="tnb" onclick="goTo('ch3')">Simple</button>
+        <button class="tnb" onclick="goTo('ch4')">Continuous</button>
+        <button class="tnb" onclick="goTo('ch5')">Perfect</button>
+        <button class="tnb" onclick="goTo('ch6')">Perf. Cont.</button>
+      </div>
+      <div class="tn-group">
+        <span class="tn-label">Past</span>
+        <button class="tnb" onclick="goTo('ch7')">Simple</button>
+        <button class="tnb" onclick="goTo('ch8')">Continuous</button>
+        <button class="tnb" onclick="goTo('ch9')">Perfect</button>
+        <button class="tnb" onclick="goTo('ch10')">Perf. Cont.</button>
+      </div>
+      <div class="tn-group">
+        <span class="tn-label">Future</span>
+        <button class="tnb" onclick="goTo('ch11')">All 4 Forms</button>
+      </div>
+      <div class="tn-group">
+        <span class="tn-label">Intermediate</span>
+        <button class="tnb" onclick="goTo('ch12')">Prepositions</button>
+        <button class="tnb" onclick="goTo('ch13')">Conjunctions</button>
+        <button class="tnb" onclick="goTo('ch14')">Modal Verbs</button>
+      </div>
+      <div class="tn-group">
+        <span class="tn-label">Advanced</span>
+        <button class="tnb" onclick="goTo('ch15')">Conditionals</button>
+        <button class="tnb" onclick="goTo('ch16')">Passive Voice</button>
+        <button class="tnb" onclick="goTo('ch17')">Reported Speech</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="sb-brand">JASAM'S ENGLISH<span>Spoken & Written Complete Guide</span></div>
+  <div class="sb-search"><input type="text" id="sbSearch" placeholder="🔍 Chapter খোঁজো..."></div>
+  <div class="sb-progress">
+    <div class="sb-progress-label">Progress</div>
+    <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+    <div class="prog-text" id="progText">0 / 11 completed</div>
+  </div>
+  <nav class="sb-nav" id="sbNav">
+    <div class="sb-step">📘 Step 1 — Foundation</div>
+    <button class="sb-link" onclick="goTo('ch1')" id="nav-ch1"><span class="sbi">📝</span><span class="sbn">Sentence Structure</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch2')" id="nav-ch2"><span class="sbi">📌</span><span class="sbn">Articles — a, an, the</span><span class="sbdone">✓</span></button>
+
+    <div class="sb-step">🕐 Step 2 — Present Tense</div>
+    <button class="sb-link" onclick="goTo('ch3')" id="nav-ch3"><span class="sbi">🟢</span><span class="sbn">Present Simple</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch4')" id="nav-ch4"><span class="sbi">🔵</span><span class="sbn">Present Continuous</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch5')" id="nav-ch5"><span class="sbi">🟡</span><span class="sbn">Present Perfect</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch6')" id="nav-ch6"><span class="sbi">🔴</span><span class="sbn">Present Perfect Continuous</span><span class="sbdone">✓</span></button>
+
+    <div class="sb-step">⏮ Step 3 — Past Tense</div>
+    <button class="sb-link" onclick="goTo('ch7')" id="nav-ch7"><span class="sbi">1️⃣</span><span class="sbn">Past Simple</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch8')" id="nav-ch8"><span class="sbi">2️⃣</span><span class="sbn">Past Continuous</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch9')" id="nav-ch9"><span class="sbi">3️⃣</span><span class="sbn">Past Perfect</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch10')" id="nav-ch10"><span class="sbi">4️⃣</span><span class="sbn">Past Perfect Continuous</span><span class="sbdone">✓</span></button>
+
+    <div class="sb-step">⏭ Step 4 — Future Tense</div>
+    <button class="sb-link" onclick="goTo('ch11')" id="nav-ch11"><span class="sbi">🔮</span><span class="sbn">Future — All 4 Forms</span><span class="sbdone">✓</span></button>
+
+    <div class="sb-step">🧩 Step 5 — Intermediate</div>
+    <button class="sb-link" onclick="goTo('ch12')" id="nav-ch12"><span class="sbi">📍</span><span class="sbn">Prepositions</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch13')" id="nav-ch13"><span class="sbi">🔗</span><span class="sbn">Conjunctions</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch14')" id="nav-ch14"><span class="sbi">💬</span><span class="sbn">Modal Verbs</span><span class="sbdone">✓</span></button>
+
+    <div class="sb-step">🎓 Step 6 — Advanced</div>
+    <button class="sb-link" onclick="goTo('ch15')" id="nav-ch15"><span class="sbi">⚡</span><span class="sbn">Conditionals (If Clause)</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch16')" id="nav-ch16"><span class="sbi">🔄</span><span class="sbn">Passive Voice</span><span class="sbdone">✓</span></button>
+    <button class="sb-link" onclick="goTo('ch17')" id="nav-ch17"><span class="sbi">💭</span><span class="sbn">Reported Speech</span><span class="sbdone">✓</span></button>
+  </nav>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <div class="topbar">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="topbar-title">ENGLISH MASTER BOOK</div>
+    <div class="topbar-search"><input type="text" id="mainSearch" placeholder="🔍 Search content..."></div>
+  </div>
+
+  <div class="content" id="content">
+
+
+<!-- HOME PAGE -->
+<div class="chapter active" id="home">
+  <div style="text-align:center;padding:50px 20px 30px;position:relative">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,10vw,5.5rem);
+      letter-spacing:4px;line-height:1;margin-bottom:12px;
+      background:linear-gradient(90deg,#ff5f2e,#ffc400,#00d4ff,#00ff88,#bf7bff,#ff5f2e);
+      background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;animation:hue 6s linear infinite">
+      JASAM'S<br>ENGLISH BOOK
+    </div>
+    <div style="color:var(--muted);font-size:0.9rem;margin-bottom:8px">
+      Spoken & Written English — বাংলায় সম্পূর্ণ গাইড
+    </div>
+    <div style="display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:16px 0 30px">
+      <span style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);color:#4ade80;border-radius:20px;padding:4px 14px;font-size:0.75rem">📚 17 Chapters</span>
+      <span style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.3);color:#60a5fa;border-radius:20px;padding:4px 14px;font-size:0.75rem">🏆 Foundation → Advanced</span>
+      <span style="background:rgba(255,196,0,0.1);border:1px solid rgba(255,196,0,0.3);color:#ffc400;border-radius:20px;padding:4px 14px;font-size:0.75rem">🇧🇩 Bangla Explained</span>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div style="max-width:600px;margin:0 auto 32px;padding:0 20px">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px">📊 Your Progress</div>
+      <div style="height:8px;background:rgba(255,255,255,0.06);border-radius:4px;margin-bottom:8px">
+        <div id="homeProg" style="height:8px;background:linear-gradient(90deg,var(--gold),var(--blue));border-radius:4px;transition:width .5s;width:0%"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+        <span id="homeProgText" style="color:var(--muted)">0 / 17 chapters done</span>
+        <span id="homeProgPct" style="color:var(--gold);font-weight:700">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER CARDS GRID -->
+  <div style="max-width:1000px;margin:0 auto;padding:0 16px 60px">
+
+    <!-- Step 1 -->
+    <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin:0 0 12px;padding-left:4px">📘 Step 1 — Foundation</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:28px">
+      <div class="home-card gold-theme" onclick="goTo('ch1')"><div class="hc-num">01</div><div class="hc-title">Sentence Structure</div><div class="hc-desc">S + V + O, বাক্যের গঠন</div><div class="hc-done" id="hd-ch1"></div></div>
+      <div class="home-card blue-theme" onclick="goTo('ch2')"><div class="hc-num">02</div><div class="hc-title">Articles</div><div class="hc-desc">a, an, the — কখন কোনটা</div><div class="hc-done" id="hd-ch2"></div></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin:0 0 12px;padding-left:4px">🕐 Step 2 — Present Tense</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:28px">
+      <div class="home-card green-theme" onclick="goTo('ch3')"><div class="hc-num">03</div><div class="hc-title">Present Simple</div><div class="hc-desc">অভ্যাস ও চিরন্তন সত্য</div><div class="hc-done" id="hd-ch3"></div></div>
+      <div class="home-card blue-theme" onclick="goTo('ch4')"><div class="hc-num">04</div><div class="hc-title">Present Continuous</div><div class="hc-desc">এখন চলছে</div><div class="hc-done" id="hd-ch4"></div></div>
+      <div class="home-card gold-theme" onclick="goTo('ch5')"><div class="hc-num">05</div><div class="hc-title">Present Perfect</div><div class="hc-desc">এইমাত্র শেষ / অভিজ্ঞতা</div><div class="hc-done" id="hd-ch5"></div></div>
+      <div class="home-card pink-theme" onclick="goTo('ch6')"><div class="hc-num">06</div><div class="hc-title">Present Perf. Cont.</div><div class="hc-desc">কতক্ষণ ধরে চলছে</div><div class="hc-done" id="hd-ch6"></div></div>
+    </div>
+
+    <!-- Step 3 -->
+    <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin:0 0 12px;padding-left:4px">⏮ Step 3 — Past Tense</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:28px">
+      <div class="home-card orange-theme" onclick="goTo('ch7')"><div class="hc-num">07</div><div class="hc-title">Past Simple</div><div class="hc-desc">অতীতে হয়ে গেছে</div><div class="hc-done" id="hd-ch7"></div></div>
+      <div class="home-card blue-theme" onclick="goTo('ch8')"><div class="hc-num">08</div><div class="hc-title">Past Continuous</div><div class="hc-desc">অতীতে চলছিল</div><div class="hc-done" id="hd-ch8"></div></div>
+      <div class="home-card green-theme" onclick="goTo('ch9')"><div class="hc-num">09</div><div class="hc-title">Past Perfect</div><div class="hc-desc">অতীতের আগে হয়েছিল</div><div class="hc-done" id="hd-ch9"></div></div>
+      <div class="home-card pink-theme" onclick="goTo('ch10')"><div class="hc-num">10</div><div class="hc-title">Past Perf. Cont.</div><div class="hc-desc">অতীতে কতক্ষণ চলছিল</div><div class="hc-done" id="hd-ch10"></div></div>
+    </div>
+
+    <!-- Step 4 -->
+    <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin:0 0 12px;padding-left:4px">⏭ Step 4 — Future Tense</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:28px">
+      <div class="home-card purple-theme" onclick="goTo('ch11')"><div class="hc-num">11</div><div class="hc-title">Future — All 4 Forms</div><div class="hc-desc">will, will be, will have...</div><div class="hc-done" id="hd-ch11"></div></div>
+    </div>
+
+    <!-- Step 5 -->
+    <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin:0 0 12px;padding-left:4px">🧩 Step 5 — Intermediate</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:28px">
+      <div class="home-card gold-theme" onclick="goTo('ch12')"><div class="hc-num">12</div><div class="hc-title">Prepositions</div><div class="hc-desc">in, on, at, by, with...</div><div class="hc-done" id="hd-ch12"></div></div>
+      <div class="home-card blue-theme" onclick="goTo('ch13')"><div class="hc-num">13</div><div class="hc-title">Conjunctions</div><div class="hc-desc">and, but, because, although...</div><div class="hc-done" id="hd-ch13"></div></div>
+      <div class="home-card green-theme" onclick="goTo('ch14')"><div class="hc-num">14</div><div class="hc-title">Modal Verbs</div><div class="hc-desc">can, should, must, would...</div><div class="hc-done" id="hd-ch14"></div></div>
+    </div>
+
+    <!-- Step 6 -->
+    <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin:0 0 12px;padding-left:4px">🎓 Step 6 — Advanced</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:28px">
+      <div class="home-card orange-theme" onclick="goTo('ch15')"><div class="hc-num">15</div><div class="hc-title">Conditionals</div><div class="hc-desc">If clause — ৪ ধরন</div><div class="hc-done" id="hd-ch15"></div></div>
+      <div class="home-card purple-theme" onclick="goTo('ch16')"><div class="hc-num">16</div><div class="hc-title">Passive Voice</div><div class="hc-desc">Active → Passive</div><div class="hc-done" id="hd-ch16"></div></div>
+      <div class="home-card pink-theme" onclick="goTo('ch17')"><div class="hc-num">17</div><div class="hc-title">Reported Speech</div><div class="hc-desc">Direct → Indirect</div><div class="hc-done" id="hd-ch17"></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     CHAPTER 1 — SENTENCE STRUCTURE
+═══════════════════════════════════════════════ -->
+<div class="chapter" id="ch1">
+  <div class="ch-header gold-theme">
+    <div class="ch-step">📘 Step 1 • Chapter 1</div>
+    <div class="ch-title">Sentence Structure</div>
+    <div class="ch-desc">বাক্যের গঠন — Subject, Verb, Object কীভাবে সাজাতে হয় এবং বাংলার সাথে পার্থক্য</div>
+    <button class="ch-done-btn gold-theme" onclick="markDone('ch1')">✓ Mark as Done</button>
+  </div>
+
+  <div class="info-box note"><strong>💡 Sentence কী?</strong>কিছু শব্দের সমষ্টি যা একটি সম্পূর্ণ অর্থ প্রকাশ করে।<br>বাংলা: "আমি ভাত খাই" → English: "I eat rice"</div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--gold)"></span>মূল ৩টি অংশ — S + V + O</div>
+  <div class="formula">Subject (কর্তা) + Verb (ক্রিয়া) + Object (কর্ম)</div>
+  <div class="info-box tip"><strong>🔑 সবচেয়ে বড় পার্থক্য</strong>বাংলায়: Subject + <span class="hl-gold">Object</span> + <span class="hl-blue">Verb</span> → "আমি ভাত <strong>খাই</strong>"<br>English: Subject + <span class="hl-blue">Verb</span> + <span class="hl-gold">Object</span> → "I <strong>eat</strong> rice"</div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--green)"></span>উদাহরণ — ২০টি Sentence</div>
+  <table class="ex-table">
+    <tr><th>#</th><th>Subject</th><th>Verb</th><th>Object</th><th>Full Sentence</th><th>বাংলা</th></tr>
+    <tr><td>1</td><td>I</td><td>eat</td><td>rice</td><td class="hl-gold">I eat rice.</td><td>আমি ভাত খাই।</td></tr>
+    <tr><td>2</td><td>She</td><td>reads</td><td>books</td><td class="hl-gold">She reads books.</td><td>সে বই পড়ে।</td></tr>
+    <tr><td>3</td><td>He</td><td>plays</td><td>cricket</td><td class="hl-gold">He plays cricket.</td><td>সে ক্রিকেট খেলে।</td></tr>
+    <tr><td>4</td><td>They</td><td>watch</td><td>movies</td><td class="hl-gold">They watch movies.</td><td>তারা মুভি দেখে।</td></tr>
+    <tr><td>5</td><td>We</td><td>drink</td><td>water</td><td class="hl-gold">We drink water.</td><td>আমরা পানি পান করি।</td></tr>
+    <tr><td>6</td><td>My mother</td><td>cooks</td><td>food</td><td class="hl-gold">My mother cooks food.</td><td>আমার মা রান্না করেন।</td></tr>
+    <tr><td>7</td><td>The teacher</td><td>teaches</td><td>students</td><td class="hl-gold">The teacher teaches students.</td><td>শিক্ষক ছাত্রদের পড়ান।</td></tr>
+    <tr><td>8</td><td>I</td><td>love</td><td>my family</td><td class="hl-gold">I love my family.</td><td>আমি আমার পরিবারকে ভালোবাসি।</td></tr>
+    <tr><td>9</td><td>He</td><td>drives</td><td>a car</td><td class="hl-gold">He drives a car.</td><td>সে গাড়ি চালায়।</td></tr>
+    <tr><td>10</td><td>Birds</td><td>build</td><td>nests</td><td class="hl-gold">Birds build nests.</td><td>পাখিরা বাসা বানায়।</td></tr>
+  </table>
+
+  <div class="sec-title"><span class="dot" style="background:var(--blue)"></span>বিভিন্ন ধরনের Sentence</div>
+  <div class="ex-grid">
+    <div class="ex-card"><div class="eng">✅ Affirmative (হ্যাঁ-বোধক)</div><div class="bn" style="color:var(--green)">I like mangoes.</div></div>
+    <div class="ex-card"><div class="eng">❌ Negative (না-বোধক)</div><div class="bn" style="color:var(--pink)">I do not like mangoes.</div></div>
+    <div class="ex-card"><div class="eng">❓ Interrogative (প্রশ্নবোধক)</div><div class="bn" style="color:var(--blue)">Do you like mangoes?</div></div>
+    <div class="ex-card"><div class="eng">📢 Imperative (আদেশ)</div><div class="bn" style="color:var(--orange)">Close the door.</div></div>
+    <div class="ex-card"><div class="eng">😲 Exclamatory (আবেগ)</div><div class="bn" style="color:var(--purple)">What a beautiful day!</div></div>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 মনে রাখার ট্রিক</div>
+    <div class="trick-item">বাংলায়: <strong>কে?</strong> → কী করে? → <strong>কাকে/কী?</strong></div>
+    <div class="trick-item">English: <strong>কে?</strong> → কী করে? → <strong>কাকে/কী?</strong> (Same order!)</div>
+    <div class="trick-item">শুধু পার্থক্য — Verb এর position: বাংলায় শেষে, English এ মাঝে</div>
+  </div>
+
+  <div class="dialogue">
+    <div class="dialogue-header">💬 Dialogue Practice — দুই বন্ধু স্কুলে কথা বলছে</div>
+    <div class="dlg-line"><div class="dlg-speaker" style="color:var(--blue)">Rahim:</div><div class="dlg-eng">Hi! What do you do after school?</div><div class="dlg-bn">হাই! তুমি স্কুলের পরে কী করো?</div></div>
+    <div class="dlg-line"><div class="dlg-speaker" style="color:var(--green)">Karim:</div><div class="dlg-eng">I play football in the field.</div><div class="dlg-bn">আমি মাঠে ফুটবল খেলি।</div></div>
+    <div class="dlg-line"><div class="dlg-speaker" style="color:var(--blue)">Rahim:</div><div class="dlg-eng">My brother plays guitar. He loves music.</div><div class="dlg-bn">আমার ভাই গিটার বাজায়। সে গান ভালোবাসে।</div></div>
+    <div class="dlg-line"><div class="dlg-speaker" style="color:var(--green)">Karim:</div><div class="dlg-eng">We eat dinner at 9 pm. What about you?</div><div class="dlg-bn">আমরা রাত ৯টায় রাতের খাবার খাই। তোমরা?</div></div>
+  </div>
+
+  <div class="page-nav">
+    <div></div>
+    <button class="pnav-btn" onclick="goTo('ch2')"><div class="pdir">Next →</div>Articles — a, an, the</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     CHAPTER 2 — ARTICLES
+═══════════════════════════════════════════════ -->
+<div class="chapter" id="ch2">
+  <div class="ch-header blue-theme">
+    <div class="ch-step">📘 Step 1 • Chapter 2</div>
+    <div class="ch-title">Articles — a, an, the</div>
+    <div class="ch-desc">Noun এর আগে কোন article বসবে — a, an, নাকি the? সম্পূর্ণ নিয়ম + উদাহরণ</div>
+    <button class="ch-done-btn blue-theme" onclick="markDone('ch2')">✓ Mark as Done</button>
+  </div>
+
+  <div class="chart-box" style="margin-bottom:16px">
+    <table>
+      <tr><th>Article</th><th>কখন বসে</th><th>উদাহরণ</th></tr>
+      <tr><td style="color:var(--gold);font-weight:700">a</td><td>Consonant sound এর আগে</td><td style="color:var(--green)">a book, a university</td></tr>
+      <tr><td style="color:var(--blue);font-weight:700">an</td><td>Vowel sound এর আগে (a,e,i,o,u)</td><td style="color:var(--green)">an apple, an hour</td></tr>
+      <tr><td style="color:var(--pink);font-weight:700">the</td><td>নির্দিষ্ট / একটিই আছে</td><td style="color:var(--green)">the sun, the best</td></tr>
+      <tr><td style="color:var(--muted);font-weight:700">✗ (no article)</td><td>Plural সাধারণ / Uncountable সাধারণ</td><td style="color:var(--green)">Dogs are loyal. Water is...</td></tr>
+    </table>
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--gold)"></span>"A" — Consonant Sound এর আগে</div>
+  <div class="info-box warn"><strong>⚠️ Important</strong>Letter নয়, SOUND দেখতে হবে! "university" → /juː/ → consonant sound → "a university" ✅</div>
+  <div class="ex-grid">
+    <div class="ex-card"><div class="eng">a book</div><div class="bn">'b' = consonant sound</div></div>
+    <div class="ex-card"><div class="eng">a doctor</div><div class="bn">'d' = consonant sound</div></div>
+    <div class="ex-card"><div class="eng">a university 🔥</div><div class="bn">'u' = /juː/ → consonant!</div></div>
+    <div class="ex-card"><div class="eng">a one-way road 🔥</div><div class="bn">'o' = /wʌn/ → consonant!</div></div>
+    <div class="ex-card"><div class="eng">a useful thing 🔥</div><div class="bn">'u' = /juːs/ → consonant!</div></div>
+    <div class="ex-card"><div class="eng">a European 🔥</div><div class="bn">'E' = /juː/ → consonant!</div></div>
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--blue)"></span>"AN" — Vowel Sound এর আগে</div>
+  <div class="ex-grid">
+    <div class="ex-card"><div class="eng">an apple</div><div class="bn">'a' = vowel sound</div></div>
+    <div class="ex-card"><div class="eng">an egg</div><div class="bn">'e' = vowel sound</div></div>
+    <div class="ex-card"><div class="eng">an hour 🔥</div><div class="bn">'h' silent → /aʊ/ vowel!</div></div>
+    <div class="ex-card"><div class="eng">an honest man 🔥</div><div class="bn">'h' silent → vowel sound</div></div>
+    <div class="ex-card"><div class="eng">an M.B.A. 🔥</div><div class="bn">'M' = /em/ → vowel sound</div></div>
+    <div class="ex-card"><div class="eng">an X-ray 🔥</div><div class="bn">'X' = /eks/ → vowel sound</div></div>
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--pink)"></span>"THE" — নির্দিষ্ট জিনিসের আগে</div>
+  <table class="ex-table">
+    <tr><th>Rule</th><th>উদাহরণ</th><th>বাংলা</th></tr>
+    <tr><td>আগে উল্লেখ হয়েছে</td><td class="hl-gold">I saw a boy. The boy was tall.</td><td>প্রথমে 'a' → পরে 'the'</td></tr>
+    <tr><td>একটিই আছে</td><td class="hl-gold">The sun / The moon / The earth</td><td>পৃথিবীতে একটিই</td></tr>
+    <tr><td>নদী / সাগর</td><td class="hl-gold">The Padma / The Bay of Bengal</td><td>নদী ও সাগরের আগে</td></tr>
+    <tr><td>Superlative</td><td class="hl-gold">The best / The tallest</td><td>সবচেয়ে বেশি/কম</td></tr>
+    <tr><td>Musical instrument</td><td class="hl-gold">Play the guitar / the piano</td><td>বাদ্যযন্ত্রের আগে</td></tr>
+    <tr><td>নির্দিষ্ট কিছু বোঝালে</td><td class="hl-gold">Open the door / Pass the salt</td><td>ওই নির্দিষ্টটা</td></tr>
+  </table>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 Super Easy Trick</div>
+    <div class="trick-item">প্রথমবার বললে → <span class="hl-gold">a/an</span> (I saw <strong>a dog</strong>)</div>
+    <div class="trick-item">দ্বিতীয়বার বললে → <span class="hl-blue">the</span> (<strong>The dog</strong> was black)</div>
+    <div class="trick-item">সারা পৃথিবীতে একটাই → <span class="hl-blue">the</span> (<strong>The</strong> sun, <strong>the</strong> moon)</div>
+  </div>
+
+  <div class="dialogue">
+    <div class="dialogue-header">💬 Dialogue Practice — বাজারে দুই বন্ধু</div>
+    <div class="dlg-line"><div class="dlg-speaker" style="color:var(--blue)">Sumon:</div><div class="dlg-eng">I need to buy <span class="hl-gold">an</span> umbrella.</div><div class="dlg-bn">আমার একটি ছাতা কিনতে হবে।</div></div>
+    <div class="dlg-line"><div class="dlg-speaker" style="color:var(--green)">Rony:</div><div class="dlg-eng">I want to buy <span class="hl-gold">a</span> notebook and <span class="hl-gold">a</span> pen.</div><div class="dlg-bn">আমি একটি খাতা আর কলম কিনতে চাই।</div></div>
+    <div class="dlg-line"><div class="dlg-speaker" style="color:var(--blue)">Sumon:</div><div class="dlg-eng">I found <span class="hl-gold">an</span> umbrella. <span class="hl-blue">The</span> umbrella is blue.</div><div class="dlg-bn">প্রথমে 'an' → পরে 'the'</div></div>
+    <div class="dlg-line"><div class="dlg-speaker" style="color:var(--green)">Rony:</div><div class="dlg-eng"><span class="hl-blue">The</span> sun is going down. Let's go home!</div><div class="dlg-bn">সূর্য একটিই তাই 'the'।</div></div>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch1')"><div class="pdir">← Previous</div>Sentence Structure</button>
+    <button class="pnav-btn" onclick="goTo('ch3')"><div class="pdir">Next →</div>Present Simple</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     CHAPTER 3 — PRESENT SIMPLE
+═══════════════════════════════════════════════ -->
+<div class="chapter" id="ch3">
+  <div class="ch-header green-theme">
+    <div class="ch-step">🕐 Step 2 • Chapter 3</div>
+    <div class="ch-title">Present Simple Tense</div>
+    <div class="ch-desc">অভ্যাস, চিরন্তন সত্য, নিয়মিত কাজ — সাধারণ বর্তমান কাল</div>
+    <button class="ch-done-btn green-theme" onclick="markDone('ch3')">✓ Mark as Done</button>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 কখন ব্যবহার করবো?</div>
+    <div class="trick-item"><strong>Habit</strong> — I wake up at 6 am. (প্রতিদিনের অভ্যাস)</div>
+    <div class="trick-item"><strong>Universal Truth</strong> — The earth moves around the sun.</div>
+    <div class="trick-item"><strong>General Fact</strong> — Water boils at 100°C.</div>
+    <div class="trick-item"><strong>Timetable</strong> — The train leaves at 5 pm.</div>
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--green)"></span>Structure</div>
+  <div class="struct-box">
+    <div class="label">Affirmative ✅</div>
+    <div class="struct-item"><span class="tag">I/You/We/They</span><span class="arrow">→</span>Subject + Verb (base form)</div>
+    <div class="struct-item"><span class="tag">He/She/It</span><span class="arrow">→</span>Subject + Verb + <strong>s/es</strong></div>
+    <div class="label" style="margin-top:10px">Negative ❌</div>
+    <div class="struct-item"><span class="tag">I/You/We/They</span><span class="arrow">→</span>Subject + <strong>do not / don't</strong> + Verb</div>
+    <div class="struct-item"><span class="tag">He/She/It</span><span class="arrow">→</span>Subject + <strong>does not / doesn't</strong> + Verb</div>
+    <div class="label" style="margin-top:10px">Interrogative ❓</div>
+    <div class="struct-item"><span class="tag">Do/Does</span><span class="arrow">→</span>Do/Does + Subject + Verb?</div>
+  </div>
+
+  <div class="info-box tip"><strong>📌 s/es যোগের নিয়ম — He/She/It এর সাথে</strong>
+    সাধারণত s → plays, eats | শেষে s/sh/ch/x/o → es (goes, washes) | consonant+y → ies (studies) | have → has
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--gold)"></span>২০টি উদাহরণ</div>
+  <table class="ex-table">
+    <tr><th>#</th><th>Sentence</th><th>বাংলা</th></tr>
+    <tr><td>1</td><td class="hl-green">I eat rice every day.</td><td>আমি প্রতিদিন ভাত খাই।</td></tr>
+    <tr><td>2</td><td class="hl-green">She goes to school.</td><td>সে স্কুলে যায়।</td></tr>
+    <tr><td>3</td><td class="hl-green">The sun rises in the east.</td><td>সূর্য পূর্ব দিকে ওঠে।</td></tr>
+    <tr><td>4</td><td class="hl-green">Water boils at 100°C.</td><td>পানি ১০০°C তে ফোটে।</td></tr>
+    <tr><td>5</td><td class="hl-green">My father works in a bank.</td><td>আমার বাবা ব্যাংকে কাজ করেন।</td></tr>
+    <tr><td>6</td><td class="hl-pink">She does not like coffee.</td><td>সে কফি পছন্দ করে না।</td></tr>
+    <tr><td>7</td><td class="hl-pink">I don't have a car.</td><td>আমার গাড়ি নেই।</td></tr>
+    <tr><td>8</td><td class="hl-blue">Do you eat rice?</td><td>তুমি কি ভাত খাও?</td></tr>
+    <tr><td>9</td><td class="hl-blue">Does she like music?</td><td>সে কি গান পছন্দ করে?</td></tr>
+    <tr><td>10</td><td class="hl-blue">Where do you live?</td><td>তুমি কোথায় থাকো?</td></tr>
+  </table>
+
+  <div class="sec-title"><span class="dot" style="background:var(--purple)"></span>Signal Words — এগুলো দেখলে Present Simple</div>
+  <div class="signal-grid">
+    <span class="signal-tag">always</span><span class="signal-tag">usually</span><span class="signal-tag">often</span>
+    <span class="signal-tag">sometimes</span><span class="signal-tag">never</span><span class="signal-tag">every day</span>
+    <span class="signal-tag">on Sundays</span><span class="signal-tag">daily</span><span class="signal-tag">regularly</span>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 1-word Formula</div>
+    <div class="trick-item">Present Simple = <strong>HABIT</strong></div>
+    <div class="trick-item">"What do you do daily?" → Present Simple</div>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch2')"><div class="pdir">← Previous</div>Articles</button>
+    <button class="pnav-btn" onclick="goTo('ch4')"><div class="pdir">Next →</div>Present Continuous</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     CHAPTER 4 — PRESENT CONTINUOUS
+═══════════════════════════════════════════════ -->
+<div class="chapter" id="ch4">
+  <div class="ch-header blue-theme">
+    <div class="ch-step">🕐 Step 2 • Chapter 4</div>
+    <div class="ch-title">Present Continuous</div>
+    <div class="ch-desc">এখন এই মুহূর্তে যা চলছে — চলমান বর্তমান কাল</div>
+    <button class="ch-done-btn blue-theme" onclick="markDone('ch4')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula">Subject + <span style="color:var(--gold)">am/is/are</span> + Verb+<span style="color:var(--blue)">ing</span></div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 কখন ব্যবহার?</div>
+    <div class="trick-item"><strong>এই মুহূর্তে চলছে</strong> — I am writing now.</div>
+    <div class="trick-item"><strong>সাময়িক পরিস্থিতি</strong> — She is staying with her uncle.</div>
+    <div class="trick-item"><strong>নিকট ভবিষ্যৎ plan</strong> — I am going to Dhaka tomorrow.</div>
+  </div>
+
+  <div class="info-box warn"><strong>⚠️ Stative Verbs — Continuous এ ব্যবহার হয় না!</strong>
+    know, believe, like, love, hate, want, need, understand, remember, own<br>
+    ❌ I am knowing. &nbsp;&nbsp; ✅ I know. &nbsp;&nbsp; ❌ She is wanting. &nbsp;&nbsp; ✅ She wants.
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--blue)"></span>উদাহরণ</div>
+  <table class="ex-table">
+    <tr><th>#</th><th>Sentence</th><th>বাংলা</th></tr>
+    <tr><td>1</td><td class="hl-blue">I am eating lunch.</td><td>আমি দুপুরের খাবার খাচ্ছি।</td></tr>
+    <tr><td>2</td><td class="hl-blue">She is reading a book.</td><td>সে একটি বই পড়ছে।</td></tr>
+    <tr><td>3</td><td class="hl-blue">It is raining outside.</td><td>বাইরে বৃষ্টি হচ্ছে।</td></tr>
+    <tr><td>4</td><td class="hl-blue">They are building a house.</td><td>তারা একটি ঘর বানাচ্ছে।</td></tr>
+    <tr><td>5</td><td class="hl-pink">I am not sleeping.</td><td>আমি ঘুমাচ্ছি না।</td></tr>
+    <tr><td>6</td><td class="hl-pink">She is not coming today.</td><td>সে আজ আসছে না।</td></tr>
+    <tr><td>7</td><td class="hl-gold">Are you coming?</td><td>তুমি কি আসছো?</td></tr>
+    <tr><td>8</td><td class="hl-gold">What are you doing?</td><td>তুমি কী করছো?</td></tr>
+    <tr><td>9</td><td class="hl-gold">Where is she going?</td><td>সে কোথায় যাচ্ছে?</td></tr>
+    <tr><td>10</td><td class="hl-blue">I am going to Dhaka tomorrow.</td><td>আমি কাল ঢাকা যাচ্ছি। (Plan)</td></tr>
+  </table>
+
+  <div class="signal-grid">
+    <span class="signal-tag">now</span><span class="signal-tag">right now</span><span class="signal-tag">at the moment</span>
+    <span class="signal-tag">currently</span><span class="signal-tag">today</span><span class="signal-tag">Look!</span>
+    <span class="signal-tag">Listen!</span><span class="signal-tag">still</span>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 1-word Formula</div>
+    <div class="trick-item">Present Continuous = <strong>NOW</strong></div>
+    <div class="trick-item">"What are you doing?" → Continuous</div>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch3')"><div class="pdir">← Previous</div>Present Simple</button>
+    <button class="pnav-btn" onclick="goTo('ch5')"><div class="pdir">Next →</div>Present Perfect</button>
+  </div>
+</div>
+
+<!-- CHAPTER 5 — PRESENT PERFECT -->
+<div class="chapter" id="ch5">
+  <div class="ch-header gold-theme">
+    <div class="ch-step">🕐 Step 2 • Chapter 5</div>
+    <div class="ch-title">Present Perfect</div>
+    <div class="ch-desc">এইমাত্র শেষ হয়েছে বা জীবনে অভিজ্ঞতা হয়েছে — পূর্ণ বর্তমান</div>
+    <button class="ch-done-btn gold-theme" onclick="markDone('ch5')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula">Subject + <span style="color:var(--gold)">have/has</span> + <span style="color:var(--blue)">V3</span> (past participle)</div>
+
+  <div class="info-box note"><strong>💡 have vs has</strong>
+    I/You/We/They → <strong>have</strong> &nbsp;&nbsp;|&nbsp;&nbsp; He/She/It → <strong>has</strong>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 কখন ব্যবহার?</div>
+    <div class="trick-item"><strong>এইমাত্র শেষ</strong> — I have just finished. (just দিয়ে চিনবে)</div>
+    <div class="trick-item"><strong>অভিজ্ঞতা</strong> — I have visited Cox's Bazar. (ever/never দিয়ে)</div>
+    <div class="trick-item"><strong>অতীত → বর্তমান</strong> — I have lived here for 10 years. (since/for দিয়ে)</div>
+    <div class="trick-item"><strong>ফলাফল গুরুত্বপূর্ণ</strong> — She has lost her phone. (এখনও নেই)</div>
+  </div>
+
+  <div class="chart-box">
+    <table>
+      <tr><th>since</th><th>for</th></tr>
+      <tr><td class="c-pres">since 2010 (নির্দিষ্ট সময় থেকে)</td><td class="c-past">for 5 years (সময়ের পরিমাণ)</td></tr>
+      <tr><td class="c-pres">since Monday</td><td class="c-past">for 3 days</td></tr>
+      <tr><td class="c-pres">since morning</td><td class="c-past">for 2 hours</td></tr>
+    </table>
+  </div>
+
+  <table class="ex-table">
+    <tr><th>#</th><th>Sentence</th><th>বাংলা</th><th>Type</th></tr>
+    <tr><td>1</td><td class="hl-gold">I have just finished my work.</td><td>এইমাত্র কাজ শেষ করেছি।</td><td>just</td></tr>
+    <tr><td>2</td><td class="hl-gold">She has lost her phone.</td><td>সে ফোন হারিয়েছে।</td><td>result</td></tr>
+    <tr><td>3</td><td class="hl-gold">I have visited London.</td><td>আমি লন্ডন ঘুরেছি।</td><td>experience</td></tr>
+    <tr><td>4</td><td class="hl-gold">I have never been to India.</td><td>আমি কখনো ভারত যাইনি।</td><td>never</td></tr>
+    <tr><td>5</td><td class="hl-gold">We have lived here for 5 years.</td><td>আমরা ৫ বছর ধরে এখানে থাকি।</td><td>for</td></tr>
+    <tr><td>6</td><td class="hl-gold">I have known him since childhood.</td><td>ছোটবেলা থেকে তাকে চিনি।</td><td>since</td></tr>
+    <tr><td>7</td><td class="hl-pink">I have not eaten yet.</td><td>আমি এখনও খাইনি।</td><td>yet</td></tr>
+    <tr><td>8</td><td class="hl-blue">Have you ever been to Cox's Bazar?</td><td>কক্সবাজার কি কখনো গেছো?</td><td>ever</td></tr>
+  </table>
+
+  <div class="signal-grid">
+    <span class="signal-tag">just</span><span class="signal-tag">already</span><span class="signal-tag">yet</span>
+    <span class="signal-tag">ever</span><span class="signal-tag">never</span><span class="signal-tag">recently</span>
+    <span class="signal-tag">since</span><span class="signal-tag">for</span><span class="signal-tag">so far</span>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch4')"><div class="pdir">← Previous</div>Present Continuous</button>
+    <button class="pnav-btn" onclick="goTo('ch6')"><div class="pdir">Next →</div>Present Perfect Continuous</button>
+  </div>
+</div>
+
+<!-- CHAPTER 6 — PRESENT PERFECT CONTINUOUS -->
+<div class="chapter" id="ch6">
+  <div class="ch-header pink-theme">
+    <div class="ch-step">🕐 Step 2 • Chapter 6</div>
+    <div class="ch-title">Present Perfect Continuous</div>
+    <div class="ch-desc">কতক্ষণ ধরে চলছে সেটার উপর জোর — পূর্ণ চলমান বর্তমান</div>
+    <button class="ch-done-btn pink-theme" onclick="markDone('ch6')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula">Subject + <span style="color:var(--gold)">have/has been</span> + Verb+<span style="color:var(--blue)">ing</span> + <span style="color:var(--green)">since/for</span></div>
+
+  <div class="chart-box">
+    <table>
+      <tr><th>Present Perfect</th><th>Present Perfect Continuous</th></tr>
+      <tr><td class="c-pres">কাজ শেষ হয়েছে কিনা গুরুত্বপূর্ণ</td><td class="c-past">কতক্ষণ ধরে চলছে গুরুত্বপূর্ণ</td></tr>
+      <tr><td class="c-pres">I have read 3 books.</td><td class="c-past">I have been reading for 2 hours.</td></tr>
+    </table>
+  </div>
+
+  <table class="ex-table">
+    <tr><th>#</th><th>Sentence</th><th>বাংলা</th></tr>
+    <tr><td>1</td><td class="hl-pink">I have been studying for 3 hours.</td><td>আমি ৩ ঘণ্টা ধরে পড়ছি।</td></tr>
+    <tr><td>2</td><td class="hl-pink">She has been cooking since morning.</td><td>সে সকাল থেকে রান্না করছে।</td></tr>
+    <tr><td>3</td><td class="hl-pink">He has been working here for 5 years.</td><td>সে ৫ বছর ধরে এখানে কাজ করছে।</td></tr>
+    <tr><td>4</td><td class="hl-pink">I have been learning English for 2 years.</td><td>আমি ২ বছর ধরে ইংরেজি শিখছি।</td></tr>
+    <tr><td>5</td><td class="hl-pink">It has been raining since yesterday.</td><td>গতকাল থেকে বৃষ্টি হচ্ছে।</td></tr>
+    <tr><td>6</td><td class="hl-pink">We have been waiting for 30 minutes.</td><td>আমরা ৩০ মিনিট ধরে অপেক্ষা করছি।</td></tr>
+  </table>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 4-word Formula — সব Present Tense</div>
+    <div class="trick-item">Simple = <strong>HABIT</strong> &nbsp;|&nbsp; Continuous = <strong>NOW</strong></div>
+    <div class="trick-item">Perfect = <strong>DONE</strong> &nbsp;|&nbsp; Perfect Continuous = <strong>RUNNING</strong></div>
+  </div>
+
+  <div class="chart-box">
+    <table>
+      <tr><th>Type</th><th>Formula</th><th>Example</th></tr>
+      <tr><td>Simple</td><td class="c-pres">V1 / V1+s</td><td>I eat / She eats</td></tr>
+      <tr><td>Continuous</td><td class="c-past">am/is/are + V-ing</td><td>I am eating</td></tr>
+      <tr><td>Perfect</td><td class="c-fut">have/has + V3</td><td>I have eaten</td></tr>
+      <tr><td>Perfect Cont.</td><td class="c-pres">have/has been + V-ing</td><td>I have been eating</td></tr>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch5')"><div class="pdir">← Previous</div>Present Perfect</button>
+    <button class="pnav-btn" onclick="goTo('ch7')"><div class="pdir">Next →</div>Past Simple</button>
+  </div>
+</div>
+
+<!-- CHAPTER 7 — PAST SIMPLE -->
+<div class="chapter" id="ch7">
+  <div class="ch-header orange-theme">
+    <div class="ch-step">⏮ Step 3 • Chapter 7</div>
+    <div class="ch-title">Past Simple Tense</div>
+    <div class="ch-desc">অতীতে সম্পন্ন হয়েছে — সাধারণ অতীত কাল</div>
+    <button class="ch-done-btn orange-theme" onclick="markDone('ch7')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula">Subject + <span style="color:var(--orange)">Verb₂</span> (Past Form)</div>
+  <div class="info-box warn"><strong>⚠️ Negative ও Question এ সাবধান!</strong>
+    Negative: Subject + <strong>did not + V1</strong> (base form)<br>
+    Question: <strong>Did</strong> + Subject + V1?<br>
+    ❌ She didn't went. &nbsp;&nbsp; ✅ She didn't go.
+  </div>
+
+  <table class="ex-table">
+    <tr><th>#</th><th>Sentence</th><th>বাংলা</th></tr>
+    <tr><td>1</td><td class="hl-orange">I ate rice last night.</td><td>আমি গত রাতে ভাত খেয়েছিলাম।</td></tr>
+    <tr><td>2</td><td class="hl-orange">She went to school yesterday.</td><td>সে গতকাল স্কুলে গিয়েছিল।</td></tr>
+    <tr><td>3</td><td class="hl-orange">We visited Cox's Bazar last year.</td><td>আমরা গত বছর কক্সবাজার গিয়েছিলাম।</td></tr>
+    <tr><td>4</td><td class="hl-orange">He bought a new bike.</td><td>সে একটি নতুন বাইক কিনেছিল।</td></tr>
+    <tr><td>5</td><td class="hl-pink">She didn't go to school yesterday.</td><td>সে গতকাল স্কুলে যায়নি।</td></tr>
+    <tr><td>6</td><td class="hl-pink">I didn't understand the question.</td><td>আমি প্রশ্নটি বুঝিনি।</td></tr>
+    <tr><td>7</td><td class="hl-blue">Did you eat lunch?</td><td>তুমি কি দুপুরের খাবার খেয়েছো?</td></tr>
+    <tr><td>8</td><td class="hl-blue">Where did you go yesterday?</td><td>তুমি গতকাল কোথায় গিয়েছিলে?</td></tr>
+  </table>
+
+  <div class="sec-title"><span class="dot" style="background:var(--orange)"></span>Irregular Verbs — মুখস্থ করো</div>
+  <table class="ex-table">
+    <tr><th>V1</th><th>V2</th><th>V1</th><th>V2</th><th>V1</th><th>V2</th></tr>
+    <tr><td>go</td><td class="hl-orange">went</td><td>eat</td><td class="hl-orange">ate</td><td>write</td><td class="hl-orange">wrote</td></tr>
+    <tr><td>come</td><td class="hl-orange">came</td><td>drink</td><td class="hl-orange">drank</td><td>see</td><td class="hl-orange">saw</td></tr>
+    <tr><td>do</td><td class="hl-orange">did</td><td>give</td><td class="hl-orange">gave</td><td>take</td><td class="hl-orange">took</td></tr>
+    <tr><td>buy</td><td class="hl-orange">bought</td><td>tell</td><td class="hl-orange">told</td><td>feel</td><td class="hl-orange">felt</td></tr>
+    <tr><td>win</td><td class="hl-orange">won</td><td>lose</td><td class="hl-orange">lost</td><td>think</td><td class="hl-orange">thought</td></tr>
+    <tr><td>speak</td><td class="hl-orange">spoke</td><td>know</td><td class="hl-orange">knew</td><td>find</td><td class="hl-orange">found</td></tr>
+  </table>
+
+  <div class="signal-grid">
+    <span class="signal-tag">yesterday</span><span class="signal-tag">last night</span><span class="signal-tag">last week</span>
+    <span class="signal-tag">last year</span><span class="signal-tag">ago</span><span class="signal-tag">in 2020</span>
+    <span class="signal-tag">that day</span><span class="signal-tag">once</span>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch6')"><div class="pdir">← Previous</div>Present Perfect Cont.</button>
+    <button class="pnav-btn" onclick="goTo('ch8')"><div class="pdir">Next →</div>Past Continuous</button>
+  </div>
+</div>
+
+<!-- CHAPTER 8 — PAST CONTINUOUS -->
+<div class="chapter" id="ch8">
+  <div class="ch-header blue-theme">
+    <div class="ch-step">⏮ Step 3 • Chapter 8</div>
+    <div class="ch-title">Past Continuous</div>
+    <div class="ch-desc">অতীতে চলছিল — চলমান অতীত কাল। When ও While এর ব্যবহার।</div>
+    <button class="ch-done-btn blue-theme" onclick="markDone('ch8')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula">Subject + <span style="color:var(--blue)">was/were</span> + Verb+<span style="color:var(--gold)">ing</span></div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 When + While Pattern — সবচেয়ে বেশি ব্যবহার!</div>
+    <div class="trick-item">When + <strong>Past Simple</strong>, <strong>Past Continuous</strong></div>
+    <div class="trick-item">While + <strong>Past Continuous</strong>, <strong>Past Simple</strong></div>
+    <div class="trick-item">→ When she called, I <strong>was sleeping</strong>. (ফোন করার সময় ঘুমাচ্ছিলাম)</div>
+    <div class="trick-item">→ While I <strong>was walking</strong>, it started raining. (হাঁটার সময় বৃষ্টি শুরু হলো)</div>
+  </div>
+
+  <table class="ex-table">
+    <tr><th>#</th><th>Sentence</th><th>বাংলা</th></tr>
+    <tr><td>1</td><td class="hl-blue">I was eating dinner at 9 pm.</td><td>আমি রাত ৯টায় খাচ্ছিলাম।</td></tr>
+    <tr><td>2</td><td class="hl-blue">She was reading when I called.</td><td>আমি ফোন করার সময় সে পড়ছিল।</td></tr>
+    <tr><td>3</td><td class="hl-blue">It was raining heavily.</td><td>প্রচণ্ড বৃষ্টি হচ্ছিল।</td></tr>
+    <tr><td>4</td><td class="hl-blue">While I was cooking, he was cleaning.</td><td>আমি রান্না করছিলাম, সে পরিষ্কার করছিল।</td></tr>
+    <tr><td>5</td><td class="hl-pink">I was not sleeping. I was studying.</td><td>আমি ঘুমাচ্ছিলাম না। পড়ছিলাম।</td></tr>
+    <tr><td>6</td><td class="hl-gold">Were you watching the match?</td><td>তুমি কি ম্যাচ দেখছিলে?</td></tr>
+  </table>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch7')"><div class="pdir">← Previous</div>Past Simple</button>
+    <button class="pnav-btn" onclick="goTo('ch9')"><div class="pdir">Next →</div>Past Perfect</button>
+  </div>
+</div>
+
+<!-- CHAPTER 9 — PAST PERFECT -->
+<div class="chapter" id="ch9">
+  <div class="ch-header green-theme">
+    <div class="ch-step">⏮ Step 3 • Chapter 9</div>
+    <div class="ch-title">Past Perfect</div>
+    <div class="ch-desc">অতীতের দুটি কাজের মধ্যে যেটি আগে হয়েছিল সেটা Past Perfect এ</div>
+    <button class="ch-done-btn green-theme" onclick="markDone('ch9')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula">Subject + <span style="color:var(--green)">had</span> + <span style="color:var(--blue)">V3</span></div>
+  <div class="info-box tip"><strong>💡 সব Subject এর সাথে "had" — কোনো পরিবর্তন নেই!</strong></div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 Key Pattern</div>
+    <div class="trick-item">Before + Past Simple → <strong>Past Perfect</strong> (আগে হয়েছিল)</div>
+    <div class="trick-item">After + Past Perfect → <strong>Past Simple</strong></div>
+    <div class="trick-item">→ <strong>Before</strong> I reached, the train <strong>had left</strong>.</div>
+    <div class="trick-item">→ <strong>After</strong> she <strong>had eaten</strong>, she went out.</div>
+  </div>
+
+  <table class="ex-table">
+    <tr><th>#</th><th>Sentence</th><th>বাংলা</th></tr>
+    <tr><td>1</td><td class="hl-green">I had eaten before she came.</td><td>সে আসার আগেই আমি খেয়ে ফেলেছিলাম।</td></tr>
+    <tr><td>2</td><td class="hl-green">The train had left before I reached.</td><td>আমি পৌঁছানোর আগে ট্রেন ছেড়ে দিয়েছিল।</td></tr>
+    <tr><td>3</td><td class="hl-green">She had studied hard, so she passed.</td><td>কঠোর পরিশ্রম করেছিল তাই পাস করেছিল।</td></tr>
+    <tr><td>4</td><td class="hl-green">By the time we arrived, the show had ended.</td><td>আমরা পৌঁছানোর আগেই শো শেষ হয়ে গিয়েছিল।</td></tr>
+    <tr><td>5</td><td class="hl-pink">I had not slept well, so I was tired.</td><td>ভালো ঘুমাইনি তাই ক্লান্ত ছিলাম।</td></tr>
+  </table>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch8')"><div class="pdir">← Previous</div>Past Continuous</button>
+    <button class="pnav-btn" onclick="goTo('ch10')"><div class="pdir">Next →</div>Past Perfect Continuous</button>
+  </div>
+</div>
+
+<!-- CHAPTER 10 — PAST PERFECT CONTINUOUS -->
+<div class="chapter" id="ch10">
+  <div class="ch-header pink-theme">
+    <div class="ch-step">⏮ Step 3 • Chapter 10</div>
+    <div class="ch-title">Past Perfect Continuous</div>
+    <div class="ch-desc">অতীতে কোনো ঘটনার আগে কতক্ষণ ধরে চলছিল</div>
+    <button class="ch-done-btn pink-theme" onclick="markDone('ch10')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula">Subject + <span style="color:var(--pink)">had been</span> + Verb+<span style="color:var(--gold)">ing</span> + since/for</div>
+
+  <table class="ex-table">
+    <tr><th>#</th><th>Sentence</th><th>বাংলা</th></tr>
+    <tr><td>1</td><td class="hl-pink">I had been waiting for 2 hours before the bus came.</td><td>বাস আসার আগে ২ ঘণ্টা অপেক্ষা করছিলাম।</td></tr>
+    <tr><td>2</td><td class="hl-pink">She had been cooking since morning when we arrived.</td><td>আমরা পৌঁছানোর সময় সকাল থেকে রান্না করছিল।</td></tr>
+    <tr><td>3</td><td class="hl-pink">He had been running. He was out of breath.</td><td>সে দৌড়াচ্ছিল। শ্বাস ফুরিয়ে গিয়েছিল।</td></tr>
+    <tr><td>4</td><td class="hl-pink">I had been studying for 3 years before moving abroad.</td><td>বিদেশ যাওয়ার আগে ৩ বছর পড়ছিলাম।</td></tr>
+  </table>
+
+  <div class="chart-box">
+    <table>
+      <tr><th>Type</th><th>Formula</th><th>Keyword</th></tr>
+      <tr><td>Simple</td><td class="c-pres">V2</td><td>yesterday, last week</td></tr>
+      <tr><td>Continuous</td><td class="c-past">was/were + V-ing</td><td>when, while</td></tr>
+      <tr><td>Perfect</td><td class="c-fut">had + V3</td><td>before, after, by the time</td></tr>
+      <tr><td>Perfect Cont.</td><td class="c-pres">had been + V-ing</td><td>for, since + past event</td></tr>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch9')"><div class="pdir">← Previous</div>Past Perfect</button>
+    <button class="pnav-btn" onclick="goTo('ch11')"><div class="pdir">Next →</div>Future Tense</button>
+  </div>
+</div>
+
+<!-- CHAPTER 11 — FUTURE TENSE -->
+<div class="chapter" id="ch11">
+  <div class="ch-header purple-theme">
+    <div class="ch-step">⏭ Step 4 • Chapter 11</div>
+    <div class="ch-title">Future Tense — All 4 Forms</div>
+    <div class="ch-desc">ভবিষ্যতে হবে, চলবে, শেষ হবে — সব ভবিষ্যৎ কাল একসাথে</div>
+    <button class="ch-done-btn purple-theme" onclick="markDone('ch11')">✓ Mark as Done</button>
+  </div>
+
+  <div class="cond-grid">
+    <div class="cond-card" style="background:var(--purpled);border:1px solid var(--purpleb)">
+      <div class="c-type" style="color:var(--purple)">1️⃣ Future Simple</div>
+      <div class="c-rule">Subject + will + V1</div>
+      <div class="c-ex">I will go. &nbsp; She will come. &nbsp; They will study.</div>
+      <div class="c-bn">ভবিষ্যতের কাজ / প্রতিশ্রুতি / সিদ্ধান্ত</div>
+    </div>
+    <div class="cond-card" style="background:var(--blued);border:1px solid var(--blueb)">
+      <div class="c-type" style="color:var(--blue)">2️⃣ Future Continuous</div>
+      <div class="c-rule">Subject + will be + V-ing</div>
+      <div class="c-ex">I will be studying at 10 pm.</div>
+      <div class="c-bn">ভবিষ্যতে নির্দিষ্ট সময়ে চলবে</div>
+    </div>
+    <div class="cond-card" style="background:var(--greend);border:1px solid var(--greenb)">
+      <div class="c-type" style="color:var(--green)">3️⃣ Future Perfect</div>
+      <div class="c-rule">Subject + will have + V3</div>
+      <div class="c-ex">I will have finished by 6 pm.</div>
+      <div class="c-bn">ভবিষ্যতের নির্দিষ্ট সময়ের আগে শেষ হবে</div>
+    </div>
+    <div class="cond-card" style="background:var(--goldd);border:1px solid var(--goldb)">
+      <div class="c-type" style="color:var(--gold)">4️⃣ Future Perfect Continuous</div>
+      <div class="c-rule">Subject + will have been + V-ing + for/since</div>
+      <div class="c-ex">By 10 pm, I will have been studying for 4 hours.</div>
+      <div class="c-bn">ভবিষ্যতে কতক্ষণ ধরে চলবে</div>
+    </div>
+  </div>
+
+  <div class="info-box note"><strong>💡 will vs going to</strong>
+    <strong>will</strong> = তাৎক্ষণিক সিদ্ধান্ত / ভবিষ্যদ্বাণী → "I'll answer the phone."<br>
+    <strong>going to</strong> = পূর্ব-পরিকল্পিত → "I am going to visit my uncle tomorrow."
+  </div>
+
+  <div class="chart-box">
+    <table>
+      <tr><th></th><th class="c-pres">Present</th><th class="c-past">Past</th><th class="c-fut">Future</th></tr>
+      <tr><td>Simple</td><td class="c-pres">I eat</td><td class="c-past">I ate</td><td class="c-fut">I will eat</td></tr>
+      <tr><td>Continuous</td><td class="c-pres">I am eating</td><td class="c-past">I was eating</td><td class="c-fut">I will be eating</td></tr>
+      <tr><td>Perfect</td><td class="c-pres">I have eaten</td><td class="c-past">I had eaten</td><td class="c-fut">I will have eaten</td></tr>
+      <tr><td>Perf. Cont.</td><td class="c-pres">I have been eating</td><td class="c-past">I had been eating</td><td class="c-fut">I will have been eating</td></tr>
+    </table>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 Complete Formula — 12 Tenses in 4 words</div>
+    <div class="trick-item">Simple = <strong>DO</strong> &nbsp;|&nbsp; Continuous = <strong>DOING</strong></div>
+    <div class="trick-item">Perfect = <strong>DONE</strong> &nbsp;|&nbsp; Perfect Continuous = <strong>BEEN DOING</strong></div>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch10')"><div class="pdir">← Previous</div>Past Perfect Cont.</button>
+    <button class="pnav-btn" onclick="goTo('ch12')"><div class="pdir">Next →</div>Prepositions</button>
+  </div>
+</div>
+
+<!-- CHAPTER 12 — PREPOSITIONS -->
+<div class="chapter" id="ch12">
+  <div class="ch-header gold-theme">
+    <div class="ch-step">🧩 Step 5 • Chapter 12</div>
+    <div class="ch-title">Prepositions</div>
+    <div class="ch-desc">in, on, at, by, with — কোথায়, কখন, কীভাবে বোঝানোর শব্দ</div>
+    <button class="ch-done-btn gold-theme" onclick="markDone('ch12')">✓ Mark as Done</button>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 AT / IN / ON — সহজ ট্রিক</div>
+    <div class="trick-item"><strong>AT</strong> → ঘড়ির সময় / নির্দিষ্ট point → at 5 pm, at night, at home</div>
+    <div class="trick-item"><strong>IN</strong> → বড় জায়গা / দীর্ঘ সময় → in Dhaka, in January, in the room</div>
+    <div class="trick-item"><strong>ON</strong> → নির্দিষ্ট দিন / surface → on Monday, on the table</div>
+  </div>
+
+  <div class="chart-box">
+    <table>
+      <tr><th></th><th>AT</th><th>IN</th><th>ON</th></tr>
+      <tr><td>TIME</td><td class="c-pres">at 5pm, at night</td><td class="c-past">in January, in 2024</td><td class="c-fut">on Monday, on Eid</td></tr>
+      <tr><td>PLACE</td><td class="c-pres">at home, at school</td><td class="c-past">in Dhaka, in the room</td><td class="c-fut">on the table, on the wall</td></tr>
+    </table>
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--gold)"></span>Other Important Prepositions</div>
+  <table class="ex-table">
+    <tr><th>Preposition</th><th>মানে</th><th>Example</th><th>বাংলা</th></tr>
+    <tr><td class="hl-gold">TO</td><td>দিকে</td><td>go to school</td><td>স্কুলে যাওয়া</td></tr>
+    <tr><td class="hl-gold">FROM</td><td>থেকে</td><td>from Dhaka</td><td>ঢাকা থেকে</td></tr>
+    <tr><td class="hl-gold">FOR</td><td>জন্য</td><td>for you, for 2 hours</td><td>তোমার জন্য</td></tr>
+    <tr><td class="hl-gold">WITH</td><td>সাথে</td><td>come with me</td><td>আমার সাথে এসো</td></tr>
+    <tr><td class="hl-gold">BY</td><td>দ্বারা/পাশে</td><td>by bus, by 5pm</td><td>বাসে, ৫টার মধ্যে</td></tr>
+    <tr><td class="hl-gold">ABOUT</td><td>সম্পর্কে</td><td>talk about it</td><td>এটা নিয়ে কথা</td></tr>
+    <tr><td class="hl-gold">BETWEEN</td><td>মধ্যে (২টার)</td><td>between you and me</td><td>তোমার আর আমার মধ্যে</td></tr>
+    <tr><td class="hl-gold">AMONG</td><td>মধ্যে (অনেকের)</td><td>among students</td><td>ছাত্রদের মধ্যে</td></tr>
+    <tr><td class="hl-gold">WITHOUT</td><td>ছাড়া</td><td>without you</td><td>তোমাকে ছাড়া</td></tr>
+    <tr><td class="hl-gold">DURING</td><td>চলাকালীন</td><td>during the exam</td><td>পরীক্ষার সময়</td></tr>
+    <tr><td class="hl-gold">IN FRONT OF</td><td>সামনে</td><td>in front of the house</td><td>ঘরের সামনে</td></tr>
+    <tr><td class="hl-gold">BEHIND</td><td>পিছনে</td><td>behind the door</td><td>দরজার পিছনে</td></tr>
+  </table>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch11')"><div class="pdir">← Previous</div>Future Tense</button>
+    <button class="pnav-btn" onclick="goTo('ch13')"><div class="pdir">Next →</div>Conjunctions</button>
+  </div>
+</div>
+
+<!-- CHAPTER 13 — CONJUNCTIONS -->
+<div class="chapter" id="ch13">
+  <div class="ch-header blue-theme">
+    <div class="ch-step">🧩 Step 5 • Chapter 13</div>
+    <div class="ch-title">Conjunctions</div>
+    <div class="ch-desc">and, but, because, although — দুটো sentence জোড়া লাগানোর শব্দ</div>
+    <button class="ch-done-btn blue-theme" onclick="markDone('ch13')">✓ Mark as Done</button>
+  </div>
+
+  <table class="ex-table">
+    <tr><th>Conjunction</th><th>মানে</th><th>ব্যবহার</th><th>Example</th></tr>
+    <tr><td class="hl-green">AND</td><td>এবং</td><td>দুটো যোগ</td><td>I like tea and coffee.</td></tr>
+    <tr><td class="hl-pink">BUT</td><td>কিন্তু</td><td>বিপরীত</td><td>I tried but I failed.</td></tr>
+    <tr><td class="hl-gold">OR</td><td>অথবা</td><td>choice</td><td>Tea or coffee?</td></tr>
+    <tr><td class="hl-blue">BECAUSE</td><td>কারণ</td><td>কারণ বলে</td><td>Late because of traffic.</td></tr>
+    <tr><td class="hl-orange">SO</td><td>তাই</td><td>ফলাফল</td><td>I was hungry, so I ate.</td></tr>
+    <tr><td class="hl-purple">IF</td><td>যদি</td><td>শর্ত</td><td>If you study, you will pass.</td></tr>
+    <tr><td class="hl-green">WHEN</td><td>যখন</td><td>সময়</td><td>Call me when you arrive.</td></tr>
+    <tr><td class="hl-blue">WHILE</td><td>যখন (চলমান)</td><td>একসাথে চলছে</td><td>While I ate, he cooked.</td></tr>
+    <tr><td class="hl-pink">ALTHOUGH</td><td>যদিও</td><td>বিপরীত তবুও</td><td>Although rich, he is humble.</td></tr>
+    <tr><td class="hl-orange">UNTIL</td><td>পর্যন্ত</td><td>সময়সীমা</td><td>Wait until I come.</td></tr>
+    <tr><td class="hl-gold">AS SOON AS</td><td>যেই...তখনই</td><td>সাথে সাথে</td><td>As soon as he came, I left.</td></tr>
+    <tr><td class="hl-purple">NOT ONLY...BUT ALSO</td><td>শুধু...নয়, ও</td><td>দুটো গুণ</td><td>Smart but also hardworking.</td></tr>
+  </table>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 Most Used in Conversation</div>
+    <div class="trick-item"><strong>because</strong> — কারণ বলতে (most common!)</div>
+    <div class="trick-item"><strong>but</strong> — কিন্তু বলতে (second most!)</div>
+    <div class="trick-item"><strong>so</strong> — তাই/ফলে বলতে</div>
+    <div class="trick-item"><strong>although</strong> — যদিও (advanced feel!)</div>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch12')"><div class="pdir">← Previous</div>Prepositions</button>
+    <button class="pnav-btn" onclick="goTo('ch14')"><div class="pdir">Next →</div>Modal Verbs</button>
+  </div>
+</div>
+
+<!-- CHAPTER 14 — MODAL VERBS -->
+<div class="chapter" id="ch14">
+  <div class="ch-header green-theme">
+    <div class="ch-step">🧩 Step 5 • Chapter 14</div>
+    <div class="ch-title">Modal Verbs</div>
+    <div class="ch-desc">can, could, should, must, would — সামর্থ্য, অনুমতি, বাধ্যবাধকতা</div>
+    <button class="ch-done-btn green-theme" onclick="markDone('ch14')">✓ Mark as Done</button>
+  </div>
+
+  <div class="info-box warn"><strong>⚠️ Modal এর পরে সবসময় V1 (base form)</strong>
+    ❌ I can swimming. &nbsp;&nbsp; ✅ I can swim.<br>
+    Modal verb এ কখনো s/es/ing/ed যোগ হয় না।
+  </div>
+
+  <div class="modal-grid">
+    <div class="modal-card" style="border-color:var(--greenb)">
+      <div class="mv" style="color:var(--green)">CAN</div>
+      <div class="mv-meaning">পারা (ability / permission)</div>
+      <div class="mv-ex">I can speak English.</div>
+      <div class="mv-ex">Can I use your phone?</div>
+    </div>
+    <div class="modal-card" style="border-color:var(--blueb)">
+      <div class="mv" style="color:var(--blue)">COULD</div>
+      <div class="mv-meaning">পারতাম / ভদ্র অনুরোধ</div>
+      <div class="mv-ex">I could run fast when young.</div>
+      <div class="mv-ex">Could you help me, please?</div>
+    </div>
+    <div class="modal-card" style="border-color:var(--goldb)">
+      <div class="mv" style="color:var(--gold)">SHOULD</div>
+      <div class="mv-meaning">উচিত (advice)</div>
+      <div class="mv-ex">You should study daily.</div>
+      <div class="mv-ex">You shouldn't smoke.</div>
+    </div>
+    <div class="modal-card" style="border-color:var(--pinkb)">
+      <div class="mv" style="color:var(--pink)">MUST</div>
+      <div class="mv-meaning">অবশ্যই (strong obligation)</div>
+      <div class="mv-ex">You must finish homework.</div>
+      <div class="mv-ex">I must go now.</div>
+    </div>
+    <div class="modal-card" style="border-color:var(--purpleb)">
+      <div class="mv" style="color:var(--purple)">WOULD</div>
+      <div class="mv-meaning">করতাম / ভদ্র request</div>
+      <div class="mv-ex">I would help you.</div>
+      <div class="mv-ex">Would you like tea?</div>
+    </div>
+    <div class="modal-card" style="border-color:var(--orangeb)">
+      <div class="mv" style="color:var(--orange)">MAY / MIGHT</div>
+      <div class="mv-meaning">হয়তো / formal অনুমতি</div>
+      <div class="mv-ex">May I come in?</div>
+      <div class="mv-ex">It might rain today.</div>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <table>
+      <tr><th>Modal</th><th>মানে</th><th>Example</th></tr>
+      <tr><td class="c-pres">can</td><td>পারা</td><td>I can swim.</td></tr>
+      <tr><td class="c-past">could</td><td>পারতাম / ভদ্র</td><td>Could you help me?</td></tr>
+      <tr><td class="c-fut">should</td><td>উচিত</td><td>You should exercise.</td></tr>
+      <tr><td class="c-pres">must</td><td>অবশ্যই করতে হবে</td><td>You must try.</td></tr>
+      <tr><td class="c-past">would</td><td>করতাম</td><td>I would go if I could.</td></tr>
+      <tr><td class="c-fut">may</td><td>হয়তো / অনুমতি</td><td>May I sit here?</td></tr>
+      <tr><td class="c-pres">might</td><td>হয়তো (কম নিশ্চিত)</td><td>She might come late.</td></tr>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch13')"><div class="pdir">← Previous</div>Conjunctions</button>
+    <button class="pnav-btn" onclick="goTo('ch15')"><div class="pdir">Next →</div>Conditionals</button>
+  </div>
+</div>
+
+<!-- CHAPTER 15 — CONDITIONALS -->
+<div class="chapter" id="ch15">
+  <div class="ch-header orange-theme">
+    <div class="ch-step">🎓 Step 6 • Chapter 15</div>
+    <div class="ch-title">Conditionals — If Clause</div>
+    <div class="ch-desc">"যদি...তাহলে" — ৪ ধরনের Conditional sentence</div>
+    <button class="ch-done-btn orange-theme" onclick="markDone('ch15')">✓ Mark as Done</button>
+  </div>
+
+  <div class="cond-grid">
+    <div class="cond-card" style="background:rgba(74,222,128,0.07);border:1px solid var(--greenb)">
+      <div class="c-type" style="color:var(--green)">🟢 Zero Conditional — সত্য Fact</div>
+      <div class="c-rule">If + Present Simple, Present Simple</div>
+      <div class="c-ex">If you heat water, it <span class="hl-green">boils</span>.</div>
+      <div class="c-bn">পানি গরম করলে সবসময় ফোটে — চিরন্তন সত্য</div>
+    </div>
+    <div class="cond-card" style="background:rgba(96,165,250,0.07);border:1px solid var(--blueb)">
+      <div class="c-type" style="color:var(--blue)">🔵 First Conditional — সম্ভব ঘটনা</div>
+      <div class="c-rule">If + Present Simple, will + V1</div>
+      <div class="c-ex">If I <span class="hl-blue">study</span> hard, I <span class="hl-gold">will pass</span>.</div>
+      <div class="c-bn">পড়লে পাস করবো — সম্ভব / realistic</div>
+    </div>
+    <div class="cond-card" style="background:rgba(251,146,60,0.07);border:1px solid var(--orangeb)">
+      <div class="c-type" style="color:var(--orange)">🟡 Second Conditional — অসম্ভব / কল্পনা</div>
+      <div class="c-rule">If + Past Simple, would + V1</div>
+      <div class="c-ex">If I <span class="hl-orange">had</span> money, I <span class="hl-gold">would travel</span> the world.</div>
+      <div class="c-bn">যদি টাকা থাকতো — কিন্তু এখন নেই</div>
+    </div>
+    <div class="cond-card" style="background:rgba(244,114,182,0.07);border:1px solid var(--pinkb)">
+      <div class="c-type" style="color:var(--pink)">🔴 Third Conditional — অতীতের অপরিবর্তনীয়</div>
+      <div class="c-rule">If + Past Perfect, would have + V3</div>
+      <div class="c-ex">If I <span class="hl-pink">had studied</span>, I <span class="hl-gold">would have passed</span>.</div>
+      <div class="c-bn">যদি পড়তাম পাস করতাম — কিন্তু পড়িনি (অতীত)</div>
+    </div>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 Easy Memory Trick</div>
+    <div class="trick-item">Zero = <strong>Always true</strong> (scientific facts)</div>
+    <div class="trick-item">First = <strong>Possible future</strong> (realistic)</div>
+    <div class="trick-item">Second = <strong>Imaginary present</strong> (dream/wish)</div>
+    <div class="trick-item">Third = <strong>Impossible past</strong> (regret)</div>
+  </div>
+
+  <div class="ex-grid">
+    <div class="ex-card" style="border-color:var(--greenb)"><div class="eng" style="color:var(--green)">If it rains, I will stay home.</div><div class="bn">1st Conditional — সম্ভব</div></div>
+    <div class="ex-card" style="border-color:var(--orangeb)"><div class="eng" style="color:var(--orange)">If I were rich, I would buy a car.</div><div class="bn">2nd Conditional — কল্পনা</div></div>
+    <div class="ex-card" style="border-color:var(--pinkb)"><div class="eng" style="color:var(--pink)">If I had tried harder, I would have won.</div><div class="bn">3rd Conditional — অতীত অনুশোচনা</div></div>
+    <div class="ex-card" style="border-color:var(--blueb)"><div class="eng" style="color:var(--blue)">Call me if you need help.</div><div class="bn">1st Conditional — অনুরোধ</div></div>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch14')"><div class="pdir">← Previous</div>Modal Verbs</button>
+    <button class="pnav-btn" onclick="goTo('ch16')"><div class="pdir">Next →</div>Passive Voice</button>
+  </div>
+</div>
+
+<!-- CHAPTER 16 — PASSIVE VOICE -->
+<div class="chapter" id="ch16">
+  <div class="ch-header purple-theme">
+    <div class="ch-step">🎓 Step 6 • Chapter 16</div>
+    <div class="ch-title">Passive Voice</div>
+    <div class="ch-desc">কাজটা কে করেছে না বলে কী হয়েছে সেটা বলা — Active থেকে Passive</div>
+    <button class="ch-done-btn purple-theme" onclick="markDone('ch16')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula"><span style="color:var(--blue)">Active</span>: S + V + O &nbsp;&nbsp;&nbsp; → &nbsp;&nbsp;&nbsp; <span style="color:var(--green)">Passive</span>: O + be + V3 + by + S</div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--purple)"></span>Active → Passive Examples</div>
+
+  <div class="passive-row">
+    <div class="active-side">🔵 Jasam writes the code. (Active)</div>
+    <div class="arrow-mid">→</div>
+    <div class="passive-side">🟢 The code is written by Jasam. (Passive)</div>
+  </div>
+  <div class="passive-row">
+    <div class="active-side">🔵 Teacher explains the lesson.</div>
+    <div class="arrow-mid">→</div>
+    <div class="passive-side">🟢 The lesson is explained by the teacher.</div>
+  </div>
+  <div class="passive-row">
+    <div class="active-side">🔵 They built the bridge.</div>
+    <div class="arrow-mid">→</div>
+    <div class="passive-side">🟢 The bridge was built by them.</div>
+  </div>
+  <div class="passive-row">
+    <div class="active-side">🔵 Someone stole my phone.</div>
+    <div class="arrow-mid">→</div>
+    <div class="passive-side">🟢 My phone was stolen. (কে চুরি করেছে জানি না)</div>
+  </div>
+
+  <div class="chart-box">
+    <table>
+      <tr><th>Tense</th><th>Active</th><th>Passive</th></tr>
+      <tr><td>Present Simple</td><td class="c-past">He writes it.</td><td class="c-pres">It is written by him.</td></tr>
+      <tr><td>Past Simple</td><td class="c-past">She made tea.</td><td class="c-pres">Tea was made by her.</td></tr>
+      <tr><td>Future Simple</td><td class="c-past">They will build it.</td><td class="c-pres">It will be built by them.</td></tr>
+      <tr><td>Present Cont.</td><td class="c-past">He is writing it.</td><td class="c-pres">It is being written.</td></tr>
+    </table>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 Passive কখন ব্যবহার করবে?</div>
+    <div class="trick-item">কে করেছে জানা নেই → My phone <strong>was stolen</strong>.</div>
+    <div class="trick-item">কে করেছে গুরুত্বপূর্ণ না → The road <strong>is being fixed</strong>.</div>
+    <div class="trick-item">Formal writing এ → The report <strong>was submitted</strong>.</div>
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch15')"><div class="pdir">← Previous</div>Conditionals</button>
+    <button class="pnav-btn" onclick="goTo('ch17')"><div class="pdir">Next →</div>Reported Speech</button>
+  </div>
+</div>
+
+<!-- CHAPTER 17 — REPORTED SPEECH -->
+<div class="chapter" id="ch17">
+  <div class="ch-header pink-theme">
+    <div class="ch-step">🎓 Step 6 • Chapter 17</div>
+    <div class="ch-title">Reported Speech</div>
+    <div class="ch-desc">কারো কথা অন্যকে বলা — Direct থেকে Indirect speech</div>
+    <button class="ch-done-btn pink-theme" onclick="markDone('ch17')">✓ Mark as Done</button>
+  </div>
+
+  <div class="formula"><span style="color:var(--blue)">Direct</span>: He said, "I am hungry." &nbsp;→&nbsp; <span style="color:var(--pink)">Indirect</span>: He said that he <span style="color:var(--gold)">was</span> hungry.</div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--pink)"></span>Tense Change Rules</div>
+  <div class="chart-box">
+    <table>
+      <tr><th>Direct Speech</th><th>→</th><th>Reported Speech</th></tr>
+      <tr><td class="c-pres">am/is/are</td><td>→</td><td class="c-past">was/were</td></tr>
+      <tr><td class="c-pres">will</td><td>→</td><td class="c-past">would</td></tr>
+      <tr><td class="c-pres">can</td><td>→</td><td class="c-past">could</td></tr>
+      <tr><td class="c-pres">do/does</td><td>→</td><td class="c-past">did</td></tr>
+      <tr><td class="c-pres">have/has</td><td>→</td><td class="c-past">had</td></tr>
+      <tr><td class="c-pres">now</td><td>→</td><td class="c-past">then</td></tr>
+      <tr><td class="c-pres">today</td><td>→</td><td class="c-past">that day</td></tr>
+      <tr><td class="c-pres">tomorrow</td><td>→</td><td class="c-past">the next day</td></tr>
+      <tr><td class="c-pres">"I"</td><td>→</td><td class="c-past">he / she</td></tr>
+    </table>
+  </div>
+
+  <div class="sec-title"><span class="dot" style="background:var(--gold)"></span>উদাহরণ</div>
+  <div class="passive-row">
+    <div class="active-side">🔵 Direct: She said, "I will go tomorrow."</div>
+    <div class="arrow-mid">→</div>
+    <div class="passive-side">🟢 Indirect: She said that she would go the next day.</div>
+  </div>
+  <div class="passive-row">
+    <div class="active-side">🔵 Direct: He said, "I can help you."</div>
+    <div class="arrow-mid">→</div>
+    <div class="passive-side">🟢 Indirect: He said that he could help me.</div>
+  </div>
+  <div class="passive-row">
+    <div class="active-side">🔵 Direct: She said, "I am happy."</div>
+    <div class="arrow-mid">→</div>
+    <div class="passive-side">🟢 Indirect: She said that she was happy.</div>
+  </div>
+  <div class="passive-row">
+    <div class="active-side">🔵 Direct: He asked, "Do you know me?"</div>
+    <div class="arrow-mid">→</div>
+    <div class="passive-side">🟢 Indirect: He asked if I knew him.</div>
+  </div>
+
+  <div class="trick-box">
+    <div class="trick-title">🧠 Quick Rules</div>
+    <div class="trick-item">Statement → <strong>said that</strong></div>
+    <div class="trick-item">Yes/No Question → <strong>asked if / whether</strong></div>
+    <div class="trick-item">Wh-Question → <strong>asked + Wh-word</strong></div>
+    <div class="trick-item">Command → <strong>told + to + V1</strong> (She told me to sit down.)</div>
+  </div>
+
+  <div class="info-box tip" style="margin-top:20px"><strong>🎉 Congratulations Boss!</strong>
+    তুমি সব ১৭টি Chapter শেষ করেছো! এখন তুমি English Grammar এর Complete Foundation থেকে Advanced পর্যন্ত জানো।<br><br>
+    পরের step: প্রতিদিন practice করো — এই book থেকে dialogue গুলো মুখে বলার চেষ্টা করো।
+  </div>
+
+  <div class="page-nav">
+    <button class="pnav-btn" onclick="goTo('ch16')"><div class="pdir">← Previous</div>Passive Voice</button>
+    <button class="pnav-btn" onclick="goTo('ch1')" style="border-color:var(--goldb);color:var(--gold)"><div class="pdir">🔁 Restart</div>Chapter 1 থেকে শুরু করো</button>
+  </div>
+</div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+const CHAPTERS = ['home','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','ch10','ch11','ch12','ch13','ch14','ch15','ch16','ch17'];
+let done = [];
+
+function goTo(id){
+  CHAPTERS.forEach(c=>{
+    document.getElementById(c).classList.toggle('active',c===id);
+  });
+  // update top nav buttons
+  document.querySelectorAll('.tnb').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tn-home').forEach(b=>b.classList.remove('active'));
+  if(id==='home'){
+    document.querySelectorAll('.tn-home').forEach(b=>b.classList.add('active'));
+    updateHomeProgress();
+  } else {
+    // find tnb by onclick
+    document.querySelectorAll('.tnb').forEach(b=>{
+      if(b.getAttribute('onclick')==="goTo('"+id+"')") b.classList.add('active');
+    });
+  }
+  document.getElementById('main').scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateHomeProgress(){
+  const d = done.filter(x=>x!=='home');
+  const total = CHAPTERS.filter(x=>x!=='home').length;
+  const pct = Math.round(d.length/total*100);
+  const hp=document.getElementById('homeProg');
+  const ht=document.getElementById('homeProgText');
+  const hpct=document.getElementById('homeProgPct');
+  if(hp) hp.style.width=pct+'%';
+  if(ht) ht.textContent=d.length+' / '+total+' chapters done';
+  if(hpct) hpct.textContent=pct+'%';
+  // update home card done indicators
+  CHAPTERS.filter(x=>x!=='home').forEach(id=>{
+    const el=document.getElementById('hd-'+id);
+    if(el) el.textContent = done.includes(id) ? '✅ Completed' : '';
+  });
+}
+
+function markDone(id){
+  if(!done.includes(id)) done.push(id);
+  // saved in memory
+  const nav=document.getElementById('nav-'+id);
+  if(nav) nav.classList.add('done');
+  const btn=document.querySelector(`#${id} .ch-done-btn`);
+  if(btn){btn.textContent='✅ Completed!';btn.classList.add('done')}
+  updateProgress();
+  updateHomeProgress();
+}
+
+function updateProgress(){
+  const pct=Math.round(done.length/CHAPTERS.length*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progText').textContent=`${done.length} / ${CHAPTERS.length} completed`;
+}
+
+// restore done state
+done.forEach(id=>{
+  const nav=document.getElementById('nav-'+id);
+  if(nav) nav.classList.add('done');
+  const btn=document.querySelector(`#${id} .ch-done-btn`);
+  if(btn){btn.textContent='✅ Completed!';btn.classList.add('done')}
+});
+updateProgress();
+
+// sidebar search
+document.getElementById('sbSearch').addEventListener('input',function(){
+  const q=this.value.toLowerCase();
+  document.querySelectorAll('.sb-link').forEach(b=>{
+    b.style.display=b.textContent.toLowerCase().includes(q)?'':'none';
+  });
+});
+
+// main search highlight (simple)
+document.getElementById('mainSearch').addEventListener('input',function(){
+  const q=this.value.trim();
+  // just show search hint for now
+});
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// close sidebar on outside click (mobile)
+document.getElementById('main').addEventListener('click',()=>{
+  document.getElementById('sidebar').classList.remove('open');
+});
+
+// init
+document.querySelectorAll('.tn-home').forEach(b=>b.classList.add('active'));
+updateHomeProgress();
+</script>
+</body>
+</html>
